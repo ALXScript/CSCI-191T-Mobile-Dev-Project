@@ -1,0 +1,13 @@
+/Users/Alex/Documents/GitHub/CSCI-191T-Mobile-Dev-Project/PictureThis/PictureThis/bin/Debug/netstandard2.0/PictureThis.deps.json
+/Users/Alex/Documents/GitHub/CSCI-191T-Mobile-Dev-Project/PictureThis/PictureThis/bin/Debug/netstandard2.0/PictureThis.dll
+/Users/Alex/Documents/GitHub/CSCI-191T-Mobile-Dev-Project/PictureThis/PictureThis/bin/Debug/netstandard2.0/ref/PictureThis.dll
+/Users/Alex/Documents/GitHub/CSCI-191T-Mobile-Dev-Project/PictureThis/PictureThis/bin/Debug/netstandard2.0/PictureThis.pdb
+/Users/Alex/Documents/GitHub/CSCI-191T-Mobile-Dev-Project/PictureThis/PictureThis/obj/Debug/netstandard2.0/PictureThis.csprojAssemblyReference.cache
+/Users/Alex/Documents/GitHub/CSCI-191T-Mobile-Dev-Project/PictureThis/PictureThis/obj/Debug/netstandard2.0/App.xaml.g.cs
+/Users/Alex/Documents/GitHub/CSCI-191T-Mobile-Dev-Project/PictureThis/PictureThis/obj/Debug/netstandard2.0/MainPage.xaml.g.cs
+/Users/Alex/Documents/GitHub/CSCI-191T-Mobile-Dev-Project/PictureThis/PictureThis/obj/Debug/netstandard2.0/PictureThis.AssemblyInfoInputs.cache
+/Users/Alex/Documents/GitHub/CSCI-191T-Mobile-Dev-Project/PictureThis/PictureThis/obj/Debug/netstandard2.0/PictureThis.AssemblyInfo.cs
+/Users/Alex/Documents/GitHub/CSCI-191T-Mobile-Dev-Project/PictureThis/PictureThis/obj/Debug/netstandard2.0/XamlC.stamp
+/Users/Alex/Documents/GitHub/CSCI-191T-Mobile-Dev-Project/PictureThis/PictureThis/obj/Debug/netstandard2.0/PictureThis.dll
+/Users/Alex/Documents/GitHub/CSCI-191T-Mobile-Dev-Project/PictureThis/PictureThis/obj/Debug/netstandard2.0/ref/PictureThis.dll
+/Users/Alex/Documents/GitHub/CSCI-191T-Mobile-Dev-Project/PictureThis/PictureThis/obj/Debug/netstandard2.0/PictureThis.pdb
