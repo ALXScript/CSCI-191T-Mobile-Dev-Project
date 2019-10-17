@@ -1,5 +1,5 @@
 ﻿<Properties StartupConfiguration="{89AD80B2-A233-47DA-8558-3D822C583C85}|Default">
-  <MonoDevelop.Ide.ItemProperties.PictureThis.iOS FirstBuild="True" automaticSigning="False" PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneDeviceTarget.728565faf3d5d49c034f8ebaa62d9da05eff4552" />
+  <MonoDevelop.Ide.ItemProperties.PictureThis.iOS automaticSigning="False" PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneDeviceTarget.728565faf3d5d49c034f8ebaa62d9da05eff4552" />
   <MonoDevelop.Ide.Workbench ActiveDocument="PictureThis.iOS/Info.plist">
     <Files>
       <File FileName="PictureThis/MainPage.xaml.cs" Line="1" Column="1" />
@@ -26,5 +26,4 @@
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.ItemProperties.PictureThis FirstBuild="True" />
 </Properties>
