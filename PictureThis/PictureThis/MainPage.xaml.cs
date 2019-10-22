@@ -16,6 +16,7 @@ namespace PictureThis
         public MainPage()
         {
             InitializeComponent();
+            this.Equals(new NavigationPage(new MainPage()));
         }
     }
 }
