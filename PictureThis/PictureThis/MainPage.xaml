@@ -34,6 +34,7 @@
                     VerticalOptions="Center"
                     CornerRadius="5"
                     Padding="5,0,5,0"
+                    Clicked="OnLabelClicked"
                     Text="Label Picture"
                     TextColor="Black"/>
                 <Button
@@ -43,6 +44,7 @@
                     VerticalOptions="Center"
                     CornerRadius="5"
                     Padding="5,0,5,0"
+                    Clicked="OnRateClicked"
                     Text="Rate Pictures"
                     TextColor="Black"/>
                 <Button

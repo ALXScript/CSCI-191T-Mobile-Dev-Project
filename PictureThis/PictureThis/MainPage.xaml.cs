@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using PictureThis.View;
 
 namespace PictureThis
 {
@@ -19,6 +20,11 @@ namespace PictureThis
             NavigationPage.SetHasNavigationBar(this, true);
         }
 
-        protected async void OnBrowseClicked(object sender, EventArgs e) => await Navigation.PushAsync(new GalleryPage());
+        protected async void OnBrowseClicked(object sender, EventArgs e) => await Navigation.PushAsync(new LocalImages());
+
+        protected async void OnRateClicked(object sender, EventArgs e) => await Navigation.PushAsync(new Rate());
+        protected async void OnLabelClicked(object sender, EventArgs e) => await Navigation.PushAsync(new LabelPage());
+       
+
     }
 }
