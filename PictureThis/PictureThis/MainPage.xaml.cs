@@ -16,7 +16,12 @@ namespace PictureThis
         public MainPage()
         {
             InitializeComponent();
-            this.Equals(new NavigationPage(new MainPage()));
+            NavigationPage.SetHasNavigationBar(this, true);
+        }
+
+        private void ImageButton_ChildAdded(object sender, ElementEventArgs e)
+        {
+
         }
     }
 }
