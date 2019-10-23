@@ -19,9 +19,6 @@ namespace PictureThis
             NavigationPage.SetHasNavigationBar(this, true);
         }
 
-        private void ImageButton_ChildAdded(object sender, ElementEventArgs e)
-        {
-
-        }
+        protected async void OnBrowseClicked(object sender, EventArgs e) => await Navigation.PushAsync(new GalleryPage());
     }
 }
