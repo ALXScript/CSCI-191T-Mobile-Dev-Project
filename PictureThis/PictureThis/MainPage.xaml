@@ -29,40 +29,41 @@
                 </Grid.RowDefinitions>
                 <Button
                     Grid.Row="0"
-                    ImageSource="cameralens.jpg"
-                    ContentLayout="Top"
-                    HorizontalOptions="Center"
+                    BackgroundColor="Crimson"
+                    HorizontalOptions="Fill"
                     VerticalOptions="Center"
-                    CornerRadius="2"
+                    CornerRadius="5"
+                    Padding="5,0,5,0"
                     Text="Take a Picture"
-                    TextColor="White"/>
+                    TextColor="Black"/>
                 <Button
                     Grid.Row="1"
-                    ImageSource="folders.jpg"
-                    ContentLayout="Top"
-                    HorizontalOptions="Center"
+                    BackgroundColor="Aquamarine"
+                    HorizontalOptions="Fill"
                     VerticalOptions="Center"
-                    CornerRadius="2"
+                    CornerRadius="5"
+                    Padding="5,0,5,0"
                     Text="Label Picture"
-                    TextColor="White"/>
+                    TextColor="Black"/>
                 <Button
                     Grid.Row="2"
-                    ImageSource="stars.jpg"
-                    ContentLayout="Top"
-                    HorizontalOptions="Center"
+                    BackgroundColor="DarkSeaGreen"
+                    HorizontalOptions="Fill"
                     VerticalOptions="Center"
-                    CornerRadius="2"
+                    CornerRadius="5"
+                    Padding="5,0,5,0"
                     Text="Rate Pictures"
-                    TextColor="White"/>
+                    TextColor="Black"/>
                 <Button
                     Grid.Row="3"
-                    ImageSource="gallery.jpg"
-                    ContentLayout="Top"
-                    HorizontalOptions="Center"
+                    BackgroundColor="Khaki"
+                    HorizontalOptions="Fill"
                     VerticalOptions="Center"
-                    CornerRadius="2"
+                    CornerRadius="5"
+                    Padding="5,0,5,0"
+                    
                     Text="Browse All Pictures"
-                    TextColor="White"/>
+                    TextColor="Black"/>
             </Grid>
         </ScrollView>
           
