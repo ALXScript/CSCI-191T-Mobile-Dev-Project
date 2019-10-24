@@ -6,10 +6,18 @@
              mc:Ignorable="d"
              x:Class="PictureThis.View.Rate">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Rate!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout Margin="20">
+            <Label Text="Swipe inside the box with a single finger." />
+            <BoxView Color="Teal" WidthRequest="300" HeightRequest="300" HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
+                <BoxView.GestureRecognizers>
+                    <!-- Can also set a swipe threshold on each gesture recognizer -->
+                    <SwipeGestureRecognizer Direction="Left" Swiped="OnSwiped"/>
+                    <SwipeGestureRecognizer Direction="Right" Swiped="OnSwiped"/>
+                    <SwipeGestureRecognizer Direction="Up" Swiped="OnSwiped"/>
+                    <SwipeGestureRecognizer Direction="Down" Swiped="OnSwiped"/>
+                </BoxView.GestureRecognizers>
+            </BoxView>
+            <Label x:Name="swipedLabel" Text="You swiped: "/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

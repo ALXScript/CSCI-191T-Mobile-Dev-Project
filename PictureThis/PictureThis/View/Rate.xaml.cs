@@ -16,5 +16,9 @@ namespace PictureThis.View
         {
             InitializeComponent();
         }
+        void OnSwiped(object sender, SwipedEventArgs e)
+        {
+            swipedLabel.Text = $"You swiped: {e.Direction.ToString()}";
+        }
     }
 }
