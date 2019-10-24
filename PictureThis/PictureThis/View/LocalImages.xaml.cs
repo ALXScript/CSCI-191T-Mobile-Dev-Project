@@ -16,5 +16,10 @@ namespace PictureThis.View
         {
             InitializeComponent();
         }
+
+        private void GetImageGallery(object sender, EventArgs e)
+        {
+
+        }
     }
 }
