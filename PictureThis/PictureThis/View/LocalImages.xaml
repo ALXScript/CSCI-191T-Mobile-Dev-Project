@@ -10,15 +10,8 @@
             <Label Text="Welcome to Local Images!"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
-            <Button
-                    BackgroundColor="DarkSeaGreen"
-                    HorizontalOptions="Fill"
-                    VerticalOptions="Center"
-                    CornerRadius="5"
-                    Padding="5,0,5,0"
-                    Text="Pick an Image"
-                    TextColor="Black"
-                    Clicked="GetImageGallery"/>
+            <Image Source="{Binding ImgSrc}"
+          ></Image>
 
         </StackLayout>
     </ContentPage.Content>
