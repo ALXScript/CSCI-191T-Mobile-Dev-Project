@@ -7,7 +7,7 @@
              x:Class="PictureThis.View.LocalImages">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="{Binding dir}"
+            <Label Text="{Binding }"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
             <Image Source="{Binding ImgSrc}"

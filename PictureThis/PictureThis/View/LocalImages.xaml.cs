@@ -12,6 +12,7 @@ namespace PictureThis.View
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LocalImages : ContentPage
     {
+        
         public string dir = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyPictures);
         public LocalImages()
         {
