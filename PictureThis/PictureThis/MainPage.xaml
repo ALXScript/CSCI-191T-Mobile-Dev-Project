@@ -25,6 +25,7 @@
                     VerticalOptions="Center"
                     CornerRadius="5"
                     Padding="5,0,5,0"
+                    Clicked="OnCameraClicked"
                     Text="Take a Picture"
                     TextColor="Black"/>
                 <Button

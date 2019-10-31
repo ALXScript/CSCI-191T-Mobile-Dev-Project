@@ -24,6 +24,7 @@ namespace PictureThis
 
         protected async void OnRateClicked(object sender, EventArgs e) => await Navigation.PushAsync(new Rate());
         protected async void OnLabelClicked(object sender, EventArgs e) => await Navigation.PushAsync(new LabelPage());
+        protected async void OnCameraClicked(object sender, EventArgs e) => await Navigation.PushAsync(new CameraPage());
        
 
     }
