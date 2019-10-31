@@ -7,13 +7,14 @@ using System.IO;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
+
 namespace PictureThis.View
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Rate : ContentPage
     {
 
-        string dir = Directory.GetCurrentDirectory();
+        string dir = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyPictures);
 
         public Rate()
         {
