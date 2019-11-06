@@ -13,23 +13,26 @@ namespace PictureThis.View
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Rate : ContentPage
     {
-
-        string dir = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyPictures);
+        private string dir = Directory.GetCurrentDirectory();
 
         public Rate()
         {
             InitializeComponent();
 
-            swipedLabel.Text = "";
-            String[] dirs = Directory.GetDirectories(dir);
-            for (int i =0; i< dirs.Length; i++)
-                if (Directory.Exists(dirs[i]))
-                    swipedLabel.Text+= dirs[i];
-
+            //This code is simply to check to see if we are able to pick a photo. It will be deleted later
+            if (Plugin.Media.CrossMedia.Current.IsPickPhotoSupported)
+            { swipedLabel.Text = "Picked Photo Supported"; }
+            else swipedLabel.Text = "Not Supported";
         }
-        void OnSwiped(object sender, SwipedEventArgs e)
+        async void  OnSwiped(object sender, SwipedEventArgs e)
         {
             swipedLabel.Text = $"You swiped: {e.Direction.ToString()}";
+            var photo = await Plugin.Media.CrossMedia.Current.PickPhotoAsync();
+
+            if (photo != null)
+                Box.Source = ImageSource.FromStream(() => { return photo.GetStream(); });
+
+
         }
     }
 }
