@@ -14,7 +14,7 @@ namespace PictureThis.Model
 
         }
 
-        void addTag(string newTag)
+        public void AddTag(string newTag)
         {
             //convert the json to a string
             string jsonString = System.IO.File.ReadAllText(tagsPath);
@@ -39,7 +39,7 @@ namespace PictureThis.Model
 
         }
 
-        public void removeTag(string currentTag)
+        public void RemoveTag(string currentTag)
         {
             //convert the json to a string
             string jsonString = System.IO.File.ReadAllText(tagsPath);
@@ -64,6 +64,21 @@ namespace PictureThis.Model
 
             //write back to the new json file
             System.IO.File.WriteAllText(tagsPath, jsonString);
+        }
+
+        public List<String> GetTags()
+        {
+            //Declare the List Tag
+            List<String> tags;
+
+            //convert the json to a string
+            string jsonString = System.IO.File.ReadAllText(tagsPath);
+
+            //deserialize json into list of tags
+            tags = JsonConvert.DeserializeObject<List<string>>(jsonString);
+
+            //Return the list
+            return tags;
         }
     }
 }
