@@ -7,7 +7,7 @@ namespace PictureThis.Model
     public class JSONToolbox
     {
         string tagsPath = "Resources/tags.json";
-        string imagesPath = ""; //Get this later
+        string imagesPath = ""; //Get this later: Path that holds all of the embedded images
 
         public JSONToolbox()
         {

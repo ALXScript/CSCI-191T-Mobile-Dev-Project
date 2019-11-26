@@ -91,11 +91,14 @@ namespace PictureThis.View
             var entCellLocation = new EntryCell { Label= imageLocation.ToString(), IsEnabled=false };
 
             //Add Editor to show the tags for the image
-            var editorTags = new Editor { IsReadOnly = true };
+            var editorTags = new Editor { Label = "Tags", IsReadOnly = true };
             //populate the Editor with the tags
 
             //Create the spinner
             var spinner = new Picker { Title = "Tags", VerticalOptions = LayoutOptions.CenterAndExpand};
+
+            //Add the default option
+            spinner.Items.Add("Select A Tag");
 
             //Populate the spinner
             foreach(string element in spinnerElements)
@@ -110,12 +113,25 @@ namespace PictureThis.View
              {
                  if (spinner.SelectedIndex == -1)
                  {
-                     
+                     //do nothing
                  }
                  else
                  {
-                     string colorName = picker.Items[picker.SelectedIndex];
-                     boxView.Color = nameToColor[colorName];
+                     //string colorName = picker.Items[picker.SelectedIndex];
+                     //boxView.Color = nameToColor[colorName];
+                     //check the selected index is "Select a Tag"
+                     if(spinner.Items[spinner.SelectedIndex] == "Select A Tag")
+                     {
+                         //do nothing
+                     }else if(spinner.Items[spinner.SelectedIndex] == "Add New Tag")
+                     {
+                         //Call a prompt
+                         string prompt = await DisplayPromptAsync("New Tag", "Please Enter A New Tag");
+                     }
+                     else
+                     {
+
+                     }
                  }
              };
 
@@ -130,7 +146,30 @@ namespace PictureThis.View
 
         void Tags(Editor passEditor)
         {
-            pictureData.tags.
+            //declare a string of tags
+            string tags = "";
+
+            //declare a counter
+            int counter = 0;
+
+            //loop through the tags in the picture data class and put them in the string
+            foreach(string element in pictureData.tags)
+            {
+                //check if the last element has been reached
+                if (pictureData.tags.Count == counter)
+                {
+                    tags += element;
+                }
+                else
+                {
+                    tags += element + ", ";
+                }
+
+                //increment the counter
+                counter++;
+            }
+
+            passEditor.Text = tags;
         }
     }
 }
