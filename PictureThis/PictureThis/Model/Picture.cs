@@ -6,21 +6,17 @@ namespace PictureThis.Model
 {
     class Picture
     {
-<<<<<<< Updated upstream
-        String name;
-        DateTime dateTime;
-        //var location;
-        Boolean isLiked;
-        String[] tags;
-    
-    
-=======
+
         public String name;
         public DateTime dateTime;
         public Double latitude;
         public Double longitude;
         public int rating; //increase or decrease by one based on how we swipe
         public List<String> tags;
->>>>>>> Stashed changes
+
+        public Boolean hasTag(String tag)
+        {
+            return tags.Contains(tag);   
+        }
     }
 }
