@@ -3,12 +3,18 @@
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
                 <RowDefinition Height="*" />
-                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <Image x:Name="PhotoImage" />
-            <Button x:Name="CameraButton" Text="Take Photo" Grid.Row="1" />
+            <Button x:Name="CameraButton" 
+                    Text="Take Photo" 
+                    Grid.Row="0" 
+                    Margin="10,0,10,0"/>
+            <Button x:Name="LoadButton" 
+                    Text="Import Photo" 
+                    Grid.Row="1" 
+                    Margin="10,0,10,0"/>
         </Grid>
     </ContentPage.Content>
 </ContentPage>
