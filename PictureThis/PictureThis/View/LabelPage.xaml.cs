@@ -14,7 +14,15 @@ namespace PictureThis.View
     {
         public LabelPage()
         {
-        
+            //Query blueprint used to get pictures with tag
+            //This can be moved to a query manager
+            /*
+             
+            List<Picture> pictures= from pic in Pictures
+                                    where pic.hasTag(selectedTag)
+                                    select pic;
+
+            */
             InitializeComponent();
         }
     }
