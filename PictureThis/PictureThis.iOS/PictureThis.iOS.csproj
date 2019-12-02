@@ -137,7 +137,4 @@
       <Name>PictureThis</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\tags.json" />
-  </ItemGroup>
 </Project>

@@ -22,7 +22,7 @@
     <EmbeddedResource Remove="MyPage.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\tags.json" />
+    <EmbeddedResource Include="tags.json" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Update="View\CameraSavePage.xaml">

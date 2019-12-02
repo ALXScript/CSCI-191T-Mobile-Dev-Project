@@ -4,37 +4,30 @@ using System.IO;
 using System.Reflection;
 using Xamarin.Forms;
 using Newtonsoft.Json;
+using PictureThis;
 
 namespace PictureThis.Model
 {
-    public class JSONToolbox
+    public class jsonToolbox
     {
         //string tagsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Resources/tags.json");
-        string tagsPath = "";
-        string tagsPathiOS = "Resources/tags.json";
-        string tagsPathAndroid = "Assets/tags.json";
-        string jsonString = "";
-        string imagesPath = ""; //Get this later: Path that holds all of the embedded images
+        string tagsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "tags.json");
+        //string tagsPathiOS = "Resources/tags.json";
+        //string tagsPathAndroid = "Assets/tags.json";
+        //string jsonString = "";
+        string imagesPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "images.json"); //Get this later: Path that holds all of the embedded images
+        //List<String> currentTags;
 
-        //function for reading the Json Resource
-        private void ReadJSONResource()
+        public jsonToolbox()
         {
-            
-        }
 
-        public JSONToolbox()
-        {
-            ReadJSONResource();
-            
         }
 
         public void AddTag(string newTag)
         {
-            
-
+            //Get the tags.json as a string
             string jsonString = System.IO.File.ReadAllText(tagsPath);
             
-
             //init empty list of tags
             List<string> tagsList;
 
@@ -50,7 +43,10 @@ namespace PictureThis.Model
             //serialize list back into json
             jsonString = JsonConvert.SerializeObject(tagsList);
 
-            //write back to the new json file on current platform
+            //delete the original tags json file
+            System.IO.File.Delete(tagsPath);
+
+            //write back to the new json file with the new list
             System.IO.File.WriteAllText(tagsPath, jsonString);
 
         }
@@ -77,6 +73,9 @@ namespace PictureThis.Model
 
             //serialize list back into json
             jsonString = JsonConvert.SerializeObject(tagsList);
+
+            //delete the original tags json file
+            System.IO.File.Delete(tagsPath);
 
             //write back to the new json file
             System.IO.File.WriteAllText(tagsPath, jsonString);

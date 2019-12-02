@@ -15,7 +15,7 @@ namespace PictureThis.View
     public partial class CameraSavePage : ContentPage
     {
         Picture pictureData;
-        JSONToolbox jsonTB;
+        jsonToolbox jsonTB;
         SpinnerToolbox spinnerTB;
 
         public CameraSavePage(Plugin.Media.Abstractions.MediaFile passImage)
@@ -24,7 +24,7 @@ namespace PictureThis.View
 
             //init the classes
             pictureData = new Picture();
-            jsonTB = new JSONToolbox();
+            jsonTB = new jsonToolbox();
             spinnerTB = new SpinnerToolbox();
 
             setupFillData(passImage);
@@ -89,14 +89,7 @@ namespace PictureThis.View
             timePickTime.Time = pictureData.dateTime.TimeOfDay;
 
             //display location time
-            if (pictureData.location.Equals(null))
-            {
-                entLocation.Text = "No Location Data Found";
-            }
-            else
-            {
-                entLocation.Text = pictureData.location.ToString();
-            }
+            entLocation.Text = pictureData.location.ToString();
 
             //Start working the spinnner
             //Populate the spinner
