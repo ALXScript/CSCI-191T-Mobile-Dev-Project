@@ -68,7 +68,12 @@ namespace PictureThis
             //save the file to the device if it doesn't already exist
             if (!System.IO.File.Exists(fileName)){
                 System.IO.File.WriteAllText(fileName, json);
-            };
+                DisplayAlert("Success", "JSON File has been written!", "OK");
+            }
+            else
+            {
+                DisplayAlert("Failure", "JSON File either already exists or has not been written", "OK");
+            }
         }
 
         
