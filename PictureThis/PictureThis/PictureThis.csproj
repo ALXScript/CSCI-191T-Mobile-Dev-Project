@@ -22,6 +22,9 @@
     <EmbeddedResource Remove="MyPage.xaml" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Resources\tags.json" />
+  </ItemGroup>
+  <ItemGroup>
     <EmbeddedResource Update="View\CameraSavePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -34,5 +37,8 @@
     <EmbeddedResource Update="View\Rate.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Resources\tags.json" />
   </ItemGroup>
 </Project>

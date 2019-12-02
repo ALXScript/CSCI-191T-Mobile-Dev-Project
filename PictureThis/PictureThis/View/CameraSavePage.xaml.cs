@@ -89,7 +89,14 @@ namespace PictureThis.View
             timePickTime.Time = pictureData.dateTime.TimeOfDay;
 
             //display location time
-            entLocation.Text = pictureData.location.ToString();
+            if (pictureData.location.Equals(null))
+            {
+                entLocation.Text = "No Location Data Found";
+            }
+            else
+            {
+                entLocation.Text = pictureData.location.ToString();
+            }
 
             //Start working the spinnner
             //Populate the spinner

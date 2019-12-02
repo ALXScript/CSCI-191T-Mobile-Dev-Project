@@ -1,23 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
+using Xamarin.Forms;
 using Newtonsoft.Json;
 
 namespace PictureThis.Model
 {
     public class JSONToolbox
     {
-        string tagsPath = "Resources/tags.json";
+        //string tagsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Resources/tags.json");
+        string tagsPath = "";
+        string tagsPathiOS = "Resources/tags.json";
+        string tagsPathAndroid = "Assets/tags.json";
+        string jsonString = "";
         string imagesPath = ""; //Get this later: Path that holds all of the embedded images
+
+        //function for reading the Json Resource
+        private void ReadJSONResource()
+        {
+            
+        }
 
         public JSONToolbox()
         {
-
+            ReadJSONResource();
+            
         }
 
         public void AddTag(string newTag)
         {
-            //convert the json to a string
+            
+
             string jsonString = System.IO.File.ReadAllText(tagsPath);
+            
 
             //init empty list of tags
             List<string> tagsList;
@@ -34,7 +50,7 @@ namespace PictureThis.Model
             //serialize list back into json
             jsonString = JsonConvert.SerializeObject(tagsList);
 
-            //write back to the new json file
+            //write back to the new json file on current platform
             System.IO.File.WriteAllText(tagsPath, jsonString);
 
         }

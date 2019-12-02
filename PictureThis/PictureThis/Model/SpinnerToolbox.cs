@@ -9,7 +9,7 @@ namespace PictureThis.Model
 {
     class SpinnerToolbox
     {
-        private JSONToolbox JSONtb;
+        private JSONToolbox JSONtb = new JSONToolbox();
 
 
         public void LoadAllTags(Picker spinner)
@@ -60,8 +60,10 @@ namespace PictureThis.Model
 
         public void ClearSpinner(Picker spinner)
         {
-            spinner.Items.Clear();
+            if (spinner.Items.Count > 0)
+            {
+                spinner.Items.Clear();
+            }          
         }
-
     }
 }
