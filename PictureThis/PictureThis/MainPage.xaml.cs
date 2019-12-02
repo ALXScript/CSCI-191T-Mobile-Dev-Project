@@ -22,7 +22,7 @@ namespace PictureThis
             NavigationPage.SetHasNavigationBar(this, true);
         }
 
-        protected async void OnBrowseClicked(object sender, EventArgs e) => await Navigation.PushAsync(new LocalImages());
+        protected async void OnBrowseClicked(object sender, EventArgs e) => await Navigation.PushAsync(new GalleryPage());
 
         protected async void OnRateClicked(object sender, EventArgs e) => await Navigation.PushAsync(new Rate());
         protected async void OnLabelClicked(object sender, EventArgs e) => await Navigation.PushAsync(new LabelPage());
