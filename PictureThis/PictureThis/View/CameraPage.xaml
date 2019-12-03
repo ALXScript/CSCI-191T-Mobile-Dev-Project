@@ -1,14 +1,52 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="PictureThis.View.CameraPage">
     <ContentPage.Content>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
+        <StackLayout>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
 
-            <Image x:Name="PhotoImage" />
-            <Button x:Name="CameraButton" Text="Take Photo" Grid.Row="1" />
-        </Grid>
+                <Image 
+                Grid.Row="0"
+                Aspect="AspectFill"
+                Source="Resources/cameralens.jpg"/>
+
+                <Image 
+                Grid.Row="1"
+                Aspect="AspectFill"
+                Source="Resources/gallery.jpg"/>
+
+                <Label
+                Grid.Row="0"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                TextColor="White"
+                FontSize="Title"
+                FontAttributes="Bold"
+                FontFamily="Times"
+                Text="Take Photo"/>
+
+                <Label
+                Grid.Row="1"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                TextColor="Black"
+                FontSize="Title"
+                FontAttributes="Bold"
+                FontFamily="Times"
+                Text="Import Photo"/>
+
+                <Button x:Name="CameraButton" 
+                    BackgroundColor="Transparent"
+                    BorderColor="Transparent"
+                    Grid.Row="0"/>
+                <Button x:Name="LoadButton" 
+                    BackgroundColor="Transparent"
+                    BorderColor="Transparent"
+                    Grid.Row="1"/>
+            </Grid>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>
