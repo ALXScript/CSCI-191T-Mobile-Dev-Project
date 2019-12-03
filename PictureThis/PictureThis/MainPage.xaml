@@ -10,58 +10,127 @@
     Title="Picture This!">
 
     <StackLayout>
-        <ScrollView>
-            <Grid>
+        <ContentView>
+            <Grid ColumnSpacing="0" RowSpacing="0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
 
+                <Image 
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Aspect="AspectFill"
+                    Source="Resources/cameralens.jpg"/>
+
+                <Image 
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Aspect="AspectFill"
+                    Source="Resources/stars.jpg"/>
+
+                <Image 
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Aspect="AspectFill"
+                    Source="Resources/folders.jpg"/>
+
+                <Image 
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Aspect="AspectFill"
+                    Source="Resources/gallery.jpg"/>
+
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    TextColor="White"
+                    FontSize="Title"
+                    FontAttributes="Bold"
+                    FontFamily="Times"
+                    Text="Take A Picture"/>
+
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    TextColor="Black"
+                    FontSize="Title"
+                    FontAttributes="Bold"
+                    FontFamily="Times"
+                    Text="Rate Pictures"/>
+
+                <Label
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    TextColor="Black"
+                    FontSize="Title"
+                    FontAttributes="Bold"
+                    FontFamily="Times"
+                    Text="Label Picture"/>
+
+                <Label
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    TextColor="Black"
+                    FontSize="Title"
+                    FontAttributes="Bold"
+                    FontFamily="Times"
+                    Text="Gallery"/>
+
+                <Button
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    BackgroundColor="Transparent"
+                    BorderColor="Transparent"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand"
+                    CornerRadius="5"
+                    Padding="5,0,5,0"
+                    Clicked="OnCameraClicked"/>
+                
+                <Button
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    BackgroundColor="Transparent"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand"
+                    CornerRadius="5"
+                    Padding="5,0,5,0"
+                    Clicked="OnLabelClicked"/>
                 
                 <Button
                     Grid.Row="0"
-                    BackgroundColor="Crimson"
-                    HorizontalOptions="Fill"
-                    VerticalOptions="Center"
+                    Grid.Column="1"
+                    BackgroundColor="Transparent"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand"
                     CornerRadius="5"
                     Padding="5,0,5,0"
-                    Clicked="OnCameraClicked"
-                    Text="Take a Picture"
-                    TextColor="Black"/>
+                    Clicked="OnRateClicked"/>
+                
                 <Button
                     Grid.Row="1"
-                    BackgroundColor="Aquamarine"
-                    HorizontalOptions="Fill"
-                    VerticalOptions="Center"
+                    Grid.Column="1"
+                    BackgroundColor="Transparent"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand"
                     CornerRadius="5"
                     Padding="5,0,5,0"
-                    Clicked="OnLabelClicked"
-                    Text="Label Picture"
-                    TextColor="Black"/>
-                <Button
-                    Grid.Row="2"
-                    BackgroundColor="DarkSeaGreen"
-                    HorizontalOptions="Fill"
-                    VerticalOptions="Center"
-                    CornerRadius="5"
-                    Padding="5,0,5,0"
-                    Clicked="OnRateClicked"
-                    Text="Rate Pictures"
-                    TextColor="Black"/>
-                <Button
-                    Grid.Row="3"
-                    BackgroundColor="Khaki"
-                    HorizontalOptions="Fill"
-                    VerticalOptions="Center"
-                    CornerRadius="5"
-                    Padding="5,0,5,0"
-                    Clicked="OnBrowseClicked"
-                    Text="Browse All Pictures"
-                    TextColor="Black"/>
+                    Clicked="OnBrowseClicked"/>
             </Grid>
-        </ScrollView>
+        </ContentView>
           
     </StackLayout>
 </ContentPage>

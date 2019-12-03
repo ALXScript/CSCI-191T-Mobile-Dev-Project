@@ -82,7 +82,7 @@ namespace PictureThis
 
 
             //get the path for storing the file
-            string fileName = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "tags.json");
+            string fileName = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Writtentags.json");
 
             //convert the object into a json object
             string json = JsonConvert.SerializeObject(myJSON2, Formatting.Indented);
