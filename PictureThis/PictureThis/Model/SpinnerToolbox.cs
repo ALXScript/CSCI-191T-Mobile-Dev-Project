@@ -5,11 +5,13 @@ using Xamarin.Forms;
 using Xamarin.Essentials;
 using PictureThis.Model;
 
-namespace PictureThis.Model
+namespace PictureThis
 {
     class SpinnerToolbox
     {
         private jsonToolbox JSONtb = new jsonToolbox();
+        private Picker classSpinner;
+        private Picture classPicture;
 
 
         public void LoadAllTags(Picker spinner)

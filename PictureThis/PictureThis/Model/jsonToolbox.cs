@@ -4,7 +4,6 @@ using System.IO;
 using System.Reflection;
 using Xamarin.Forms;
 using Newtonsoft.Json;
-using PictureThis;
 
 namespace PictureThis.Model
 {

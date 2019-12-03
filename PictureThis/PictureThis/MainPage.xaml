@@ -19,9 +19,7 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                <Image
-                    Grid.Column="0"
-                    Source="{local:ImageResource PictureThis.Resources.cameralens.jpg}" />
+                
                 <Button
                     Grid.Row="0"
                     BackgroundColor="Crimson"

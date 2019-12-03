@@ -30,7 +30,7 @@ namespace PictureThis
 
         public class JSONClass
         {
-            public IList<string> Tags { get; set; }
+            public List<string> Tags { get; set; }
         }
 
         void startFiles()
@@ -59,11 +59,33 @@ namespace PictureThis
                 }
             };
 
+            List<String> myJSON2 = new List<string>();
+            myJSON2.Add("Vacation");
+            myJSON2.Add("Holiday");
+            myJSON2.Add("Birthday");
+            myJSON2.Add("Beach");
+            myJSON2.Add("Museum");
+            myJSON2.Add("Forest");
+            myJSON2.Add("Park");
+            myJSON2.Add("Pet");
+            myJSON2.Add("Pets");
+            myJSON2.Add("Dog");
+            myJSON2.Add("Cat");
+            myJSON2.Add("Family");
+            myJSON2.Add("Childhood");
+            myJSON2.Add("Fair");
+            myJSON2.Add("Restaurant");
+            myJSON2.Add("Food");
+            myJSON2.Add("Fresno");
+
+            myJSON2.Sort();
+
+
             //get the path for storing the file
             string fileName = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "tags.json");
 
             //convert the object into a json object
-            string json = JsonConvert.SerializeObject(myJSON, Formatting.Indented);
+            string json = JsonConvert.SerializeObject(myJSON2, Formatting.Indented);
 
             //save the file to the device if it doesn't already exist
             if (!System.IO.File.Exists(fileName)){
@@ -72,7 +94,12 @@ namespace PictureThis
             }
             else
             {
-                DisplayAlert("Failure", "JSON File either already exists or has not been written", "OK");
+                //delete the original file
+                System.IO.File.Delete(fileName);
+
+                //write the new file
+                System.IO.File.WriteAllText(fileName, json);
+                DisplayAlert("Attention", "JSON File already exists or has not been written. New File written", "OK");
             }
         }
 
