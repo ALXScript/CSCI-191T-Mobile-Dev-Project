@@ -19,7 +19,7 @@ namespace PictureThis
         public MainPage()
         {
             InitializeComponent();
-            pclInit();
+            pclTest();
             //startFiles();
             NavigationPage.SetHasNavigationBar(this, true);
         }
@@ -35,13 +35,12 @@ namespace PictureThis
             public List<string> Tags { get; set; }
         }
 
-        async void pclInit()
+        async void pclTest()
         {
             IFolder rootFolder = FileSystem.Current.LocalStorage;
-            IFolder folder = await rootFolder.CreateFolderAsync("TestFolder",
-                CreationCollisionOption.OpenIfExists);
-            IFile file = await folder.CreateFileAsync("result.txt",
-                CreationCollisionOption.ReplaceExisting);
+            IFolder resourcesFolder = await rootFolder.GetFolderAsync("Resources");
+            //IFolder folder = await rootFolder.CreateFolderAsync("TestFolder", CreationCollisionOption.OpenIfExists);
+            IFile file = await resourcesFolder.CreateFileAsync("result.txt", CreationCollisionOption.ReplaceExisting);
             await file.WriteAllTextAsync("Success!");
         }
 
