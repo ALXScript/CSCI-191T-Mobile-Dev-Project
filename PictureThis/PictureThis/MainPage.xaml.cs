@@ -19,7 +19,8 @@ namespace PictureThis
         public MainPage()
         {
             InitializeComponent();
-            pclTest();
+            //pclTest();
+            //pclResultText();
             //startFiles();
             NavigationPage.SetHasNavigationBar(this, true);
         }
@@ -38,10 +39,55 @@ namespace PictureThis
         async void pclTest()
         {
             IFolder rootFolder = FileSystem.Current.LocalStorage;
-            IFolder resourcesFolder = await rootFolder.GetFolderAsync("Resources");
-            //IFolder folder = await rootFolder.CreateFolderAsync("TestFolder", CreationCollisionOption.OpenIfExists);
-            IFile file = await resourcesFolder.CreateFileAsync("result.txt", CreationCollisionOption.ReplaceExisting);
+            //IFolder resourcesFolder = await rootFolder.GetFolderAsync("Resources");
+            IFolder folder = await rootFolder.CreateFolderAsync("TestFolder", CreationCollisionOption.OpenIfExists);
+            IFile file = await folder.CreateFileAsync("result.txt", CreationCollisionOption.ReplaceExisting);
             await file.WriteAllTextAsync("Success!");
+        }
+
+        async void pclResultText()
+        {
+            IFolder rootFolder = FileSystem.Current.LocalStorage;
+            IFolder folder = await rootFolder.CreateFolderAsync("TestFolder", CreationCollisionOption.OpenIfExists);
+            IFile file = await folder.GetFileAsync("result.txt");
+
+            //read from the file
+            string fileText = await file.ReadAllTextAsync();
+
+            await DisplayAlert("File Contents", fileText, "OK");
+        }
+
+        void initFiles()
+        {
+            //create the JSON List File
+            List<String> myJSON2 = new List<string>();
+            myJSON2.Add("Vacation");
+            myJSON2.Add("Holiday");
+            myJSON2.Add("Birthday");
+            myJSON2.Add("Beach");
+            myJSON2.Add("Museum");
+            myJSON2.Add("Forest");
+            myJSON2.Add("Park");
+            myJSON2.Add("Pet");
+            myJSON2.Add("Pets");
+            myJSON2.Add("Dog");
+            myJSON2.Add("Cat");
+            myJSON2.Add("Family");
+            myJSON2.Add("Childhood");
+            myJSON2.Add("Fair");
+            myJSON2.Add("Restaurant");
+            myJSON2.Add("Food");
+            myJSON2.Add("Fresno");
+            
+            //Sort the tags
+            myJSON2.Sort();
+
+            //serialize it into a string
+            string json = JsonConvert.SerializeObject(myJSON2, Formatting.Indented);
+
+            //PCL Storage begins
+
+
         }
 
         void startFiles()

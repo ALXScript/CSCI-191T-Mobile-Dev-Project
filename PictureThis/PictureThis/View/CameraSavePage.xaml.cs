@@ -8,10 +8,11 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Xamarin.Essentials;
 using PictureThis.Model;
+using Newtonsoft.Json;
 
 namespace PictureThis.View
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
+    //[XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CameraSavePage : ContentPage
     {
         Picture pictureData;
@@ -21,6 +22,7 @@ namespace PictureThis.View
         public CameraSavePage(Plugin.Media.Abstractions.MediaFile passImage)
         {
             InitializeComponent();
+            SaveButton.Clicked += SaveButton_Clicked;
 
             //init the classes
             pictureData = new Picture();
@@ -28,6 +30,31 @@ namespace PictureThis.View
             spinnerTB = new SpinnerToolbox();
 
             setupFillData(passImage);
+        }
+
+        //have all of the elements of the image placed in the array
+        private async void SaveButton_Clicked(object sender, EventArgs e)
+        {
+            //set the variable to capture the json 
+            string json = "";
+
+            //function for getting the path of the json file and deserializing it
+            //Insert functino for saving into the file here
+
+            //get the file that has the list of objects
+            List<Picture> Images = JsonConvert.DeserializeObject<List<Picture>>(json);
+
+            //add the latest class to the list
+            Images.Add(pictureData);
+
+            //sort the list of images
+            Images.Sort();
+
+            //serialize the object back to json
+            string newJSON = JsonConvert.SerializeObject(Images, Formatting.Indented);
+
+            //save it to the file
+            //Insert function for saving into the file here
         }
 
         async void setupFillData(Plugin.Media.Abstractions.MediaFile passImage)
