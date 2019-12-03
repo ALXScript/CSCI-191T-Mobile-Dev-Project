@@ -13,7 +13,8 @@ namespace PictureThis.View
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Rate : ContentPage
     {
-        private string dir = Directory.GetCurrentDirectory();
+        private string dir;
+        private IEnumerable<string> d;
         Picture picture;
         int pictureIndex = 0;
         List<Picture> pictures;
@@ -34,23 +35,27 @@ namespace PictureThis.View
         {
             swipedLabel.Text = $"You swiped: {e.Direction.ToString()}";
             
-            
-            //This is the logic to add a single photo. 
-            var photo = await Plugin.Media.CrossMedia.Current.PickPhotoAsync();
-            if (photo != null)
-                Box.Source = ImageSource.FromStream(() => { swipedLabel.Text= photo.Path; return photo.GetStream(); });
-
-
 
             //logic to update rating based on which direction the user swiped 
             //then get next picture.
             switch (e.Direction.ToString())
             {
                 case "Up":
+
+                    //This is the logic to add a single photo. It is not part of the end functionality of this page
+                    var photo = await Plugin.Media.CrossMedia.Current.PickPhotoAsync();
+                    if (photo != null)
+                    {
+                        Box.Source = ImageSource.FromStream(() => { return photo.GetStream(); });
+                        dir = photo.AlbumPath;
+                    }
+
+
                     //skip rating for this picture and get next picture 
                     break;
                 //increase rating
                 case "Right":
+                    
                     //picture.rating++;
                     break;
                 //decrease rating
