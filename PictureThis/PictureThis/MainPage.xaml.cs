@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using PictureThis.View;
 using Newtonsoft.Json;
+using PCLStorage;
 
 namespace PictureThis
 {
@@ -18,7 +19,8 @@ namespace PictureThis
         public MainPage()
         {
             InitializeComponent();
-            startFiles();
+            pclInit();
+            //startFiles();
             NavigationPage.SetHasNavigationBar(this, true);
         }
 
@@ -31,6 +33,16 @@ namespace PictureThis
         public class JSONClass
         {
             public List<string> Tags { get; set; }
+        }
+
+        async void pclInit()
+        {
+            IFolder rootFolder = FileSystem.Current.LocalStorage;
+            IFolder folder = await rootFolder.CreateFolderAsync("TestFolder",
+                CreationCollisionOption.OpenIfExists);
+            IFile file = await folder.CreateFileAsync("result.txt",
+                CreationCollisionOption.ReplaceExisting);
+            await file.WriteAllTextAsync("Success!");
         }
 
         void startFiles()
