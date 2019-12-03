@@ -57,25 +57,25 @@ namespace PictureThis.View
             catch (FeatureNotSupportedException fnsEX)
             {
                 //Not supported on device
-                await DisplayAlert(fnsEX.ToString(), "GPS is not supported on this device", "OK");
+                await DisplayAlert("Error: GPS Support", "GPS is not supported on this device", "OK");
                 pictureData.location = null;
             }
             catch (FeatureNotEnabledException fneEX)
             {
                 //Not enabled on device
-                await DisplayAlert(fneEX.ToString(), "GPS is not enabled on this device", "OK");
+                await DisplayAlert("Error: GPS Enabled/Disabled", "GPS is not enabled on this device", "OK");
                 pictureData.location = null;
             }
             catch (PermissionException pEX)
             {
                 //Permission exception
-                await DisplayAlert(pEX.ToString(), "GPS permissions are not accepted on this device", "OK");
+                await DisplayAlert("Error: GPS Permission", "GPS permissions are not accepted on this device", "OK");
                 pictureData.location = null;
             }
             catch (Exception ex)
             {
                 //couldn't get location
-                await DisplayAlert(ex.ToString(), "Could not get location", "OK");
+                await DisplayAlert("Error: GPS Functionality", "Could not get location", "OK");
                 pictureData.location = null;
             }
 
