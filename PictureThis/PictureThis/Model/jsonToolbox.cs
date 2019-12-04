@@ -18,18 +18,15 @@ namespace PictureThis.Model
         string imagesPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "images.json"); //Get this later: Path that holds all of the embedded images
         //List<String> currentTags;
 
-        //USING PCL
-        IFolder rootFolder = FileSystem.Current.LocalStorage;
-
         public jsonToolbox()
         {
-
+            initFiles();
         }
 
         public void AddTag(string newTag)
         {
             //Get the tags.json as a string
-            string jsonString = System.IO.File.ReadAllText(tagsPath);
+            string jsonString = File.ReadAllText(tagsPath);
             
             //init empty list of tags
             List<string> tagsList;
@@ -46,11 +43,8 @@ namespace PictureThis.Model
             //serialize list back into json
             jsonString = JsonConvert.SerializeObject(tagsList);
 
-            //delete the original tags json file
-            System.IO.File.Delete(tagsPath);
-
             //write back to the new json file with the new list
-            System.IO.File.WriteAllText(tagsPath, jsonString);
+            File.WriteAllText(tagsPath, jsonString);
 
         }
 
@@ -77,11 +71,8 @@ namespace PictureThis.Model
             //serialize list back into json
             jsonString = JsonConvert.SerializeObject(tagsList);
 
-            //delete the original tags json file
-            System.IO.File.Delete(tagsPath);
-
             //write back to the new json file
-            System.IO.File.WriteAllText(tagsPath, jsonString);
+            File.WriteAllText(tagsPath, jsonString);
         }
 
         public List<String> GetTags()
@@ -90,13 +81,53 @@ namespace PictureThis.Model
             List<String> tags;
 
             //convert the json to a string
-            string jsonString = System.IO.File.ReadAllText(tagsPath);
+            string jsonString = File.ReadAllText(tagsPath);
 
             //deserialize json into list of tags
             tags = JsonConvert.DeserializeObject<List<string>>(jsonString);
 
             //Return the list
             return tags;
+        }
+
+        void initFiles()
+        {
+            //create the JSON List File
+            List<String> myJSON2 = new List<string>();
+            myJSON2.Add("Vacation");
+            myJSON2.Add("Holiday");
+            myJSON2.Add("Birthday");
+            myJSON2.Add("Beach");
+            myJSON2.Add("Museum");
+            myJSON2.Add("Forest");
+            myJSON2.Add("Park");
+            myJSON2.Add("Pet");
+            myJSON2.Add("Pets");
+            myJSON2.Add("Dog");
+            myJSON2.Add("Cat");
+            myJSON2.Add("Family");
+            myJSON2.Add("Childhood");
+            myJSON2.Add("Fair");
+            myJSON2.Add("Restaurant");
+            myJSON2.Add("Food");
+            myJSON2.Add("Fresno");
+
+            //Sort the tags
+            myJSON2.Sort();
+
+            //serialize it into a string
+            string json = JsonConvert.SerializeObject(myJSON2, Formatting.Indented);
+
+            //check if the file exists and write it if it doesn't
+            if (!File.Exists(tagsPath))
+            {
+                File.WriteAllText(tagsPath, json);
+
+                //DisplayAlert("Doesn't Exist", "Json File Written", "OK");
+            }
+
+
+
         }
     }
 }
