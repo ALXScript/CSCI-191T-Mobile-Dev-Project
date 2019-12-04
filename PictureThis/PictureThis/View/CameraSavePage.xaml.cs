@@ -29,6 +29,10 @@ namespace PictureThis.View
             jsonTB = new jsonToolbox();
             spinnerTB = new SpinnerToolbox();
 
+            //init the necessary data
+            pictureData.rating = 0;
+
+
             setupFillData(passImage);
         }
 
@@ -59,9 +63,6 @@ namespace PictureThis.View
 
         async void setupFillData(Plugin.Media.Abstractions.MediaFile passImage)
         {
-            //Declare the Variables
-            pictureData.isLiked = false;
-
             //Get the transferred image to the image box
             imgImage.Source = ImageSource.FromStream(() => { return passImage.GetStream(); });
 
@@ -77,6 +78,7 @@ namespace PictureThis.View
                 if (geoLocation != null)
                 {
                     pictureData.location = geoLocation;
+                    await DisplayAlert("Location achieved", "Your Location is: " + pictureData.location.ToString(), "OK");
                 }
 
             }
@@ -116,11 +118,19 @@ namespace PictureThis.View
             timePickTime.Time = pictureData.dateTime.TimeOfDay;
 
             //display location time
-            entLocation.Text = pictureData.location.ToString();
+            if(pictureData.location == null)
+            {
+                entLocation.Text = "No Location";
+            }else
+            {
+                entLocation.Text = pictureData.location.ToString();
+            }
+            
 
             //Start working the spinnner
             //Populate the spinner
-            spinnerTB.LoadAvailableTags(spinner, pictureData);
+            spinner = spinnerTB.LoadAvailableTags(pictureData.tags);
+
 
             //spinner function
             spinner.SelectedIndexChanged += async (sender, args) =>
@@ -128,6 +138,7 @@ namespace PictureThis.View
                 if (spinner.SelectedIndex == -1)
                 {
                     //do nothing
+                    return;
                 }
                 else
                 {
@@ -156,6 +167,7 @@ namespace PictureThis.View
                             pictureData.tags.Add(spinner.SelectedIndex.ToString());
 
                             //reload the editor();
+                            reloadEditorTags();
                         }
                     }
                 }

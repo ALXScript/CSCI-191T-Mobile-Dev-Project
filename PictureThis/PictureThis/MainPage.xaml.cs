@@ -22,6 +22,8 @@ namespace PictureThis
             //pclTest();
             //pclResultText();
             //startFiles();
+            initFiles();
+
             NavigationPage.SetHasNavigationBar(this, true);
         }
 
@@ -85,8 +87,21 @@ namespace PictureThis
             //serialize it into a string
             string json = JsonConvert.SerializeObject(myJSON2, Formatting.Indented);
 
-            //PCL Storage begins
+            //set the path
+            string path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "tags.json");
 
+            if (System.IO.File.Exists(path))
+            {
+                DisplayAlert("Exists!!!", "yeah", "whatever");
+            }
+            else
+            {
+                System.IO.File.WriteAllText(path, json);
+
+                DisplayAlert("Doesn't Exist", "Json File Written", "OK");
+            }
+
+            
 
         }
 

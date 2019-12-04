@@ -11,7 +11,6 @@ namespace PictureThis.Model
         public String name;
         public DateTime dateTime;
         public Location location;
-        public Boolean isLiked;
         public int rating;
         public List<String> tags;
     }
