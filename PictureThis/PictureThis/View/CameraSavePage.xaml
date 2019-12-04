@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="PictureThis.View.CameraSavePage">
+    <ContentPage.Content>
+        <StackLayout>
+            <ScrollView>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="400"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <Image Grid.Row="0"
+                           Grid.ColumnSpan="2"
+                           x:Name="imgImage"
+                           BackgroundColor="Crimson"
+                           HorizontalOptions="Fill"
+                           VerticalOptions="Fill"
+                           Aspect="AspectFit"
+                           Margin="10,10,10,10"/>
+
+                    <Label Grid.Row="1"
+                           Grid.Column="0"
+                           x:Name="lblName"
+                           Text="Name: "
+                           TextColor="Black"
+                           FontSize="Large"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center"
+                           Margin="0,0,0,0"/>
+                    
+                    <Entry Grid.Row="1"
+                           Grid.Column="1"
+                           x:Name="entName"
+                           Keyboard="Chat"
+                           Margin="0,0,10,0"/>
+
+                    <Label Grid.Row="2"
+                           Grid.Column="0"
+                           x:Name="lblDate"
+                           Text="Date: "
+                           TextColor="Black"
+                           FontSize="Large"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center"
+                           Margin="0,0,0,0"/>
+
+                    <DatePicker Grid.Row="2"
+                                Grid.Column="1"
+                                x:Name="datePickDate"
+                                IsEnabled="False"
+                                Margin="0,0,10,0"/>
+
+                    <Label Grid.Row="3"
+                           Grid.Column="0"
+                           x:Name="lblTime"
+                           Text="Time: "
+                           TextColor="Black"
+                           FontSize="Large"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center"
+                           Margin="0,0,0,0"/>
+
+                    <TimePicker Grid.Row="3"
+                                Grid.Column="1"
+                                x:Name="timePickTime"
+                                IsEnabled="False"
+                                Margin="0,0,10,0"/>
+
+                    <Label Grid.Row="4"
+                           Grid.Column="0"
+                           x:Name="lblLocation"
+                           Text="GPS: "
+                           TextColor="Black"
+                           FontSize="Large"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center"
+                           Margin="0,0,0,0"/>
+
+                    <Entry Grid.Row="4"
+                           Grid.Column="1"
+                           x:Name="entLocation"
+                           IsReadOnly="True"
+                           Margin="0,0,10,0"/>
+
+                    <Picker Grid.Row="5"
+                            Grid.ColumnSpan="2"
+                            x:Name="spinner"
+                            Margin="10,0,10,0"/>
+
+                    <Label Grid.Row="6"
+                           Grid.Column="0"
+                           x:Name="lblTag"
+                           Text="Tags: "
+                           TextColor="Black"
+                           FontSize="Large"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center"
+                           Margin="0,0,0,0"/>
+
+                    <Editor Grid.Row="6"
+                           Grid.Column="1"
+                           x:Name="edtTags"
+                           IsReadOnly="True"
+                           Margin="10,0,10,0"/>
+
+                    <Button Grid.Row="7"
+                            Grid.ColumnSpan="2"
+                            x:Name="SaveButton"
+                            BackgroundColor="Transparent"
+                            BorderColor="Crimson"
+                            Text="Save Photo"
+                            Margin="10,0,10,0"/>
+
+                </Grid>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
