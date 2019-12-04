@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using PictureThis.View;
 using Newtonsoft.Json;
+using PCLStorage;
 
 namespace PictureThis
 {
@@ -18,7 +19,11 @@ namespace PictureThis
         public MainPage()
         {
             InitializeComponent();
-            startFiles();
+            //pclTest();
+            //pclResultText();
+            //startFiles();
+            initFiles();
+
             NavigationPage.SetHasNavigationBar(this, true);
         }
 
@@ -30,7 +35,74 @@ namespace PictureThis
 
         public class JSONClass
         {
-            public IList<string> Tags { get; set; }
+            public List<string> Tags { get; set; }
+        }
+
+        async void pclTest()
+        {
+            IFolder rootFolder = FileSystem.Current.LocalStorage;
+            //IFolder resourcesFolder = await rootFolder.GetFolderAsync("Resources");
+            IFolder folder = await rootFolder.CreateFolderAsync("TestFolder", CreationCollisionOption.OpenIfExists);
+            IFile file = await folder.CreateFileAsync("result.txt", CreationCollisionOption.ReplaceExisting);
+            await file.WriteAllTextAsync("Success!");
+        }
+
+        async void pclResultText()
+        {
+            IFolder rootFolder = FileSystem.Current.LocalStorage;
+            IFolder folder = await rootFolder.CreateFolderAsync("TestFolder", CreationCollisionOption.OpenIfExists);
+            IFile file = await folder.GetFileAsync("result.txt");
+
+            //read from the file
+            string fileText = await file.ReadAllTextAsync();
+
+            await DisplayAlert("File Contents", fileText, "OK");
+        }
+
+        void initFiles()
+        {
+            //create the JSON List File
+            List<String> myJSON2 = new List<string>();
+            myJSON2.Add("Vacation");
+            myJSON2.Add("Holiday");
+            myJSON2.Add("Birthday");
+            myJSON2.Add("Beach");
+            myJSON2.Add("Museum");
+            myJSON2.Add("Forest");
+            myJSON2.Add("Park");
+            myJSON2.Add("Pet");
+            myJSON2.Add("Pets");
+            myJSON2.Add("Dog");
+            myJSON2.Add("Cat");
+            myJSON2.Add("Family");
+            myJSON2.Add("Childhood");
+            myJSON2.Add("Fair");
+            myJSON2.Add("Restaurant");
+            myJSON2.Add("Food");
+            myJSON2.Add("Fresno");
+            
+            //Sort the tags
+            myJSON2.Sort();
+
+            //serialize it into a string
+            string json = JsonConvert.SerializeObject(myJSON2, Formatting.Indented);
+
+            //set the path
+            string path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "tags.json");
+
+            if (System.IO.File.Exists(path))
+            {
+                DisplayAlert("Exists!!!", "yeah", "whatever");
+            }
+            else
+            {
+                System.IO.File.WriteAllText(path, json);
+
+                DisplayAlert("Doesn't Exist", "Json File Written", "OK");
+            }
+
+            
+
         }
 
         void startFiles()
@@ -59,11 +131,33 @@ namespace PictureThis
                 }
             };
 
+            List<String> myJSON2 = new List<string>();
+            myJSON2.Add("Vacation");
+            myJSON2.Add("Holiday");
+            myJSON2.Add("Birthday");
+            myJSON2.Add("Beach");
+            myJSON2.Add("Museum");
+            myJSON2.Add("Forest");
+            myJSON2.Add("Park");
+            myJSON2.Add("Pet");
+            myJSON2.Add("Pets");
+            myJSON2.Add("Dog");
+            myJSON2.Add("Cat");
+            myJSON2.Add("Family");
+            myJSON2.Add("Childhood");
+            myJSON2.Add("Fair");
+            myJSON2.Add("Restaurant");
+            myJSON2.Add("Food");
+            myJSON2.Add("Fresno");
+
+            myJSON2.Sort();
+
+
             //get the path for storing the file
-            string fileName = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "tags.json");
+            string fileName = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Writtentags.json");
 
             //convert the object into a json object
-            string json = JsonConvert.SerializeObject(myJSON, Formatting.Indented);
+            string json = JsonConvert.SerializeObject(myJSON2, Formatting.Indented);
 
             //save the file to the device if it doesn't already exist
             if (!System.IO.File.Exists(fileName)){
@@ -72,7 +166,12 @@ namespace PictureThis
             }
             else
             {
-                DisplayAlert("Failure", "JSON File either already exists or has not been written", "OK");
+                //delete the original file
+                System.IO.File.Delete(fileName);
+
+                //write the new file
+                System.IO.File.WriteAllText(fileName, json);
+                DisplayAlert("Attention", "JSON File already exists or has not been written. New File written", "OK");
             }
         }
 

@@ -8,10 +8,11 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Xamarin.Essentials;
 using PictureThis.Model;
+using Newtonsoft.Json;
 
 namespace PictureThis.View
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
+    //[XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CameraSavePage : ContentPage
     {
         Picture pictureData;
@@ -21,19 +22,47 @@ namespace PictureThis.View
         public CameraSavePage(Plugin.Media.Abstractions.MediaFile passImage)
         {
             InitializeComponent();
+            SaveButton.Clicked += SaveButton_Clicked;
 
             //init the classes
             pictureData = new Picture();
             jsonTB = new jsonToolbox();
             spinnerTB = new SpinnerToolbox();
 
+            //init the necessary data
+            pictureData.rating = 0;
+
+
             setupFillData(passImage);
+        }
+
+        //have all of the elements of the image placed in the array
+        private async void SaveButton_Clicked(object sender, EventArgs e)
+        {
+            //set the variable to capture the json 
+            string json = "";
+
+            //function for getting the path of the json file and deserializing it
+            //Insert functino for saving into the file here
+
+            //get the file that has the list of objects
+            List<Picture> Images = JsonConvert.DeserializeObject<List<Picture>>(json);
+
+            //add the latest class to the list
+            Images.Add(pictureData);
+
+            //sort the list of images
+            Images.Sort();
+
+            //serialize the object back to json
+            string newJSON = JsonConvert.SerializeObject(Images, Formatting.Indented);
+
+            //save it to the file
+            //Insert function for saving into the file here
         }
 
         async void setupFillData(Plugin.Media.Abstractions.MediaFile passImage)
         {
-            //Declare the Variables
-            pictureData.isLiked = false;
 
             //Get the transferred image to the image box
             imgImage.Source = ImageSource.FromStream(() => { return passImage.GetStream(); });
@@ -49,7 +78,10 @@ namespace PictureThis.View
                 //if it's not null we got your location
                 if (geoLocation != null)
                 {
+
                     pictureData.location = geoLocation;
+                    await DisplayAlert("Location achieved", "Your Location is: " + pictureData.location.ToString(), "OK");
+
                 }
 
             }
@@ -57,43 +89,53 @@ namespace PictureThis.View
             catch (FeatureNotSupportedException fnsEX)
             {
                 //Not supported on device
-                await DisplayAlert(fnsEX.ToString(), "GPS is not supported on this device", "OK");
-                pictureData.location = null;
+                await DisplayAlert("Error: GPS Support", "GPS is not supported on this device", "OK");
+ //               pictureData.location = null;
             }
             catch (FeatureNotEnabledException fneEX)
             {
                 //Not enabled on device
-                await DisplayAlert(fneEX.ToString(), "GPS is not enabled on this device", "OK");
-                pictureData.location = null;
+                await DisplayAlert("Error: GPS Enabled/Disabled", "GPS is not enabled on this device", "OK");
+//                pictureData.location = null;
             }
             catch (PermissionException pEX)
             {
                 //Permission exception
-                await DisplayAlert(pEX.ToString(), "GPS permissions are not accepted on this device", "OK");
-                pictureData.location = null;
+                await DisplayAlert("Error: GPS Permission", "GPS permissions are not accepted on this device", "OK");
+//                pictureData.location = null;
             }
             catch (Exception ex)
             {
                 //couldn't get location
-                await DisplayAlert(ex.ToString(), "Could not get location", "OK");
-                pictureData.location = null;
+                await DisplayAlert("Error: GPS Functionality", "Could not get location", "OK");
+//                pictureData.location = null;
             }
 
             //Set Date and Time
-            pictureData.dateTime = DateTime.Today;
+//            pictureData.dateTime = DateTime.Today;
 
             //get date data (read only)
-            datePickDate.Date = pictureData.dateTime.Date;
+//            datePickDate.Date = pictureData.dateTime.Date;
 
             //get time data (read only)
-            timePickTime.Time = pictureData.dateTime.TimeOfDay;
+//            timePickTime.Time = pictureData.dateTime.TimeOfDay;
 
             //display location time
-            entLocation.Text = pictureData.location.ToString();
+
+            if(pictureData.location == null)
+            {
+                entLocation.Text = "No Location";
+            }else
+            {
+                entLocation.Text = pictureData.location.ToString();
+            }
+            
+
 
             //Start working the spinnner
             //Populate the spinner
-            spinnerTB.LoadAvailableTags(spinner, pictureData);
+            spinner = spinnerTB.LoadAvailableTags(pictureData.tags);
+
 
             //spinner function
             spinner.SelectedIndexChanged += async (sender, args) =>
@@ -101,6 +143,7 @@ namespace PictureThis.View
                 if (spinner.SelectedIndex == -1)
                 {
                     //do nothing
+                    return;
                 }
                 else
                 {
@@ -129,6 +172,7 @@ namespace PictureThis.View
                             pictureData.tags.Add(spinner.SelectedIndex.ToString());
 
                             //reload the editor();
+                            reloadEditorTags();
                         }
                     }
                 }

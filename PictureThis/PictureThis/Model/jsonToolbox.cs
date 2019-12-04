@@ -4,7 +4,7 @@ using System.IO;
 using System.Reflection;
 using Xamarin.Forms;
 using Newtonsoft.Json;
-using PictureThis;
+using PCLStorage;
 
 namespace PictureThis.Model
 {
@@ -17,6 +17,9 @@ namespace PictureThis.Model
         //string jsonString = "";
         string imagesPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "images.json"); //Get this later: Path that holds all of the embedded images
         //List<String> currentTags;
+
+        //USING PCL
+        IFolder rootFolder = FileSystem.Current.LocalStorage;
 
         public jsonToolbox()
         {

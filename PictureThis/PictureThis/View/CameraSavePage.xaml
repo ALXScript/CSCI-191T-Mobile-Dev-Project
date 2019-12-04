@@ -120,12 +120,11 @@
 
                     <Button Grid.Row="7"
                             Grid.ColumnSpan="2"
-                            x:Name="btnSave"
+                            x:Name="SaveButton"
                             BackgroundColor="Transparent"
                             BorderColor="Crimson"
                             Text="Save Photo"
                             Margin="10,0,10,0"/>
-
 
                 </Grid>
             </ScrollView>
