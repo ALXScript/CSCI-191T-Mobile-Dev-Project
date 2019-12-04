@@ -6,10 +6,19 @@
              mc:Ignorable="d"
              x:Class="PictureThis.View.LabelPage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Label Pages!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout Margin="20">
+            <Label Text="Swipe inside the box with a single finger." />
+            <Image x:Name ="Box" BackgroundColor="Teal" WidthRequest="300" HeightRequest="300" HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
+                <Image.GestureRecognizers>
+                    <!-- Can also set a swipe threshold on each gesture recognizer -->
+                    <SwipeGestureRecognizer Direction="Left" Swiped="OnSwiped"/>
+                    <SwipeGestureRecognizer Direction="Right" Swiped="OnSwiped"/>
+                    <SwipeGestureRecognizer Direction="Up" Swiped="OnSwiped"/>
+                    <SwipeGestureRecognizer Direction="Down" Swiped="OnSwiped"/>
+                </Image.GestureRecognizers>
+            </Image>
+            <Label x:Name="swipedLabel" Text="You swiped: "/>
+            <Picker x:Name="labelPicker"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

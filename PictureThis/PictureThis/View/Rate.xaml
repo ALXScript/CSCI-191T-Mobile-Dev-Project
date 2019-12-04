@@ -7,8 +7,9 @@
              x:Class="PictureThis.View.Rate">
     <ContentPage.Content>
         <StackLayout Margin="20">
-            <Label Text="Swipe inside the box with a single finger." />
+            <Label Text="Swipe right to increase the picture's rating, left to decrease it." />
             <Image x:Name ="Box" BackgroundColor="Teal" WidthRequest="300" HeightRequest="300" HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
+                
                 <Image.GestureRecognizers>
                     <!-- Can also set a swipe threshold on each gesture recognizer -->
                     <SwipeGestureRecognizer Direction="Left" Swiped="OnSwiped"/>

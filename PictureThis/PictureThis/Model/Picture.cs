@@ -19,6 +19,5 @@ namespace PictureThis.Model
         {
             return tags.Contains(tag);
         }
-
     }
 }

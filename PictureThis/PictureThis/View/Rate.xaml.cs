@@ -15,9 +15,6 @@ namespace PictureThis.View
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Rate : ContentPage
     {
-        private string dir;
-        private IEnumerable<string> d;
-        Picture picture;
         int pictureIndex = 0;
         List<Picture> pictures;
         public string json;
@@ -25,7 +22,14 @@ namespace PictureThis.View
 
         public Rate()
         {
-            json = @"[
+            InitializeComponent();
+
+            imagesPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "images.json"); //Get this later: Path that holds all of the embedded images
+
+            //save the file to the device if it doesn't already exist
+            if (!System.IO.File.Exists(imagesPath))
+            {
+                json = @"[
                       {
                         'name': 'hello',
                         'rating': 0,
@@ -43,11 +47,6 @@ namespace PictureThis.View
                         ]
                     }
                     ]";
-            imagesPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "images.json"); //Get this later: Path that holds all of the embedded images
-            InitializeComponent();
-            //save the file to the device if it doesn't already exist
-            if (!System.IO.File.Exists(imagesPath))
-            {
                 System.IO.File.WriteAllText(imagesPath, json);
                 DisplayAlert("Success", "JSON File has been written!", "OK");
             }
@@ -57,7 +56,6 @@ namespace PictureThis.View
                 //System.IO.File.Delete(imagesPath);
 
                 //write the new file
-                //System.IO.File.WriteAllText(imagesPath, json);
                 DisplayAlert("Attention", "JSON File already exists", "OK");
             }
 
@@ -68,15 +66,20 @@ namespace PictureThis.View
 
             //deserialize json into list of tags
             pictures = JsonConvert.DeserializeObject<List<Picture>>(jsonString);
-            
+
+            /*
+            pictures = (from pic in pictures
+                       where pic.hasTag("Cat")
+                       select pic).ToList();
+            */
+
+
             swipedLabel.Text = "Name:" + pictures[pictureIndex].name + "\tRating:" + pictures[pictureIndex].rating;
-            
-            
 
             //initialize to first pic
             // picture = pictures[pictureIndex];
         }
-        async void  OnSwiped(object sender, SwipedEventArgs e)
+        void OnSwiped(object sender, SwipedEventArgs e)
         {
             //swipedLabel.Text = $"You swiped: {e.Direction.ToString()}";
             
@@ -102,24 +105,17 @@ namespace PictureThis.View
                     break;
                 //increase rating
                 case "Right":
-                    
                     pictures[pictureIndex].rating++;
                     break;
                 //decrease rating
                 case "Left":
                     pictures[pictureIndex].rating--;
-
                     break;
-            
             }
-            pictureIndex=(pictureIndex+1) % 2;
+            pictureIndex = (pictureIndex+1) % pictures.Count();
             swipedLabel.Text = "Name:"+ pictures[pictureIndex].name + "\tRating:"+ pictures[pictureIndex].rating;
             json = JsonConvert.SerializeObject(pictures, Formatting.Indented);
             System.IO.File.WriteAllText(imagesPath, json);
-
-
-            //TODO add logic for if there are no more pictures in list. Use Modulo?
-
         }//end OnSwiped
     }
 }
