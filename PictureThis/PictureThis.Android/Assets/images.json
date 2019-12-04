@@ -1,0 +1,18 @@
+﻿[
+  {
+    "name": "hello",
+    "rating": 0,
+    "tags": [
+      "Fresno",
+      "Cat"
+    ]
+  },
+  {
+    "name": "world",
+    "rating": 1,
+    "tags": [
+      "Fresno",
+      "Dog"
+    ]
+  }
+]
