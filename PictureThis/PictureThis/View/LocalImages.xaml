@@ -19,7 +19,6 @@
                     Text="Pick an Image"
                     TextColor="Black"
                     Clicked="GetImageGallery"/>
-
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -63,6 +63,7 @@ namespace PictureThis.View
 
         async void setupFillData(Plugin.Media.Abstractions.MediaFile passImage)
         {
+
             //Get the transferred image to the image box
             imgImage.Source = ImageSource.FromStream(() => { return passImage.GetStream(); });
 
@@ -77,8 +78,10 @@ namespace PictureThis.View
                 //if it's not null we got your location
                 if (geoLocation != null)
                 {
+
                     pictureData.location = geoLocation;
                     await DisplayAlert("Location achieved", "Your Location is: " + pictureData.location.ToString(), "OK");
+
                 }
 
             }
@@ -87,37 +90,38 @@ namespace PictureThis.View
             {
                 //Not supported on device
                 await DisplayAlert("Error: GPS Support", "GPS is not supported on this device", "OK");
-                pictureData.location = null;
+ //               pictureData.location = null;
             }
             catch (FeatureNotEnabledException fneEX)
             {
                 //Not enabled on device
                 await DisplayAlert("Error: GPS Enabled/Disabled", "GPS is not enabled on this device", "OK");
-                pictureData.location = null;
+//                pictureData.location = null;
             }
             catch (PermissionException pEX)
             {
                 //Permission exception
                 await DisplayAlert("Error: GPS Permission", "GPS permissions are not accepted on this device", "OK");
-                pictureData.location = null;
+//                pictureData.location = null;
             }
             catch (Exception ex)
             {
                 //couldn't get location
                 await DisplayAlert("Error: GPS Functionality", "Could not get location", "OK");
-                pictureData.location = null;
+//                pictureData.location = null;
             }
 
             //Set Date and Time
-            pictureData.dateTime = DateTime.Today;
+//            pictureData.dateTime = DateTime.Today;
 
             //get date data (read only)
-            datePickDate.Date = pictureData.dateTime.Date;
+//            datePickDate.Date = pictureData.dateTime.Date;
 
             //get time data (read only)
-            timePickTime.Time = pictureData.dateTime.TimeOfDay;
+//            timePickTime.Time = pictureData.dateTime.TimeOfDay;
 
             //display location time
+
             if(pictureData.location == null)
             {
                 entLocation.Text = "No Location";
@@ -126,6 +130,7 @@ namespace PictureThis.View
                 entLocation.Text = pictureData.location.ToString();
             }
             
+
 
             //Start working the spinnner
             //Populate the spinner
