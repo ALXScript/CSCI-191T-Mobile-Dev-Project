@@ -38,7 +38,8 @@
                     VerticalOptions="Center"
                     CornerRadius="5"
                     Padding="5,0,5,0"
-                    Text="Display pictures by Map"
+                    Clicked="OnBrowseClickedLocation"
+                    Text="Display pictures closest to your Location"
                     TextColor="Black"
                     />
             
