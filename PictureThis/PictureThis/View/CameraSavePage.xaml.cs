@@ -10,6 +10,7 @@ using Xamarin.Essentials;
 using PictureThis.Model;
 using Newtonsoft.Json;
 
+
 namespace PictureThis.View
 {
     //[XamlCompilation(XamlCompilationOptions.Compile)]
@@ -129,13 +130,12 @@ namespace PictureThis.View
             {
                 entLocation.Text = pictureData.location.ToString();
             }
-            
+
 
 
             //Start working the spinnner
             //Populate the spinner
-            spinner = spinnerTB.LoadAvailableTags(pictureData.tags);
-
+            spinner.ItemsSource = jsonTB.GetTags();
 
             //spinner function
             spinner.SelectedIndexChanged += async (sender, args) =>
