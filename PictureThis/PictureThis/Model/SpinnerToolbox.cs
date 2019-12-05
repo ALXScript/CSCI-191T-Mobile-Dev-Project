@@ -11,7 +11,7 @@ namespace PictureThis
     class SpinnerToolbox
     {
         private jsonToolbox JSONtb = new jsonToolbox();
-        private Picker classSpinner;
+        private Picker classSpinner = new Picker();
         //private Picture classPicture;
 
 

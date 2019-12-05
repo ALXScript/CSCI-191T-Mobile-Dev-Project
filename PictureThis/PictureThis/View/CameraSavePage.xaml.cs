@@ -15,25 +15,36 @@ namespace PictureThis.View
     //[XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CameraSavePage : ContentPage
     {
-        Picture pictureData;
-        jsonToolbox jsonTB;
-        SpinnerToolbox spinnerTB;
+        Picture pictureData = new Picture();
+        jsonToolbox jsonTB = new jsonToolbox();
+        SpinnerToolbox spinnerTB = new SpinnerToolbox();
+        List<String> getTags;
 
         public CameraSavePage(Plugin.Media.Abstractions.MediaFile passImage)
         {
             InitializeComponent();
             SaveButton.Clicked += SaveButton_Clicked;
-
-            //init the classes
-            pictureData = new Picture();
-            jsonTB = new jsonToolbox();
-            spinnerTB = new SpinnerToolbox();
+            btnNewTag.Clicked += BtnNewTag_Clicked;
+            btnAddTag.Clicked += BtnAddTag_Clicked;
 
             //init the necessary data
             pictureData.rating = 0;
+            pictureData.tags = new List<String>();
 
 
             setupFillData(passImage);
+        }
+
+        private void BtnAddTag_Clicked(object sender, EventArgs e)
+        {
+            var spinnerdata = spinner.SelectedIndex..toString();
+
+            //throw new NotImplementedException();
+        }
+
+        private void BtnNewTag_Clicked(object sender, EventArgs e)
+        {
+
         }
 
         //have all of the elements of the image placed in the array
@@ -60,6 +71,8 @@ namespace PictureThis.View
             //save it to the file
             //Insert function for saving into the file here
         }
+
+        //
 
         async void setupFillData(Plugin.Media.Abstractions.MediaFile passImage)
         {
@@ -129,49 +142,38 @@ namespace PictureThis.View
             {
                 entLocation.Text = pictureData.location.ToString();
             }
-            
-
 
             //Start working the spinnner
             //Populate the spinner
-            spinner = spinnerTB.LoadAvailableTags(pictureData.tags);
+
+            //spinner = spinnerTB.LoadAvailableTags(pictureData.tags);
+            spinner.ItemsSource = jsonTB.GetTags();
+
+            //var picker = new Picker { Title = "Select a monkey", TitleColor = Color.Red };
+            //picker.SetBinding(Picker.ItemsSourceProperty, "Monkeys");
+            //picker.ItemDisplayBinding = new Binding("Name");
 
 
             //spinner function
-            spinner.SelectedIndexChanged += async (sender, args) =>
+            spinner.SelectedIndexChanged += (sender, args) =>
             {
-                if (spinner.SelectedIndex == -1)
+                if (spinner.SelectedIndex != -1)
                 {
-                    //do nothing
-                    return;
-                }
-                else
-                {
-                    if (spinner.Items[spinner.SelectedIndex] == "Add New Tag")
+                    //add the tag to the image
+                    if (pictureData.tags.Equals(null))
                     {
-                        //Call a prompt to add the new tag
-                        string prompt = await DisplayPromptAsync("New Tag", "Please Enter A New Tag");
+                        pictureData.tags.Add(spinner.SelectedIndex.ToString());
 
-                        //check to see if the tag exists in the list of all tags
-                        if (!jsonTB.GetTags().Contains(prompt))
-                        {
-                            //add the tag to the list of tags and the image
-                            jsonTB.AddTag(prompt);
-                            pictureData.tags.Add(prompt);
-
-                            //relaod the editor
-                            reloadEditorTags();
-                        }
+                        //reload the editor(;
+                        edtTags.Text = pictureData.tags.ElementAt(0).ToString();
                     }
                     else
                     {
-                        //check to see if the tag is already in the image
                         if (!pictureData.tags.Contains(spinner.SelectedIndex.ToString()))
                         {
-                            //add the tag to the image
                             pictureData.tags.Add(spinner.SelectedIndex.ToString());
 
-                            //reload the editor();
+                            //reload the editor;
                             reloadEditorTags();
                         }
                     }
