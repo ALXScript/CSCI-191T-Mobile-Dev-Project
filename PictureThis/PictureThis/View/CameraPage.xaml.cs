@@ -20,7 +20,7 @@ namespace PictureThis.View
             var photo = await Plugin.Media.CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions() 
             {
                 // Directory = "Sample",  //where to put your phone directory
-               // Name = "test.jpg"   // where to put the pciture//file name to sure for it 
+               // Name = "test.jpg"   // where to put the pciture//file name to sure for it  // we can rename photo name
             });
 
             if (photo != null)
