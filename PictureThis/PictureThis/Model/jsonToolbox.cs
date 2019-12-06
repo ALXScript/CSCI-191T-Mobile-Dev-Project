@@ -95,7 +95,7 @@ namespace PictureThis.Model
 
 
             //check if the file exists and write it if it doesn't
-            if (!File.Exists(tagsPath))
+            if (File.Exists(tagsPath))
             {
                 //create the JSON List File
                 List<String> myJSON2 = new List<string>();
@@ -132,24 +132,33 @@ namespace PictureThis.Model
                       {
                         'name': 'Internal storage/DCIM/Camera/IMG_20191119_175951.jpg',
                         'rating': 0,
-                        'location':null,
+                        'location':{
+                                    'Latitude': 12,
+                                    'Longitude': 13,
+                                    },
                         'dateTime': '05/1/2008 8:30:52 AM',
-                        'tags': ['Fresno','Cat']
+                        'tags': ['Fresno','Cat'],
+                        'distance': 0.0,
                         },
                       {
-                        'name': 'world',
+                        'name': 'Internal storage/DCIM/Camera/IMG_20191204_144423.jpg',
                         'rating': 1,
-                        'location': null,
+                        'location':{
+                                    'Latitude': 0,
+                                    'Longitude': 0,
+                                    'Speed': 0, 
+                                    },
                         'dateTime': '05/1/2008 8:30:52 AM',
-                        'tags': [
-                          'Fresno',
-                          'Dog'
-                        ]
-                    } ,      
+                        'tags': ['Fresno','Dog' ],
+                        'distance': 0.0,
+                        },      
                     {
                         'name': 'Internal storage/DCIM/Camera/IMG_20191204_144423.jpg',
                         'rating': 7,
-                        'location':null,
+                        'location':{
+                                    'Latitude': 124,
+                                    'Longitude':60,
+                                    },
                         'dateTime': '05/1/2008 8:30:52 AM',
                         'tags': ['Fresno','Dog','Cat']
                     }

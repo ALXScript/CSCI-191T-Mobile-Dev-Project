@@ -8,7 +8,8 @@
     <ContentPage.Content>
         <StackLayout>
             <Label Text="Swipe right to increase the picture's rating, left to decrease it." />
-            <Image Source="{Binding ImagePath}" BackgroundColor="Teal" WidthRequest="300" HeightRequest="300" HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
+            <Image Source="{Binding ImageFilePath}" BackgroundColor="Teal" WidthRequest="300" HeightRequest="300" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Margin="0">
+
 
                 <Image.GestureRecognizers>
                     <!-- Can also set a swipe threshold on each gesture recognizer -->

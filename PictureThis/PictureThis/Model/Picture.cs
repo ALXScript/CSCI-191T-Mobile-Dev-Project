@@ -12,7 +12,6 @@ namespace PictureThis.Model
         public DateTime dateTime;
         public Location location;
         public double distance;
-
         public int rating;
         public List<String> tags;
  
@@ -21,5 +20,7 @@ namespace PictureThis.Model
             return tags.Contains(tag);      
             
         }
+
+
     }
 }
