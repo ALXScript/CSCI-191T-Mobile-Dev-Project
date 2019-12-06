@@ -130,9 +130,9 @@ namespace PictureThis.Model
             {
             String json = @"[
                       {
-                        'name': 'hello',
+                        'name': 'Internal storage/DCIM/Camera/IMG_20191119_175951.jpg',
                         'rating': 0,
-                        'location': null,
+                        'location':null,
                         'dateTime': '05/1/2008 8:30:52 AM',
                         'tags': ['Fresno','Cat']
                         },
@@ -147,9 +147,9 @@ namespace PictureThis.Model
                         ]
                     } ,      
                     {
-                        'name': 'Test',
+                        'name': 'Internal storage/DCIM/Camera/IMG_20191204_144423.jpg',
                         'rating': 7,
-                        'location': null,
+                        'location':null,
                         'dateTime': '05/1/2008 8:30:52 AM',
                         'tags': ['Fresno','Dog','Cat']
                     }

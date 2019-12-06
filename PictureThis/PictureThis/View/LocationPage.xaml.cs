@@ -94,6 +94,7 @@ namespace PictureThis.View
                     pictures[pictureIndex].rating--;
                     break;
             }
+            imagesPath = pictures[pictureIndex].name;
             pictureIndex = (pictureIndex + 1) % pictures.Count();
             swipedLabel.Text = "Name:" + pictures[pictureIndex].name + "\tRating:" + pictures[pictureIndex].rating;
             json = JsonConvert.SerializeObject(pictures, Formatting.Indented);
