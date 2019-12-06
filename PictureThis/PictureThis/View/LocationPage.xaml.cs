@@ -16,7 +16,7 @@ namespace PictureThis.View
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LocationPage : ContentPage
     {
-        private Xamarin.Essentials.Location currentlocation; // for location and distance formula
+        private Location currentlocation; // for location and distance formula
         int pictureIndex = 0;
         List<Picture> pictures;
         public string json;
