@@ -8,6 +8,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using PictureThis.Model;
 using Newtonsoft.Json;
+using Xamarin.Essentials;
 
 
 namespace PictureThis.View
@@ -20,6 +21,7 @@ namespace PictureThis.View
         public string json;
         string imagesPath;
         jsonToolbox jsonToolbox = new jsonToolbox();
+        Boolean fileFound = false;
 
         public Rate()
         {
@@ -34,63 +36,61 @@ namespace PictureThis.View
             }
             else
             {
-                //delete the original file
-                //System.IO.File.Delete(imagesPath);
+                fileFound = true;
+                //Get the tags.json as a string
+                string jsonString = System.IO.File.ReadAllText(imagesPath);
 
-                //write the new file
-                DisplayAlert("Attention", "JSON File already exists", "OK");
+                //deserialize json into list of tags
+                pictures = JsonConvert.DeserializeObject<List<Picture>>(jsonString);
+                swipedLabel.Text = "Name:" + pictures[pictureIndex].name + "\tRating:" + pictures[pictureIndex].rating;
+
             }
 
 
-            
-            //Get the tags.json as a string
-            string jsonString = System.IO.File.ReadAllText(imagesPath);
 
-            //deserialize json into list of tags
-            pictures = JsonConvert.DeserializeObject<List<Picture>>(jsonString);
-
-
-            pictures = (from pic in pictures
-                        where pic.hasTag("Cat")
-                        select pic).ToList();
             
 
-            swipedLabel.Text = "Name:" + pictures[pictureIndex].name + "\tRating:" + pictures[pictureIndex].rating;
 
         }
         void OnSwiped(object sender, SwipedEventArgs e)
         {
-            //logic to update rating based on which direction the user swiped 
-            //then get next picture.
-            switch (e.Direction.ToString())
+            if (fileFound)
             {
-                case "Up":
-/*
-                    //This is the logic to add a single photo. It is not part of the end functionality of this page
-                    var photo = await Plugin.Media.CrossMedia.Current.PickPhotoAsync();
-                    if (photo != null)
-                    {
-                        Box.Source = ImageSource.FromStream(() => { return photo.GetStream(); });
-                        dir = photo.AlbumPath;
-                    }
+                //logic to update rating based on which direction the user swiped 
+                //then get next picture.
+                switch (e.Direction.ToString())
+                {
+                    case "Up":
+                        /*
+                                            //This is the logic to add a single photo. It is not part of the end functionality of this page
+                                            var photo = await Plugin.Media.CrossMedia.Current.PickPhotoAsync();
+                                            if (photo != null)
+                                            {
+                                                Box.Source = ImageSource.FromStream(() => { return photo.GetStream(); });
+                                                dir = photo.AlbumPath;
+                                            }
 
-*/
+                        */
 
-                    //skip rating for this picture and get next picture 
-                    break;
-                //increase rating
-                case "Right":
-                    pictures[pictureIndex].rating++;
-                    break;
-                //decrease rating
-                case "Left":
-                    pictures[pictureIndex].rating--;
-                    break;
+                        //skip rating for this picture and get next picture 
+                        break;
+                    //increase rating
+                    case "Right":
+                        pictures[pictureIndex].rating++;
+                        break;
+                    //decrease rating
+                    case "Left":
+                        pictures[pictureIndex].rating--;
+                        break;
+                }
+
+                
+                pictureIndex = (pictureIndex + 1) % pictures.Count();
+                pictures[pictureIndex].location = new Location(12+pictureIndex, 14-pictureIndex);
+                swipedLabel.Text = "Name:" + pictures[pictureIndex].name + "\tRating:" + pictures[pictureIndex].rating +"\nLocation"+pictures[pictureIndex].location.ToString();
+                json = JsonConvert.SerializeObject(pictures, Formatting.Indented);
+                System.IO.File.WriteAllText(imagesPath, json);
             }
-            pictureIndex = (pictureIndex + 1) % pictures.Count();
-            swipedLabel.Text = "Name:"+ pictures[pictureIndex].name + "\tRating:"+ pictures[pictureIndex].rating;
-            json = JsonConvert.SerializeObject(pictures, Formatting.Indented);
-            System.IO.File.WriteAllText(imagesPath, json);
         }//end OnSwiped
     }
 }

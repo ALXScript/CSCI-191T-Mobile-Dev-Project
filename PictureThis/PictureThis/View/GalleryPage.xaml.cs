@@ -12,6 +12,6 @@ namespace PictureThis
         {
             InitializeComponent();
         }
-        protected async void OnBrowseClickedLocation(object sender, EventArgs e) => await Navigation.PushAsync(new Location());
+        protected async void OnBrowseClickedLocation(object sender, EventArgs e) => await Navigation.PushAsync(new LocationPage());
     }
 }

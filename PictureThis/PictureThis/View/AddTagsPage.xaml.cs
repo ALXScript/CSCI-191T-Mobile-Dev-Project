@@ -15,21 +15,19 @@ namespace PictureThis.View
     {
         List<string> pickerlist = new List<string>();
         jsonToolbox jsonToolbox = new jsonToolbox();
+        
         public LabelPage()
         {
             InitializeComponent();
-
             //Query blueprint used to get pictures with tag
-            //This can be moved to a query manager
+            //This can be moved to a query 
+
             /*
-             
             List<Picture> pictures= from pic in Pictures
                                     where pic.hasTag(selectedTag)
                                     select pic;
-
             */
-
-
+            
             labelPicker.ItemsSource = jsonToolbox.GetTags();
         }
 

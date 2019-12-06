@@ -92,8 +92,6 @@ namespace PictureThis.Model
 
         void initFiles()
         {
-
-
             //check if the file exists and write it if it doesn't
             if (!File.Exists(tagsPath))
             {
@@ -126,6 +124,7 @@ namespace PictureThis.Model
 
                 //DisplayAlert("Doesn't Exist", "Json File Written", "OK");
             }
+
             if (File.Exists(imagesPath))
             {
             String json = @"[
@@ -155,12 +154,17 @@ namespace PictureThis.Model
                     }
                     ]";
                 File.WriteAllText(imagesPath, json);
+/*
+                List<Picture> pictures = new List<Picture>();
 
-
-
-
+                pictures = JsonConvert.DeserializeObject<List<Picture>>(imagesPath);
+                pictures[0].location = new Xamarin.Essentials.Location(10, 10);
+                pictures[1].location = new Xamarin.Essentials.Location(20, 20);
+                pictures[2].location = new Xamarin.Essentials.Location(30, 30);
+                json = JsonConvert.SerializeObject(pictures, Formatting.Indented);
+                System.IO.File.WriteAllText(imagesPath, json);
+*/           
             }
-
 
         }
     }

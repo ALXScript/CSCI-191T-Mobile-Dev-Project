@@ -12,11 +12,11 @@ using Xamarin.Essentials;
 namespace PictureThis.View
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class Location : ContentPage
+    public partial class LocationPage : ContentPage
     {
         private Xamarin.Essentials.Location location;
 
-        public Location()
+        public LocationPage()
         {
             InitializeComponent();
             GetCLocation.Clicked += GetCurrentLocation_Clicked;

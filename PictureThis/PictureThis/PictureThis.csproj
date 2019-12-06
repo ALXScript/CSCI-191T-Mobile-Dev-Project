@@ -30,10 +30,10 @@
     <EmbeddedResource Update="View\CameraSavePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="View\LabelPage.xaml">
+    <EmbeddedResource Update="View\AddTagsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="View\Location.xaml">
+    <EmbeddedResource Update="View\LocationPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="View\Rate.xaml">
@@ -42,5 +42,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="Resources\tags.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="View\AddTagsPage.xaml.cs">
+      <DependentUpon>AddTagsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="View\LocationPage.xaml.cs">
+      <DependentUpon>LocationPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 </Project>
