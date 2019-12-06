@@ -18,12 +18,8 @@ namespace PictureThis.View
     {
         int pictureIndex = 0;
         List<Picture> pictures;
-        public string json;
-        string imagesPath;
-        jsonToolbox jsonToolbox = new jsonToolbox();
+        string json,imagesPath;
         Boolean fileFound = false;
-        Location currentLocation;
-
         public Rate()
         {
             InitializeComponent();
@@ -31,8 +27,7 @@ namespace PictureThis.View
 
             //save the file to the device if it doesn't already exist
             if (!System.IO.File.Exists(imagesPath))
-            {
-
+            { 
                 DisplayAlert("ALERT", "No Pictures were found. Please add pictures.", "OK");
             }
             else
@@ -43,8 +38,7 @@ namespace PictureThis.View
 
                 //deserialize json into list of tags
                 pictures = JsonConvert.DeserializeObject<List<Picture>>(jsonString);
-                swipedLabel.Text = "Name:" + pictures[pictureIndex].name + "\tRating:" + pictures[pictureIndex].rating;
-
+                swipedLabel.Text = "Name: " + pictures[pictureIndex].name + "\tRating: " + pictures[pictureIndex].getRating() + "\nTags: "+pictures[pictureIndex].getAllTags();
             }
         }
         void OnSwiped(object sender, SwipedEventArgs e)
@@ -71,16 +65,17 @@ namespace PictureThis.View
                         break;
                     //increase rating
                     case "Right":
-                        pictures[pictureIndex].rating++;
+                        pictures[pictureIndex].increaseRating();
                         break;
                     //decrease rating
                     case "Left":
-                        pictures[pictureIndex].rating--;
+                        pictures[pictureIndex].decreaseRating();
                         break;
                 }
                 //get next picture looping back to front if we reach the end of the list
                 pictureIndex = (pictureIndex + 1) % pictures.Count();
-                swipedLabel.Text = "Name:" + pictures[pictureIndex].name + "\tRating:" + pictures[pictureIndex].rating;
+                swipedLabel.Text = "Name: " + pictures[pictureIndex].name + "\tRating: " + pictures[pictureIndex].getRating() + "\nTags: "+pictures[pictureIndex].getAllTags();
+
                 //rewrite the json file with updated rating
                 json = JsonConvert.SerializeObject(pictures, Formatting.Indented);
                 System.IO.File.WriteAllText(imagesPath, json);
