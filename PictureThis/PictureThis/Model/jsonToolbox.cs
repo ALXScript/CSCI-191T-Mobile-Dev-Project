@@ -125,7 +125,7 @@ namespace PictureThis.Model
                 //DisplayAlert("Doesn't Exist", "Json File Written", "OK");
             }
 
-            if (File.Exists(imagesPath))
+            if (!File.Exists(imagesPath))
             {
             String json = @"[
                       {

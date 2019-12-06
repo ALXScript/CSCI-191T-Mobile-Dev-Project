@@ -22,6 +22,7 @@ namespace PictureThis.View
         string imagesPath;
         jsonToolbox jsonToolbox = new jsonToolbox();
         Boolean fileFound = false;
+        Location currentLocation;
 
         public Rate()
         {
@@ -45,12 +46,6 @@ namespace PictureThis.View
                 swipedLabel.Text = "Name:" + pictures[pictureIndex].name + "\tRating:" + pictures[pictureIndex].rating;
 
             }
-
-
-
-            
-
-
         }
         void OnSwiped(object sender, SwipedEventArgs e)
         {
@@ -83,14 +78,16 @@ namespace PictureThis.View
                         pictures[pictureIndex].rating--;
                         break;
                 }
-
-                
+                //get next picture looping back to front if we reach the end of the list
                 pictureIndex = (pictureIndex + 1) % pictures.Count();
-                pictures[pictureIndex].location = new Location(12+pictureIndex, 14-pictureIndex);
-                swipedLabel.Text = "Name:" + pictures[pictureIndex].name + "\tRating:" + pictures[pictureIndex].rating +"\nLocation"+pictures[pictureIndex].location.ToString();
+                swipedLabel.Text = "Name:" + pictures[pictureIndex].name + "\tRating:" + pictures[pictureIndex].rating;
+                //rewrite the json file with updated rating
                 json = JsonConvert.SerializeObject(pictures, Formatting.Indented);
                 System.IO.File.WriteAllText(imagesPath, json);
+                
             }
         }//end OnSwiped
+
+
     }
 }
