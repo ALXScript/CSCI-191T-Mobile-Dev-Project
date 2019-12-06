@@ -4,7 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="PictureThis.View.Location">
+             x:Class="PictureThis.View.LocationPage">
     <ContentPage.Content>
         <StackLayout>
             <Label Text="Swipe right to increase the picture's rating, left to decrease it." />

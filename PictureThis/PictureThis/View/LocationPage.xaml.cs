@@ -14,15 +14,16 @@ using Newtonsoft.Json;
 namespace PictureThis.View
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class Location : ContentPage
+    public partial class LocationPage : ContentPage
     {
-        private Xamarin.Essentials.Location currentlocation; // for lcation and distance formula
+        private Xamarin.Essentials.Location currentlocation; // for location and distance formula
         int pictureIndex = 0;
         List<Picture> pictures;
         public string json;
         string imagesPath;
-       
-        public Location()
+
+
+        public LocationPage()
         {
             InitializeComponent();
             GetCurrentLocation();
@@ -30,6 +31,7 @@ namespace PictureThis.View
             // need to change which json file it is. We need to make a new json that adds all the data. 
             //SortByLocation(); // sort pictures by closest location
         }
+
         private async void GetCurrentLocation()
         {
             try
@@ -78,7 +80,7 @@ namespace PictureThis.View
                         orderby (pic.distance) // sorts pictures by location 
                         select pic).ToList();
         }
-
+        
         void OnSwiped(object sender, SwipedEventArgs e)
         {
             switch (e.Direction.ToString())

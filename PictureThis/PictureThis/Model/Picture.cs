@@ -15,10 +15,11 @@ namespace PictureThis.Model
 
         public int rating;
         public List<String> tags;
-
+ 
         public Boolean hasTag(String tag)
         {
-            return tags.Contains(tag);
+            return tags.Contains(tag);      
+            
         }
     }
 }
