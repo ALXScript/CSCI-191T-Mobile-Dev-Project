@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PictureThis.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,9 +14,11 @@ namespace PictureThis.View
     public partial class LabelPage : ContentPage
     {
         List<string> pickerlist = new List<string>();
-       
+        jsonToolbox jsonToolbox = new jsonToolbox();
         public LabelPage()
         {
+            InitializeComponent();
+
             //Query blueprint used to get pictures with tag
             //This can be moved to a query manager
             /*
@@ -25,14 +28,15 @@ namespace PictureThis.View
                                     select pic;
 
             */
-            InitializeComponent();
+
+
+            labelPicker.ItemsSource = jsonToolbox.GetTags();
         }
 
         void OnSwiped(object sender, SwipedEventArgs e)
         {
-            swipedLabel.Text = e.Direction.ToString();
-            pickerlist.Add(e.Direction.ToString());
-            labelPicker.ItemsSource = pickerlist;
+
+        
         }
     }
 }

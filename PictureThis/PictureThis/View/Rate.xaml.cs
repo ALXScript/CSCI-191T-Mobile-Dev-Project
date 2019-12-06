@@ -19,36 +19,18 @@ namespace PictureThis.View
         List<Picture> pictures;
         public string json;
         string imagesPath;
+        jsonToolbox jsonToolbox = new jsonToolbox();
 
         public Rate()
         {
             InitializeComponent();
-
             imagesPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "images.json"); //Get this later: Path that holds all of the embedded images
 
             //save the file to the device if it doesn't already exist
             if (!System.IO.File.Exists(imagesPath))
             {
-                json = @"[
-                      {
-                        'name': 'hello',
-                        'rating': 0,
-                        'tags': [
-                          'Fresno',
-                          'Cat'
-                        ]
-                        },
-                      {
-                        'name': 'world',
-                        'rating': 1,
-                        'tags': [
-                          'Fresno',
-                          'Dog'
-                        ]
-                    }
-                    ]";
-                System.IO.File.WriteAllText(imagesPath, json);
-                DisplayAlert("Success", "JSON File has been written!", "OK");
+
+                DisplayAlert("ALERT", "No Pictures were found. Please add pictures.", "OK");
             }
             else
             {
@@ -67,30 +49,23 @@ namespace PictureThis.View
             //deserialize json into list of tags
             pictures = JsonConvert.DeserializeObject<List<Picture>>(jsonString);
 
-            /*
-            pictures = (from pic in pictures
-                       where pic.hasTag("Cat")
-                       select pic).ToList();
-            */
 
+            pictures = (from pic in pictures
+                        where pic.hasTag("Cat")
+                        select pic).ToList();
+            
 
             swipedLabel.Text = "Name:" + pictures[pictureIndex].name + "\tRating:" + pictures[pictureIndex].rating;
 
-            //initialize to first pic
-            // picture = pictures[pictureIndex];
         }
         void OnSwiped(object sender, SwipedEventArgs e)
         {
-            //swipedLabel.Text = $"You swiped: {e.Direction.ToString()}";
-            
-
             //logic to update rating based on which direction the user swiped 
             //then get next picture.
             switch (e.Direction.ToString())
             {
                 case "Up":
 /*
-
                     //This is the logic to add a single photo. It is not part of the end functionality of this page
                     var photo = await Plugin.Media.CrossMedia.Current.PickPhotoAsync();
                     if (photo != null)
@@ -112,7 +87,7 @@ namespace PictureThis.View
                     pictures[pictureIndex].rating--;
                     break;
             }
-            pictureIndex = (pictureIndex+1) % pictures.Count();
+            pictureIndex = (pictureIndex + 1) % pictures.Count();
             swipedLabel.Text = "Name:"+ pictures[pictureIndex].name + "\tRating:"+ pictures[pictureIndex].rating;
             json = JsonConvert.SerializeObject(pictures, Formatting.Indented);
             System.IO.File.WriteAllText(imagesPath, json);
