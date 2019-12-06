@@ -37,9 +37,9 @@ namespace PictureThis.View
 
         private void BtnAddTag_Clicked(object sender, EventArgs e)
         {
-            var spinnerdata = spinner.SelectedIndex..toString();
+            //var spinnerdata = spinner.SelectedIndex.toString();
 
-            //throw new NotImplementedException();
+            throw new NotImplementedException();
         }
 
         private void BtnNewTag_Clicked(object sender, EventArgs e)
