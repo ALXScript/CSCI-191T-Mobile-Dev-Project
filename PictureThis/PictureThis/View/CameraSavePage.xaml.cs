@@ -10,6 +10,7 @@ using Xamarin.Essentials;
 using PictureThis.Model;
 using Newtonsoft.Json;
 
+
 namespace PictureThis.View
 {
     //[XamlCompilation(XamlCompilationOptions.Compile)]
@@ -50,7 +51,7 @@ namespace PictureThis.View
         //have all of the elements of the image placed in the array
         private async void SaveButton_Clicked(object sender, EventArgs e)
         {
-            //set the variable to capture the json 
+            //set the variable to capture the json
             string json = "";
 
             //function for getting the path of the json file and deserializing it

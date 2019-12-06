@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PictureThis.GalleryPage"
+             Title="Gallery Page">
+    <ContentPage.Content>
+        <StackLayout>
+            <Button
+                    BackgroundColor="DarkSeaGreen"
+                    HorizontalOptions="Fill"
+                    VerticalOptions="Center"
+                    CornerRadius="5"
+                    Padding="5,0,5,0"
+                    Text="Top 5 rated Pictures"
+                    TextColor="Black"
+                    /> 
+            <Button
+                    BackgroundColor="DarkSeaGreen"
+                    HorizontalOptions="Fill"
+                    VerticalOptions="Center"
+                    CornerRadius="5"
+                    Padding="5,0,5,0"
+                    Text="Go through all Pictures"
+                    TextColor="Black"
+                    />
+            <Button
+                    BackgroundColor="DarkSeaGreen"
+                    HorizontalOptions="Fill"
+                    VerticalOptions="Center"
+                    CornerRadius="5"
+                    Padding="5,0,5,0"
+                    Text="Sort by Rating higest to lowest"
+                    TextColor="Black"
+                    />
+            <Button
+                    BackgroundColor="DarkSeaGreen"
+                    HorizontalOptions="Fill"
+                    VerticalOptions="Center"
+                    CornerRadius="5"
+                    Padding="5,0,5,0"
+                    Clicked="OnBrowseClickedLocation"
+                    Text="Display pictures closest to your Location"
+                    TextColor="Black"
+                    />
+            
+            <Button
+                    BackgroundColor="DarkSeaGreen"
+                    HorizontalOptions="Fill"
+                    VerticalOptions="Center"
+                    CornerRadius="5"
+                    Padding="5,0,5,0"
+                    Text="Display by Tags"
+                    TextColor="Black"
+                    />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
