@@ -11,6 +11,7 @@ namespace PictureThis.Model
         public String name;
         public DateTime dateTime;
         public Location location;
+        public double distance;
 
         public int rating;
         public List<String> tags;
