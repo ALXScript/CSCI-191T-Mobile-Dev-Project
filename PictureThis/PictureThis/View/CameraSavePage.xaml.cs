@@ -16,51 +16,107 @@ namespace PictureThis.View
     //[XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CameraSavePage : ContentPage
     {
-        Picture pictureData;
-        jsonToolbox jsonTB;
-        SpinnerToolbox spinnerTB;
+        Picture pictureData = new Picture();
+        jsonToolbox jsonTB = new jsonToolbox();
+        SpinnerToolbox spinnerTB = new SpinnerToolbox();
+        List<String> getTags;
 
         public CameraSavePage(Plugin.Media.Abstractions.MediaFile passImage)
         {
             InitializeComponent();
             SaveButton.Clicked += SaveButton_Clicked;
-
-            //init the classes
-            pictureData = new Picture();
-            jsonTB = new jsonToolbox();
-            spinnerTB = new SpinnerToolbox();
+            btnNewTag.Clicked += BtnNewTag_Clicked;
+            btnAddTag.Clicked += BtnAddTag_Clicked;
 
             //init the necessary data
             pictureData.rating = 0;
+            pictureData.tags = new List<String>();
+            spinner.ItemsSource = jsonTB.GetTags();
 
 
             setupFillData(passImage);
         }
 
+        private void BtnAddTag_Clicked(object sender, EventArgs e)
+        {
+            //var spinnerdata = spinner.SelectedIndex.toString();
+            //add the tag to the image
+            pictureData.addTag(spinner.Items.ElementAt(spinner.SelectedIndex));
+
+            //reset the spinner
+            spinner.SelectedIndex = -1;
+
+            //reload the editor(;
+            reloadEditorTags();
+
+            //throw new NotImplementedException();
+        }
+
+        //function for adding a new tag to the JSON Tags file
+        private async void BtnNewTag_Clicked(object sender, EventArgs e)
+        {
+            String prompt = await DisplayPromptAsync("Add New Tag", "Please Enter the new tag you would like to add", "Cancel");
+
+            if (prompt != null)
+            {
+                jsonTB.AddTag(prompt);
+
+                spinner.ItemsSource = jsonTB.GetTags();
+            }
+        }
+
         //have all of the elements of the image placed in the array
         private async void SaveButton_Clicked(object sender, EventArgs e)
         {
-            //set the variable to capture the json 
-            string json = "";
+            //set the variable to capture the json
+            string path = jsonTB.GetImagesPath();
 
-            //function for getting the path of the json file and deserializing it
-            //Insert functino for saving into the file here
+            //set the name
+            pictureData.name = entName.Text;
 
-            //get the file that has the list of objects
-            List<Picture> Images = JsonConvert.DeserializeObject<List<Picture>>(json);
+            //set the rating
+            pictureData.rating = 0;
 
-            //add the latest class to the list
-            Images.Add(pictureData);
+            //everything else should already be set/gotten
 
-            //sort the list of images
-            Images.Sort();
+            //try to deserialize the list of images
+            try
+            {
+                //get the file that has the list of objects
+                List<Picture> Images = JsonConvert.DeserializeObject<List<Picture>>(path);
 
-            //serialize the object back to json
-            string newJSON = JsonConvert.SerializeObject(Images, Formatting.Indented);
+                //add the latest class to the list
+                Images.Add(pictureData);
 
-            //save it to the file
-            //Insert function for saving into the file here
+                //sort the list of images
+                Images.Sort();
+
+                //serialize the object back to json
+                string newJSON = JsonConvert.SerializeObject(Images, Formatting.Indented);
+
+                //save it to the file
+                jsonTB.WriteToImages(newJSON);
+            }
+            catch (Exception ex)
+            {
+                //If this is the first image, just serialize the object and write it
+                List<Picture> Images = new List<Picture>();
+
+                Images.Add(pictureData);
+
+                //serialize the object back to json
+                string newJSON = JsonConvert.SerializeObject(Images, Formatting.Indented);
+
+                //save it to the file
+                jsonTB.WriteToImages(newJSON);
+
+                await DisplayAlert("Attention", "First Image Saved", "OK");
+            }
+
+            
         }
+
+        //
 
         async void setupFillData(Plugin.Media.Abstractions.MediaFile passImage)
         {
@@ -130,51 +186,24 @@ namespace PictureThis.View
             {
                 entLocation.Text = pictureData.location.ToString();
             }
-
-
-
+            
             //Start working the spinnner
             //Populate the spinner
+
+            //spinner = spinnerTB.LoadAvailableTags(pictureData.tags);
             spinner.ItemsSource = jsonTB.GetTags();
 
+            //var picker = new Picker { Title = "Select a monkey", TitleColor = Color.Red };
+            //picker.SetBinding(Picker.ItemsSourceProperty, "Monkeys");
+            //picker.ItemDisplayBinding = new Binding("Name");
+
+
             //spinner function
-            spinner.SelectedIndexChanged += async (sender, args) =>
+            spinner.SelectedIndexChanged += (sender, args) =>
             {
-                if (spinner.SelectedIndex == -1)
+                if (spinner.SelectedIndex != -1)
                 {
-                    //do nothing
-                    return;
-                }
-                else
-                {
-                    if (spinner.Items[spinner.SelectedIndex] == "Add New Tag")
-                    {
-                        //Call a prompt to add the new tag
-                        string prompt = await DisplayPromptAsync("New Tag", "Please Enter A New Tag");
-
-                        //check to see if the tag exists in the list of all tags
-                        if (!jsonTB.GetTags().Contains(prompt))
-                        {
-                            //add the tag to the list of tags and the image
-                            jsonTB.AddTag(prompt);
-                            pictureData.tags.Add(prompt);
-
-                            //relaod the editor
-                            reloadEditorTags();
-                        }
-                    }
-                    else
-                    {
-                        //check to see if the tag is already in the image
-                        if (!pictureData.tags.Contains(spinner.SelectedIndex.ToString()))
-                        {
-                            //add the tag to the image
-                            pictureData.tags.Add(spinner.SelectedIndex.ToString());
-
-                            //reload the editor();
-                            reloadEditorTags();
-                        }
-                    }
+                    
                 }
             };
 
@@ -194,19 +223,28 @@ namespace PictureThis.View
             //sort the tags
             pictureData.tags.Sort();
 
-            for(int i = 0; i < pictureData.tags.Count(); i++)
+            //populate the string
+            if(pictureData.tags.Count() == 1)
             {
-                //if the next element is the last element don't add comma to the string
-                if((i+1) >= pictureData.tags.Count())
+                tagsList += pictureData.tags.ElementAt(0);
+            }
+            else
+            {
+                for (int i = 0; i < pictureData.tags.Count(); i++)
                 {
-                    tagsList += pictureData.tags.ElementAt(i);
-                }
-                else
-                {
-                    tagsList += pictureData.tags.ElementAt(i) + ",\n";
+                    //if the next element is the last element don't add comma to the string
+                    if ((i + 1) >= pictureData.tags.Count())
+                    {
+                        tagsList += pictureData.tags.ElementAt(i);
+                    }
+                    else
+                    {
+                        tagsList += pictureData.tags.ElementAt(i) + ", ";
+                    }
                 }
             }
 
+            //update the editor to show the tags
             edtTags.Text = tagsList;
         }
 

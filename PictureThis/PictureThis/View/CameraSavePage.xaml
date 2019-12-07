@@ -18,6 +18,7 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="80"/>
@@ -102,7 +103,23 @@
                             x:Name="spinner"
                             Margin="10,0,10,0"/>
 
-                    <Label Grid.Row="6"
+                    <Button Grid.Row="6"
+                            Grid.Column="0"
+                            x:Name="btnNewTag"
+                            BackgroundColor="Transparent"
+                            BorderColor="Transparent"
+                            Text="Create New Tag"
+                            Margin="10,0,0,0"/>
+
+                    <Button Grid.Row="6"
+                            Grid.Column="1"
+                            x:Name="btnAddTag"
+                            BackgroundColor="Transparent"
+                            BorderColor="Transparent"
+                            Text="Add Tag"
+                            Margin="10,0,0,0"/>
+
+                    <Label Grid.Row="7"
                            Grid.Column="0"
                            x:Name="lblTag"
                            Text="Tags: "
@@ -112,13 +129,13 @@
                            HorizontalOptions="Center"
                            Margin="0,0,0,0"/>
 
-                    <Editor Grid.Row="6"
+                    <Editor Grid.Row="7"
                            Grid.Column="1"
                            x:Name="edtTags"
                            IsReadOnly="True"
                            Margin="10,0,10,0"/>
 
-                    <Button Grid.Row="7"
+                    <Button Grid.Row="8"
                             Grid.ColumnSpan="2"
                             x:Name="SaveButton"
                             BackgroundColor="Transparent"
