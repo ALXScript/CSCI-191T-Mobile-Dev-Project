@@ -33,7 +33,6 @@ namespace PictureThis.View
             pictureData.tags = new List<String>();
             spinner.ItemsSource = jsonTB.GetTags();
 
-
             setupFillData(passImage);
         }
 
@@ -70,6 +69,7 @@ namespace PictureThis.View
         {
             //set the variable to capture the json
             string path = jsonTB.GetImagesPath();
+            string jsonString = System.IO.File.ReadAllText(path);
 
             //set the name
             pictureData.name = entName.Text;
@@ -84,7 +84,7 @@ namespace PictureThis.View
             try
             {
                 //get the file that has the list of objects
-                Images = JsonConvert.DeserializeObject<List<Picture>>(path);
+                Images = JsonConvert.DeserializeObject<List<Picture>>(jsonString);
 
                 await DisplayAlert("Try Succeeded", "Deserialized", "OK");
             }
@@ -93,7 +93,7 @@ namespace PictureThis.View
                 //If this is the first image, just serialize the object and write it
                 Images = new List<Picture>();
 
-                await DisplayAlert("Catch Succeeded", "New List Created", "OK");
+                await DisplayAlert("Catch Succeeded", "New List Created" + ex.ToString(), "OK") ;
             }
 
             Images.Add(pictureData);
@@ -104,7 +104,6 @@ namespace PictureThis.View
             //save it to the file
             jsonTB.WriteToImages(newJSON);
 
-            await DisplayAlert("Attention", "First Image Saved", "OK");
 
         }
 
@@ -178,7 +177,7 @@ namespace PictureThis.View
             {
                 entLocation.Text = pictureData.location.ToString();
             }
-            
+
             //Start working the spinnner
             //Populate the spinner
 
@@ -195,7 +194,7 @@ namespace PictureThis.View
             {
                 if (spinner.SelectedIndex != -1)
                 {
-                    
+
                 }
             };
 
