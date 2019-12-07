@@ -20,6 +20,7 @@ namespace PictureThis.View
         jsonToolbox jsonTB = new jsonToolbox();
         SpinnerToolbox spinnerTB = new SpinnerToolbox();
         List<String> getTags;
+        Plugin.Media.Abstractions.MediaFile saveImage;
 
         public CameraSavePage(Plugin.Media.Abstractions.MediaFile passImage)
         {
@@ -32,6 +33,10 @@ namespace PictureThis.View
             pictureData.rating = 0;
             pictureData.tags = new List<String>();
             spinner.ItemsSource = jsonTB.GetTags();
+            saveImage = passImage;
+
+            DisplayAlert("Does Images.json Exist?", System.IO.File.Exists(jsonTB.GetImagesPath()).ToString(), "OK");
+
 
             setupFillData(passImage);
         }
@@ -69,7 +74,6 @@ namespace PictureThis.View
         {
             //set the variable to capture the json
             string path = jsonTB.GetImagesPath();
-            string jsonString = System.IO.File.ReadAllText(path);
 
             //set the name
             pictureData.name = entName.Text;
@@ -77,14 +81,17 @@ namespace PictureThis.View
             //set the rating
             pictureData.rating = 0;
 
+            //set the image path
+            pictureData.path = saveImage.Path;
+
             //everything else should already be set/gotten
             List<Picture> Images;
-
+            
             //try to deserialize the list of images
             try
             {
                 //get the file that has the list of objects
-                Images = JsonConvert.DeserializeObject<List<Picture>>(jsonString);
+                Images = JsonConvert.DeserializeObject<List<Picture>>(path);
 
                 await DisplayAlert("Try Succeeded", "Deserialized", "OK");
             }
@@ -93,7 +100,7 @@ namespace PictureThis.View
                 //If this is the first image, just serialize the object and write it
                 Images = new List<Picture>();
 
-                await DisplayAlert("Catch Succeeded", "New List Created" + ex.ToString(), "OK") ;
+                await DisplayAlert("Catch Succeeded", "New List Created", "OK");
             }
 
             Images.Add(pictureData);
@@ -104,6 +111,7 @@ namespace PictureThis.View
             //save it to the file
             jsonTB.WriteToImages(newJSON);
 
+            await DisplayAlert("Attention", "First Image Saved", "OK");
 
         }
 
@@ -177,7 +185,7 @@ namespace PictureThis.View
             {
                 entLocation.Text = pictureData.location.ToString();
             }
-
+            
             //Start working the spinnner
             //Populate the spinner
 
@@ -194,7 +202,7 @@ namespace PictureThis.View
             {
                 if (spinner.SelectedIndex != -1)
                 {
-
+                    
                 }
             };
 

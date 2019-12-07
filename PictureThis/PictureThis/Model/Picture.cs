@@ -15,15 +15,17 @@ namespace PictureThis.Model
         public Location location;
         public int rating;
         public List<String> tags;
+        public String path;
         public Picture() { }
         //constructor used when picture is created in CameraSavePage
-        public Picture(String myName, DateTime myDateTime, Location myLocation, List<String> myTags)
+        public Picture(String myName, DateTime myDateTime, Location myLocation, List<String> myTags, String myPath)
         {
             name = myName;
             dateTime = myDateTime;
             location = myLocation;
             tags = myTags;
-            rating = 0;        
+            rating = 0;
+            path = myPath;
         }
 
      

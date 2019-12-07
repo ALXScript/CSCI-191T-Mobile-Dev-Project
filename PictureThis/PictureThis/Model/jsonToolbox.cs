@@ -23,6 +23,11 @@ namespace PictureThis.Model
             initFiles();
         }
 
+        public void resetFile()
+        {
+            System.IO.File.Delete(imagesPath);
+        }
+
         public string GetImagesPath()
         {
             return imagesPath;

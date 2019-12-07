@@ -74,6 +74,7 @@ namespace PictureThis.View
                 }
                 //get next picture looping back to front if we reach the end of the list
                 pictureIndex = (pictureIndex + 1) % pictures.Count();
+                Box.Source = pictures.ElementAt(pictureIndex).path;
                 swipedLabel.Text = "Name: " + pictures[pictureIndex].name + "\tRating: " + pictures[pictureIndex].getRating() + "\nTags: "+pictures[pictureIndex].getAllTags();
 
                 //rewrite the json file with updated rating

@@ -11,6 +11,8 @@ namespace PictureThis
         public GalleryPage()
         {
             InitializeComponent();
+            Model.jsonToolbox jsonTB = new Model.jsonToolbox();
+            jsonTB.resetFile();
         }
         protected async void OnBrowseClickedLocation(object sender, EventArgs e) => await Navigation.PushAsync(new LocationPage());
     }
