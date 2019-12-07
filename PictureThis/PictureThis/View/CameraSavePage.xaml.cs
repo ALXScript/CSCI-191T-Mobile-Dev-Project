@@ -31,6 +31,7 @@ namespace PictureThis.View
             //init the necessary data
             pictureData.rating = 0;
             pictureData.tags = new List<String>();
+            spinner.ItemsSource = jsonTB.GetTags();
 
 
             setupFillData(passImage);
@@ -39,38 +40,80 @@ namespace PictureThis.View
         private void BtnAddTag_Clicked(object sender, EventArgs e)
         {
             //var spinnerdata = spinner.SelectedIndex.toString();
+            //add the tag to the image
+            pictureData.addTag(spinner.Items.ElementAt(spinner.SelectedIndex));
 
-            throw new NotImplementedException();
+            //reset the spinner
+            spinner.SelectedIndex = -1;
+
+            //reload the editor(;
+            reloadEditorTags();
+
+            //throw new NotImplementedException();
         }
 
-        private void BtnNewTag_Clicked(object sender, EventArgs e)
+        //function for adding a new tag to the JSON Tags file
+        private async void BtnNewTag_Clicked(object sender, EventArgs e)
         {
+            String prompt = await DisplayPromptAsync("Add New Tag", "Please Enter the new tag you would like to add", "Cancel");
 
+            if (prompt != null)
+            {
+                jsonTB.AddTag(prompt);
+
+                spinner.ItemsSource = jsonTB.GetTags();
+            }
         }
 
         //have all of the elements of the image placed in the array
         private async void SaveButton_Clicked(object sender, EventArgs e)
         {
             //set the variable to capture the json
-            string json = "";
+            string path = jsonTB.GetImagesPath();
 
-            //function for getting the path of the json file and deserializing it
-            //Insert functino for saving into the file here
+            //set the name
+            pictureData.name = entName.Text;
 
-            //get the file that has the list of objects
-            List<Picture> Images = JsonConvert.DeserializeObject<List<Picture>>(json);
+            //set the rating
+            pictureData.rating = 0;
 
-            //add the latest class to the list
-            Images.Add(pictureData);
+            //everything else should already be set/gotten
 
-            //sort the list of images
-            Images.Sort();
+            //try to deserialize the list of images
+            try
+            {
+                //get the file that has the list of objects
+                List<Picture> Images = JsonConvert.DeserializeObject<List<Picture>>(path);
 
-            //serialize the object back to json
-            string newJSON = JsonConvert.SerializeObject(Images, Formatting.Indented);
+                //add the latest class to the list
+                Images.Add(pictureData);
 
-            //save it to the file
-            //Insert function for saving into the file here
+                //sort the list of images
+                Images.Sort();
+
+                //serialize the object back to json
+                string newJSON = JsonConvert.SerializeObject(Images, Formatting.Indented);
+
+                //save it to the file
+                jsonTB.WriteToImages(newJSON);
+            }
+            catch (Exception ex)
+            {
+                //If this is the first image, just serialize the object and write it
+                List<Picture> Images = new List<Picture>();
+
+                Images.Add(pictureData);
+
+                //serialize the object back to json
+                string newJSON = JsonConvert.SerializeObject(Images, Formatting.Indented);
+
+                //save it to the file
+                jsonTB.WriteToImages(newJSON);
+
+                await DisplayAlert("Attention", "First Image Saved", "OK");
+            }
+
+            
         }
 
         //
@@ -143,7 +186,7 @@ namespace PictureThis.View
             {
                 entLocation.Text = pictureData.location.ToString();
             }
-
+            
             //Start working the spinnner
             //Populate the spinner
 
@@ -160,24 +203,7 @@ namespace PictureThis.View
             {
                 if (spinner.SelectedIndex != -1)
                 {
-                    //add the tag to the image
-                    if (pictureData.tags.Equals(null))
-                    {
-                        pictureData.tags.Add(spinner.SelectedIndex.ToString());
-
-                        //reload the editor(;
-                        edtTags.Text = pictureData.tags.ElementAt(0).ToString();
-                    }
-                    else
-                    {
-                        if (!pictureData.tags.Contains(spinner.SelectedIndex.ToString()))
-                        {
-                            pictureData.tags.Add(spinner.SelectedIndex.ToString());
-
-                            //reload the editor;
-                            reloadEditorTags();
-                        }
-                    }
+                    
                 }
             };
 
@@ -197,19 +223,28 @@ namespace PictureThis.View
             //sort the tags
             pictureData.tags.Sort();
 
-            for(int i = 0; i < pictureData.tags.Count(); i++)
+            //populate the string
+            if(pictureData.tags.Count() == 1)
             {
-                //if the next element is the last element don't add comma to the string
-                if((i+1) >= pictureData.tags.Count())
+                tagsList += pictureData.tags.ElementAt(0);
+            }
+            else
+            {
+                for (int i = 0; i < pictureData.tags.Count(); i++)
                 {
-                    tagsList += pictureData.tags.ElementAt(i);
-                }
-                else
-                {
-                    tagsList += pictureData.tags.ElementAt(i) + ",\n";
+                    //if the next element is the last element don't add comma to the string
+                    if ((i + 1) >= pictureData.tags.Count())
+                    {
+                        tagsList += pictureData.tags.ElementAt(i);
+                    }
+                    else
+                    {
+                        tagsList += pictureData.tags.ElementAt(i) + ", ";
+                    }
                 }
             }
 
+            //update the editor to show the tags
             edtTags.Text = tagsList;
         }
 

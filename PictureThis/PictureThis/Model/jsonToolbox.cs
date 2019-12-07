@@ -23,6 +23,16 @@ namespace PictureThis.Model
             initFiles();
         }
 
+        public string GetImagesPath()
+        {
+            return imagesPath;
+        }
+
+        public string GetTagsPath()
+        {
+            return tagsPath;
+        }
+
         public void AddTag(string newTag)
         {
             //Get the tags.json as a string
@@ -91,6 +101,11 @@ namespace PictureThis.Model
 
             //Return the list
             return tags;
+        }
+
+        public void WriteToImages(string passJSON)
+        {
+            File.WriteAllText(imagesPath, passJSON);
         }
 
         void initFiles()
