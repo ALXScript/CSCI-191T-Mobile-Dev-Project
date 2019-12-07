@@ -33,7 +33,7 @@ namespace PictureThis.View
             else
             {
                 fileFound = true;
-                //Get the tags.json as a string
+                //Get the images.json
                 string jsonString = System.IO.File.ReadAllText(imagesPath);
 
                 //deserialize json into list of tags

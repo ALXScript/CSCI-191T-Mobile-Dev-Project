@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using Xamarin.Forms;
 using Xamarin.Essentials;
+using System.Drawing;
+using System.IO;
 
 namespace PictureThis.Model
 {
@@ -24,7 +26,9 @@ namespace PictureThis.Model
             rating = 0;        
         }
 
-       public Boolean hasTag(String tag)
+     
+
+        public Boolean hasTag(String tag)
         {
             return tags.Contains(tag);
         }

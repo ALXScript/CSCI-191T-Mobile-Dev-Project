@@ -33,7 +33,6 @@ namespace PictureThis.View
             pictureData.tags = new List<String>();
             spinner.ItemsSource = jsonTB.GetTags();
 
-
             setupFillData(passImage);
         }
 
@@ -70,6 +69,7 @@ namespace PictureThis.View
         {
             //set the variable to capture the json
             string path = jsonTB.GetImagesPath();
+            string jsonString = System.IO.File.ReadAllText(path);
 
             //set the name
             pictureData.name = entName.Text;
@@ -78,42 +78,33 @@ namespace PictureThis.View
             pictureData.rating = 0;
 
             //everything else should already be set/gotten
+            List<Picture> Images;
 
             //try to deserialize the list of images
             try
             {
                 //get the file that has the list of objects
-                List<Picture> Images = JsonConvert.DeserializeObject<List<Picture>>(path);
+                Images = JsonConvert.DeserializeObject<List<Picture>>(jsonString);
 
-                //add the latest class to the list
-                Images.Add(pictureData);
-
-                //sort the list of images
-                Images.Sort();
-
-                //serialize the object back to json
-                string newJSON = JsonConvert.SerializeObject(Images, Formatting.Indented);
-
-                //save it to the file
-                jsonTB.WriteToImages(newJSON);
+                await DisplayAlert("Try Succeeded", "Deserialized", "OK");
             }
             catch (Exception ex)
             {
                 //If this is the first image, just serialize the object and write it
-                List<Picture> Images = new List<Picture>();
+                Images = new List<Picture>();
 
-                Images.Add(pictureData);
-
-                //serialize the object back to json
-                string newJSON = JsonConvert.SerializeObject(Images, Formatting.Indented);
-
-                //save it to the file
-                jsonTB.WriteToImages(newJSON);
-
-                await DisplayAlert("Attention", "First Image Saved", "OK");
+                await DisplayAlert("Catch Succeeded", "New List Created" + ex.ToString(), "OK") ;
             }
 
-            
+            Images.Add(pictureData);
+
+            //serialize the object back to json
+            string newJSON = JsonConvert.SerializeObject(Images, Formatting.Indented);
+
+            //save it to the file
+            jsonTB.WriteToImages(newJSON);
+
+
         }
 
         //

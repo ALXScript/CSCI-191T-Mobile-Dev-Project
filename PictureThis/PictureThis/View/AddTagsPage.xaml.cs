@@ -37,7 +37,7 @@ namespace PictureThis.View
                 string jsonString = System.IO.File.ReadAllText(imagesPath);
                 //deserialize json into list of tags
                 pictures = JsonConvert.DeserializeObject<List<Picture>>(jsonString);
-                swipedLabel.Text = "Name:" + pictures[pictureIndex].name + "\nTags: " + string.Join(",", pictures[pictureIndex].tags);
+                swipedLabel.Text = "Name:" + pictures[pictureIndex].getName() + "\nTags: " +  pictures[pictureIndex].getAllTags();
             }
             labelPicker.ItemsSource = jsonToolbox.GetTags();
         }
@@ -88,6 +88,5 @@ namespace PictureThis.View
                 System.IO.File.WriteAllText(imagesPath, json);
             }
         }
-        
     }
 }
