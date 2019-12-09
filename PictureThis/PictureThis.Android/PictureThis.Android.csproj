@@ -108,7 +108,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PictureThis\PictureThis.csproj">
-      <Project>{2F2ACA48-B80C-4B5E-BECB-2AAEAF144C9F}</Project>
+      <Project>{3158F295-0929-456D-833B-D66EB28CDC5A}</Project>
       <Name>PictureThis</Name>
     </ProjectReference>
   </ItemGroup>
