@@ -67,32 +67,7 @@ namespace PictureThis.Model
         //function for resetting the images
         public void resetImages()
         {
-            String json = @"[
-                      {
-                        'name': 'hello',
-                        'rating': 0,
-                        'location': null,
-                        'dateTime': '05/1/2008 8:30:52 AM',
-                        'tags': ['Fresno','Cat']
-                        },
-                      {
-                        'name': 'world',
-                        'rating': 1,
-                        'location': null,
-                        'dateTime': '05/1/2008 8:30:52 AM',
-                        'tags': [
-                          'Fresno',
-                          'Dog'
-                        ]
-                    } ,      
-                    {
-                        'name': 'Test',
-                        'rating': 7,
-                        'location': null,
-                        'dateTime': '05/1/2008 8:30:52 AM',
-                        'tags': ['Fresno','Dog','Cat']
-                    }
-                    ]";
+            String json = "";
             File.WriteAllText(imagesPath, json);
         }
 
