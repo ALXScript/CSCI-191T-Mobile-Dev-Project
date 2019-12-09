@@ -61,34 +61,24 @@ namespace PictureThis.View
             {
                 //logic to update rating based on which direction the user swiped 
                 //then get next picture.
+
                 switch (e.Direction.ToString())
                 {
                     case "Up":
-                        /*
-                                            //This is the logic to add a single photo. It is not part of the end functionality of this page
-                                            var photo = await Plugin.Media.CrossMedia.Current.PickPhotoAsync();
-                                            if (photo != null)
-                                            {
-                                                Box.Source = ImageSource.FromStream(() => { return photo.GetStream(); });
-                                                dir = photo.AlbumPath;
-                                            }
 
-                        */
-
-                        //skip rating for this picture and get next picture 
                         break;
-                    //increase rating
+                    //Add the selected tag from the current picture
                     case "Right":
-                        pictures[pictureIndex].increaseRating();
+                        pictureIndex = (pictureIndex + 1) % pictures.Count();
                         break;
-                    //decrease rating
+
+                    //Remove the selected tag from the selected picture
                     case "Left":
-                        pictures[pictureIndex].decreaseRating();
+                        pictureIndex = (pictureIndex - 1) % pictures.Count();
                         break;
                 }
-                //get next picture looping back to front if we reach the end of the list
-                pictureIndex = (pictureIndex + 1) % pictures.Count;
-                Box.Source = pictures.ElementAt(pictureIndex).path;
+            //get next picture looping back to front if we reach the end of the list
+            Box.Source = pictures.ElementAt(pictureIndex).path;
                 swipedLabel.Text = "Name: " + pictures[pictureIndex].name + "\tRating: " + pictures[pictureIndex].getRating() + "\nTags: " + pictures[pictureIndex].getAllTags();
 
                 //rewrite the json file with updated rating
