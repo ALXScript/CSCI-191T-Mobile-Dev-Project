@@ -6,11 +6,19 @@
              mc:Ignorable="d"
              x:Class="PictureThis.View.LocationPage">
     <ContentPage.Content>
-        <StackLayout>
-            <Button x:Name="GetCLocation" 
-                    Text="Get Current Location" 
-                    Grid.Row="0" 
-                    Margin="10,0,10,0"/>
+        <StackLayout Margin="20">
+            <Label Text="Swipe right to increase the picture's rating, left to decrease it." />
+            <Image x:Name ="Box" BackgroundColor="Teal" WidthRequest="300" HeightRequest="300" HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
+
+                <Image.GestureRecognizers>
+                    <!-- Can also set a swipe threshold on each gesture recognizer -->
+                    <SwipeGestureRecognizer Direction="Left" Swiped="OnSwiped"/>
+                    <SwipeGestureRecognizer Direction="Right" Swiped="OnSwiped"/>
+                    <SwipeGestureRecognizer Direction="Up" Swiped="OnSwiped"/>
+                    <SwipeGestureRecognizer Direction="Down" Swiped="OnSwiped"/>
+                </Image.GestureRecognizers>
+            </Image>
+            <Label x:Name="swipedLabel" Text="You swiped: "/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
