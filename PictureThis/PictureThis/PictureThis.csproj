@@ -15,6 +15,7 @@
   <ItemGroup>
     <Compile Remove="MyPage.xaml.cs" />
     <Compile Remove="View\CameraSavePageVM.xaml.cs" />
+    <Compile Remove="ViewModel\SavePictureViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Remove="MyPage.xaml" />
@@ -56,5 +57,8 @@
     <Compile Update="View\LocationPage.xaml.cs">
       <DependentUpon>LocationPage.xaml</DependentUpon>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ViewModel\" />
   </ItemGroup>
 </Project>
