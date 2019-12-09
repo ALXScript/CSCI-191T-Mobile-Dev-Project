@@ -3,14 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.IO;
+
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Xamarin.Essentials;
-using PictureThis.Model;
-using Newtonsoft.Json;
-
-
 
 
 namespace PictureThis.View
@@ -18,61 +14,24 @@ namespace PictureThis.View
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LocationPage : ContentPage
     {
-        private Location currentlocation;
-        int pictureIndex = 0;
-        List<Picture> pictures;
-        string json, imagesPath;
-        Boolean fileFound = false;
-
+        private Xamarin.Essentials.Location location;
 
         public LocationPage()
         {
             InitializeComponent();
-            imagesPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "images.json"); //Get this later: Path that holds all of the embedded images
-            
-            //save the file to the device if it doesn't already exist
-            if (!System.IO.File.Exists(imagesPath))
-            {
-                DisplayAlert("ALERT", "No Pictures were found. Please add pictures.", "OK");
-            }
-            else
-            {
-                fileFound = true;
-                //Get the images.json
-                string jsonString = System.IO.File.ReadAllText(imagesPath);
-
-                //deserialize json into list of tags
-                pictures = JsonConvert.DeserializeObject<List<Picture>>(jsonString);
-               // swipedLabel.Text = "Name: " + pictures[pictureIndex].name + "\tRating: " + pictures[pictureIndex].getRating() + "\nTags: " + pictures[pictureIndex].getAllTags();
-            }
-            SetPictureLocations();
-
-            
+            GetCLocation.Clicked += GetCurrentLocation_Clicked;
         }
-        private async void SetPictureLocations()
+        private async void GetCurrentLocation_Clicked(object sender, EventArgs e)
         {
             try
             {
                 var request = new GeolocationRequest(GeolocationAccuracy.Best);
-                currentlocation = await Geolocation.GetLocationAsync(request);
+                location = await Geolocation.GetLocationAsync(request);
 
-                if (currentlocation != null)
+                if (location != null)
                 {
-                    //await DisplayAlert("Location,",$"Latitude: {location.Latitude},Longitude: {location.Longitude}","OK");
-                    for (var i = 0; i < pictures.Count; i++) // go through list and give distances for pictures that have location
-                    {
-                        if (pictures[i].location != null) // checks if location exists
-                        {
-                            pictures[i].distance = HaversineFormula.Distance(currentlocation, pictures[i].location, DistanceType.Miles); // calculates distance for pictures needs current location and picture location
-                        }
-                    }
-
-                    pictures = (from pic in pictures
-                                where pic.location != null
-                                orderby pic.distance ascending  // sorts pictures by location 
-                                select pic).ToList();
+                    await DisplayAlert("Location,",$"Latitude: {location.Latitude},Longitude: {location.Longitude}","OK");
                 }
-            
             }
             catch (FeatureNotSupportedException)
             {
@@ -92,38 +51,6 @@ namespace PictureThis.View
             }
         }
 
-        void OnSwiped(object sender, SwipedEventArgs e)
-        {
-            if (fileFound)
-            {
-                //logic to update rating based on which direction the user swiped 
-                //then get next picture.
-                switch (e.Direction.ToString())
-                {
-                    case "Up":
-
-                        break;
-                    //Add the selected tag from the current picture
-                    case "Right":
-                        pictureIndex = (pictureIndex + 1) % pictures.Count();
-                        break;
-
-                    //Remove the selected tag from the selected picture
-                    case "Left":
-                        pictureIndex = (pictureIndex - 1) % pictures.Count();
-                        break;
-                }
-                
-
-                Box.Source = pictures.ElementAt(pictureIndex).path;
-                swipedLabel.Text = "Name: " + pictures[pictureIndex].name + "\tRating: " + pictures[pictureIndex].getRating() + "\nTags: " + pictures[pictureIndex].getAllTags() + "\nDistance: " + pictures[pictureIndex].distance;
-
-                //rewrite the json file with updated rating
-                json = JsonConvert.SerializeObject(pictures, Formatting.Indented);
-                System.IO.File.WriteAllText(imagesPath, json);
-
-            }
-        }//end OnSwiped
-
+        //private void getDistancebetweenLocations() { }
     }
 }

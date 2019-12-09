@@ -16,7 +16,6 @@ namespace PictureThis.Model
         public int rating;
         public List<String> tags;
         public String path;
-        public double distance;
         public Picture() { }
         //constructor used when picture is created in CameraSavePage
         public Picture(String myName, DateTime myDateTime, Location myLocation, List<String> myTags, String myPath)
@@ -36,8 +35,7 @@ namespace PictureThis.Model
 
         public Boolean hasTag(String tag)
         {
-            return tags.Contains(tag);      
-            
+            return tags.Contains(tag);
         }
 
         public void increaseRating()

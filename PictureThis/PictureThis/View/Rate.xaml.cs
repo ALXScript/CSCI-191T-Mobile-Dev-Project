@@ -10,6 +10,7 @@ using PictureThis.Model;
 using Newtonsoft.Json;
 using Xamarin.Essentials;
 
+
 namespace PictureThis.View
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
