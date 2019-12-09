@@ -42,15 +42,19 @@ namespace PictureThis.View
 
         private void BtnAddTag_Clicked(object sender, EventArgs e)
         {
-            //var spinnerdata = spinner.SelectedIndex.toString();
-            //add the tag to the image
-            pictureData.addTag(spinner.Items.ElementAt(spinner.SelectedIndex));
+            //check if the selected index is not null
+            if(spinner.SelectedIndex > -1)
+            {
+                //add the tag to the image
+                pictureData.addTag(spinner.Items.ElementAt(spinner.SelectedIndex));
 
-            //reset the spinner
-            spinner.SelectedIndex = -1;
+                //reset the spinner
+                spinner.SelectedIndex = -1;
 
-            //reload the editor(;
-            reloadEditorTags();
+                //reload the editor(;
+                reloadEditorTags();
+            }
+            
         }
 
         //function for adding a new tag to the JSON Tags file
@@ -80,14 +84,18 @@ namespace PictureThis.View
         //function for removing a tag from the image
         private void BtnRemoveTag_Clicked(object sender, EventArgs e)
         {
-            //Remove the tag to the image
-            pictureData.removeTag(spinner.Items.ElementAt(spinner.SelectedIndex));
+            //check if the selected index is greater than -1
+            if(spinner.SelectedIndex > -1)
+            {
+                //Remove the tag to the image
+                pictureData.removeTag(spinner.Items.ElementAt(spinner.SelectedIndex));
 
-            //reset the spinner
-            spinner.SelectedIndex = -1;
+                //reset the spinner
+                spinner.SelectedIndex = -1;
 
-            //reload the editor(;
-            reloadEditorTags();
+                //reload the editor(;
+                reloadEditorTags();
+            }
         }
 
         //function for reseting the tags in the JSON File
