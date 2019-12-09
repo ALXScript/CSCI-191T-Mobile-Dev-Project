@@ -28,7 +28,7 @@ namespace PictureThis.View
             //save the file to the device if it doesn't already exist
             if (!System.IO.File.Exists(imagesPath))
             {
-                DisplayAlert("ALERT", "No Pictures were found. Please add pictures.", "OK");
+                DisplayAlert("Error", "No file has been found containing picture data. Please add pictures.", "OK");
             }
             else
             {
