@@ -29,7 +29,7 @@ namespace PictureThis.View
         {
             InitializeComponent();
             imagesPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "images.json"); //Get this later: Path that holds all of the embedded images
-            
+
             //save the file to the device if it doesn't already exist
             if (!System.IO.File.Exists(imagesPath))
             {
@@ -47,7 +47,7 @@ namespace PictureThis.View
             }
             SetPictureLocations();
 
-            
+
         }
         private async void SetPictureLocations()
         {
@@ -63,16 +63,16 @@ namespace PictureThis.View
                     {
                         if (pictures[i].location != null) // checks if location exists
                         {
-                            pictures[i].distance = HaversineFormula.Distance(currentlocation, pictures[i].location, DistanceType.Miles); // calculates distance for pictures needs current location and picture location
+                            pictures[i].distance = currentlocation.CalculateDistance(pictures[i].location, DistanceUnits.Miles); // calculates distance for pictures needs current location and picture location
                         }
                     }
 
                     pictures = (from pic in pictures
                                 where pic.location != null
-                                orderby pic.distance ascending  // sorts pictures by location 
+                                orderby pic.distance ascending  // sorts pictures by location
                                 select pic).ToList();
                 }
-            
+
             }
             catch (FeatureNotSupportedException)
             {
@@ -96,7 +96,7 @@ namespace PictureThis.View
         {
             if (fileFound)
             {
-                //logic to update rating based on which direction the user swiped 
+                //logic to update rating based on which direction the user swiped
                 //then get next picture.
                 switch (e.Direction.ToString())
                 {
@@ -113,7 +113,7 @@ namespace PictureThis.View
                         pictureIndex = (pictureIndex - 1) % pictures.Count();
                         break;
                 }
-                
+
 
                 Box.Source = pictures.ElementAt(pictureIndex).path;
                 swipedLabel.Text = "Name: " + pictures[pictureIndex].name + "\tRating: " + pictures[pictureIndex].getRating() + "\nTags: " + pictures[pictureIndex].getAllTags() + "\nDistance: " + pictures[pictureIndex].distance;
