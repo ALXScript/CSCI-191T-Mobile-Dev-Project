@@ -37,6 +37,7 @@ namespace PictureThis.View
 
                 //deserialize json into list of tags
                 pictures = JsonConvert.DeserializeObject<List<Picture>>(jsonString);
+                Box.Source = pictures.ElementAt(pictureIndex).path;
                 swipedLabel.Text = "Name: " + pictures[pictureIndex].name + "\tRating: " + pictures[pictureIndex].getRating() + "\nTags: "+pictures[pictureIndex].getAllTags();
             }
         }
