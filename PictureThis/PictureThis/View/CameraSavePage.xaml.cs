@@ -28,6 +28,8 @@ namespace PictureThis.View
             SaveButton.Clicked += SaveButton_Clicked;
             btnNewTag.Clicked += BtnNewTag_Clicked;
             btnAddTag.Clicked += BtnAddTag_Clicked;
+            btnRemoveTag.Clicked += BtnRemoveTag_Clicked;
+            btnResetTags.Clicked += BtnResetTags_Clicked;
 
             //init the necessary data
             pictureData.rating = 0;
@@ -73,6 +75,32 @@ namespace PictureThis.View
                 //reload the editor
                 reloadEditorTags();
             }
+        }
+
+        //function for removing a tag from the image
+        private void BtnRemoveTag_Clicked(object sender, EventArgs e)
+        {
+            //Remove the tag to the image
+            pictureData.removeTag(spinner.Items.ElementAt(spinner.SelectedIndex));
+
+            //reset the spinner
+            spinner.SelectedIndex = -1;
+
+            //reload the editor(;
+            reloadEditorTags();
+        }
+
+        //function for reseting the tags in the JSON File
+        private void BtnResetTags_Clicked(object sender, EventArgs e)
+        {
+            //reset the tags json file
+            jsonTB.resetTags();
+
+            //reset the spinner
+            spinner.SelectedIndex = -1;
+
+            //reload the editor(;
+            reloadEditorTags();
         }
 
         //have all of the elements of the image placed in the array

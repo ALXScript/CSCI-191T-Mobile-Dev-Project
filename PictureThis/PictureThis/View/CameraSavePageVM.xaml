@@ -1,13 +1,13 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="PictureThis.View.CameraSavePage">
-    <ContentPage.Content>
-        <StackLayout>
-            <ScrollView BackgroundColor="">
+             x:Class="PictureThis.View.CameraSavePageVM">
+  <ContentView.Content>
+      <StackLayout>
+            <ScrollView>
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="400"/>
@@ -24,15 +24,24 @@
                         <ColumnDefinition Width="80"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    
-                    <Image Grid.Row="0"
+
+                    <Frame Grid.Row="0"
                            Grid.ColumnSpan="2"
+                           x:Name="frmImageFrame"
+                           HasShadow="True"
+                           CornerRadius="15"
+                           BorderColor="Accent"
+                           Margin="10,10,10,10">
+
+                        <Image
                            x:Name="imgImage"
                            BackgroundColor="Crimson"
                            HorizontalOptions="Fill"
                            VerticalOptions="Fill"
                            Aspect="AspectFit"
                            Margin="10,10,10,10"/>
+
+                    </Frame>
 
                     <Label Grid.Row="1"
                            Grid.Column="0"
@@ -43,7 +52,7 @@
                            VerticalOptions="Center"
                            HorizontalOptions="Center"
                            Margin="0,0,0,0"/>
-                    
+
                     <Entry Grid.Row="1"
                            Grid.Column="1"
                            x:Name="entName"
@@ -131,19 +140,21 @@
                             Margin="10,0,0,0"/>
 
                         <Button Grid.Column="2"
-                            x:Name="btnRemoveTag"
+                            x:Name="btnAddTag"
                             BackgroundColor="Transparent"
                             BorderColor="Transparent"
                             Text="Remove Tag"
                             Margin="10,0,0,0"/>
 
                         <Button Grid.Column="3"
-                            x:Name="btnResetTags"
+                            x:Name="btnAddTag"
                             BackgroundColor="Transparent"
                             BorderColor="Transparent"
                             Text="Reset Tags"
                             Margin="10,0,0,0"/>
                     </Grid>
+
+                   
 
                     <Label Grid.Row="7"
                            Grid.Column="0"
@@ -172,5 +183,5 @@
                 </Grid>
             </ScrollView>
         </StackLayout>
-    </ContentPage.Content>
-</ContentPage>
+  </ContentView.Content>
+</ContentView>

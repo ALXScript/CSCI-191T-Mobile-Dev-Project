@@ -26,6 +26,74 @@ namespace PictureThis.Model
         public void resetFile()
         {
             System.IO.File.Delete(imagesPath);
+            initFiles();
+        }
+
+        //function for resetting the tags
+        public void resetTags()
+        {
+            //create the JSON List File
+            List<String> myJSON2 = new List<string>();
+            myJSON2.Add("Vacation");
+            myJSON2.Add("Holiday");
+            myJSON2.Add("Birthday");
+            myJSON2.Add("Beach");
+            myJSON2.Add("Museum");
+            myJSON2.Add("Forest");
+            myJSON2.Add("Park");
+            myJSON2.Add("Pet");
+            myJSON2.Add("Pets");
+            myJSON2.Add("Dog");
+            myJSON2.Add("Cat");
+            myJSON2.Add("Family");
+            myJSON2.Add("Childhood");
+            myJSON2.Add("Fair");
+            myJSON2.Add("Restaurant");
+            myJSON2.Add("Food");
+            myJSON2.Add("Fresno");
+
+            //Sort the tags
+            myJSON2.Sort();
+
+            //serialize it into a string
+            string json = JsonConvert.SerializeObject(myJSON2, Formatting.Indented);
+
+            //write the file 
+            File.WriteAllText(tagsPath, json);
+
+            //DisplayAlert("Doesn't Exist", "Json File Written", "OK");
+        }
+
+        //function for resetting the images
+        public void resetImages()
+        {
+            String json = @"[
+                      {
+                        'name': 'hello',
+                        'rating': 0,
+                        'location': null,
+                        'dateTime': '05/1/2008 8:30:52 AM',
+                        'tags': ['Fresno','Cat']
+                        },
+                      {
+                        'name': 'world',
+                        'rating': 1,
+                        'location': null,
+                        'dateTime': '05/1/2008 8:30:52 AM',
+                        'tags': [
+                          'Fresno',
+                          'Dog'
+                        ]
+                    } ,      
+                    {
+                        'name': 'Test',
+                        'rating': 7,
+                        'location': null,
+                        'dateTime': '05/1/2008 8:30:52 AM',
+                        'tags': ['Fresno','Dog','Cat']
+                    }
+                    ]";
+            File.WriteAllText(imagesPath, json);
         }
 
         public string GetImagesPath()
@@ -118,65 +186,12 @@ namespace PictureThis.Model
             //check if the file exists and write it if it doesn't
             if (!File.Exists(tagsPath))
             {
-                //create the JSON List File
-                List<String> myJSON2 = new List<string>();
-                myJSON2.Add("Vacation");
-                myJSON2.Add("Holiday");
-                myJSON2.Add("Birthday");
-                myJSON2.Add("Beach");
-                myJSON2.Add("Museum");
-                myJSON2.Add("Forest");
-                myJSON2.Add("Park");
-                myJSON2.Add("Pet");
-                myJSON2.Add("Pets");
-                myJSON2.Add("Dog");
-                myJSON2.Add("Cat");
-                myJSON2.Add("Family");
-                myJSON2.Add("Childhood");
-                myJSON2.Add("Fair");
-                myJSON2.Add("Restaurant");
-                myJSON2.Add("Food");
-                myJSON2.Add("Fresno");
-
-                //Sort the tags
-                myJSON2.Sort();
-
-                //serialize it into a string
-                string json = JsonConvert.SerializeObject(myJSON2, Formatting.Indented);
-                File.WriteAllText(tagsPath, json);
-
-                //DisplayAlert("Doesn't Exist", "Json File Written", "OK");
+                resetTags();
             }
 
             if (!File.Exists(imagesPath))
             {
-            String json = @"[
-                      {
-                        'name': 'hello',
-                        'rating': 0,
-                        'location': null,
-                        'dateTime': '05/1/2008 8:30:52 AM',
-                        'tags': ['Fresno','Cat']
-                        },
-                      {
-                        'name': 'world',
-                        'rating': 1,
-                        'location': null,
-                        'dateTime': '05/1/2008 8:30:52 AM',
-                        'tags': [
-                          'Fresno',
-                          'Dog'
-                        ]
-                    } ,      
-                    {
-                        'name': 'Test',
-                        'rating': 7,
-                        'location': null,
-                        'dateTime': '05/1/2008 8:30:52 AM',
-                        'tags': ['Fresno','Dog','Cat']
-                    }
-                    ]";
-                File.WriteAllText(imagesPath, json);
+                resetImages();
 /*
                 List<Picture> pictures = new List<Picture>();
 
