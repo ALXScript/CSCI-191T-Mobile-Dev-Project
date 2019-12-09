@@ -7,7 +7,7 @@
              x:Class="PictureThis.View.CameraSavePage">
     <ContentPage.Content>
         <StackLayout>
-            <ScrollView BackgroundColor="">
+            <ScrollView>
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="400"/>
@@ -101,14 +101,15 @@
                     <Picker Grid.Row="5"
                             Grid.ColumnSpan="2"
                             x:Name="spinner"
-                            Margin="10,0,10,0"/>
+                            Margin="10,0,10,0"
+                            Title="Select A Tag"/>
 
                     <Grid Grid.Row="6"
                           Grid.ColumnSpan="2"
-                          Margin="10,0,10,0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="100"/>
-                        </Grid.RowDefinitions>
+                          x:Name="grdButtons"
+                          Margin="10,10,10,10"
+                          BackgroundColor="AliceBlue">
+
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
@@ -121,30 +122,31 @@
                             BackgroundColor="Transparent"
                             BorderColor="Transparent"
                             Text="Create New Tag"
-                            Margin="10,0,0,0"/>
+                            Margin="0,10,0,10"/>
 
                         <Button Grid.Column="1"
-                            x:Name="btnAddTag"
-                            BackgroundColor="Transparent"
-                            BorderColor="Transparent"
-                            Text="Add Tag"
-                            Margin="10,0,0,0"/>
+                                x:Name="btnAddTag"
+                                BackgroundColor="Transparent"
+                                BorderColor="Transparent"
+                                Text="Add Tag"
+                                Margin="0,10,0,10"/>
 
                         <Button Grid.Column="2"
                             x:Name="btnRemoveTag"
                             BackgroundColor="Transparent"
                             BorderColor="Transparent"
                             Text="Remove Tag"
-                            Margin="10,0,0,0"/>
+                            Margin="0,10,0,10"/>
 
                         <Button Grid.Column="3"
-                            x:Name="btnResetTags"
-                            BackgroundColor="Transparent"
-                            BorderColor="Transparent"
-                            Text="Reset Tags"
-                            Margin="10,0,0,0"/>
+                                x:Name="btnResetTags"
+                                BackgroundColor="Transparent"
+                                BorderColor="Transparent"
+                                Text="Reset Tags"
+                                Margin="0,10,0,10"/>
                     </Grid>
 
+                    
                     <Label Grid.Row="7"
                            Grid.Column="0"
                            x:Name="lblTag"

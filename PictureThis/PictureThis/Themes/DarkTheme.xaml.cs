@@ -10,7 +10,7 @@ using Xamarin.Forms.Xaml;
 namespace PictureThis.Themes
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class DarkTheme : ContentView
+    public partial class DarkTheme : ResourceDictionary
     {
         public DarkTheme()
         {

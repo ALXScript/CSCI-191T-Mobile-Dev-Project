@@ -10,7 +10,7 @@ using Xamarin.Forms.Xaml;
 namespace PictureThis.Themes
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class LightTheme : ContentView
+    public partial class LightTheme : ResourceDictionary
     {
         public LightTheme()
         {

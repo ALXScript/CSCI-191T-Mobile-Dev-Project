@@ -28,7 +28,10 @@ namespace PictureThis.Model
             path = myPath;
         }
 
-     
+        public void clearTags()
+        {
+            tags.Clear();
+        }
 
         public Boolean hasTag(String tag)
         {

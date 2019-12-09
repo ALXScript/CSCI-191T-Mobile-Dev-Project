@@ -37,9 +37,6 @@ namespace PictureThis.View
             spinner.ItemsSource = jsonTB.GetTags();
             saveImage = passImage;
 
-            DisplayAlert("Does Images.json Exist?", System.IO.File.Exists(jsonTB.GetImagesPath()).ToString(), "OK");
-
-
             setupFillData(passImage);
         }
 
@@ -72,7 +69,10 @@ namespace PictureThis.View
                 //Add the tag to the json file that has tags
                 spinner.ItemsSource = jsonTB.GetTags();
 
-                //reload the editor
+                //Add the tag to the picture
+                pictureData.addTag(prompt);
+
+                //Reload the editor
                 reloadEditorTags();
             }
         }
@@ -98,6 +98,12 @@ namespace PictureThis.View
 
             //reset the spinner
             spinner.SelectedIndex = -1;
+
+            //reload the spinner
+            spinner.ItemsSource = jsonTB.GetTags();
+
+            //get rid of all the tags in the picture
+            pictureData.clearTags();
 
             //reload the editor(;
             reloadEditorTags();
