@@ -72,9 +72,11 @@ namespace PictureThis.View
 
                 //get next picture looping back to front if we reach the end of the list
                 pictureIndex = (pictureIndex + 1) % pictures.Count();
+
                 //Update display info
                 Box.Source = pictures.ElementAt(pictureIndex).path;
                 swipedLabel.Text = "Name:" + pictures[pictureIndex].name + "\nTags: " + string.Join(",", pictures[pictureIndex].tags);
+                
                 //rewrite the json file with updated rating
                 json = JsonConvert.SerializeObject(pictures, Formatting.Indented);
                 System.IO.File.WriteAllText(imagesPath, json);
