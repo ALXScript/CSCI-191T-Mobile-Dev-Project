@@ -10,26 +10,22 @@ using Xamarin.Essentials;
 using PictureThis.Model;
 using Newtonsoft.Json;
 
-
-
-
 namespace PictureThis.View
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class LocationPage : ContentPage
+    public partial class SortByTags : ContentPage
     {
-        private Location currentlocation;
-        int pictureIndex = 0;
-        List<Picture> pictures;
-        string json, imagesPath;
         Boolean fileFound = false;
+        int pictureIndex = 0;
+        String selectedTag, imagesPath, json;
+        jsonToolbox jsonToolbox = new jsonToolbox();
+        List<Picture> pictures = new List<Picture>();
 
-
-        public LocationPage()
+        public SortByTags()
         {
             InitializeComponent();
             imagesPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "images.json"); //Get this later: Path that holds all of the embedded images
-            
+
             //save the file to the device if it doesn't already exist
             if (!System.IO.File.Exists(imagesPath))
             {
@@ -43,53 +39,18 @@ namespace PictureThis.View
 
                 //deserialize json into list of tags
                 pictures = JsonConvert.DeserializeObject<List<Picture>>(jsonString);
-               // swipedLabel.Text = "Name: " + pictures[pictureIndex].name + "\tRating: " + pictures[pictureIndex].getRating() + "\nTags: " + pictures[pictureIndex].getAllTags();
+                // swipedLabel.Text = "Name: " + pictures[pictureIndex].name + "\tRating: " + pictures[pictureIndex].getRating() + "\nTags: " + pictures[pictureIndex].getAllTags();
             }
-            SetPictureLocations();
+            SortTags();
 
-            
+
         }
-        private async void SetPictureLocations()
+        private void SortTags()
         {
-            try
-            {
-                var request = new GeolocationRequest(GeolocationAccuracy.Best);
-                currentlocation = await Geolocation.GetLocationAsync(request);
-
-                if (currentlocation != null)
-                {
-                    //await DisplayAlert("Location,",$"Latitude: {location.Latitude},Longitude: {location.Longitude}","OK");
-                    for (var i = 0; i < pictures.Count; i++) // go through list and give distances for pictures that have location
-                    {
-                        if (pictures[i].location != null) // checks if location exists
-                        {
-                            pictures[i].distance = HaversineFormula.Distance(currentlocation, pictures[i].location, DistanceType.Miles); // calculates distance for pictures needs current location and picture location
-                        }
-                    }
-
-                    pictures = (from pic in pictures
-                                where pic.location != null
-                                orderby pic.distance ascending  // sorts pictures by location 
-                                select pic).ToList();
-                }
-            
-            }
-            catch (FeatureNotSupportedException)
-            {
-                //Console.WriteLine("Feature Not Supported");
-            }
-            catch (FeatureNotEnabledException)
-            {
-                //Console.WriteLine();
-            }
-            catch (PermissionException)
-            {
-                //Console.WriteLine();
-            }
-            catch (Exception)
-            {
-                //Console.WriteLine();
-            }
+            pictures = (from pic in pictures
+                        where pic.location != null
+                        orderby (pic.tags) ascending // sorts pictures by tags
+                        select pic).ToList();
         }
 
         void OnSwiped(object sender, SwipedEventArgs e)

@@ -21,6 +21,7 @@
                     VerticalOptions="Center"
                     CornerRadius="5"
                     Padding="5,0,5,0"
+                    Clicked="OnBrowseClickedAllPictures"
                     Text="Go through all Pictures"
                     TextColor="Black"
                     />
@@ -30,6 +31,7 @@
                     VerticalOptions="Center"
                     CornerRadius="5"
                     Padding="5,0,5,0"
+                    Clicked="OnBrowseSortRating"
                     Text="Sort by Rating higest to lowest"
                     TextColor="Black"
                     />
@@ -50,7 +52,8 @@
                     VerticalOptions="Center"
                     CornerRadius="5"
                     Padding="5,0,5,0"
-                    Text="Display by Tags"
+                    Clicked="OnBrowseSortByTags"
+                    Text="Choose a Tag"
                     TextColor="Black"
                     />
         </StackLayout>

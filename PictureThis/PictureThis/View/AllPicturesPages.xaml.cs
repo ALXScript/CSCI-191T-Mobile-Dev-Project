@@ -38,7 +38,7 @@ namespace PictureThis.View
 
                     //deserialize json into list of tags
                     pictures = JsonConvert.DeserializeObject<List<Picture>>(jsonString);
-                    // swipedLabel.Text = "Name: " + pictures[pictureIndex].name + "\tRating: " + pictures[pictureIndex].getRating() + "\nTags: " + pictures[pictureIndex].getAllTags();
+                    swipedLabel.Text = "Name: " + pictures[pictureIndex].name + "\tRating: " + pictures[pictureIndex].getRating() + "\nTags: " + pictures[pictureIndex].getAllTags();
                 }
 
 
@@ -77,7 +77,7 @@ namespace PictureThis.View
                             break;
                     }
                     //get next picture looping back to front if we reach the end of the list
-                    pictureIndex = (pictureIndex + 1) % 5;
+                    pictureIndex = (pictureIndex + 1) % pictures.Count();
                     Box.Source = pictures.ElementAt(pictureIndex).path;
                     swipedLabel.Text = "Name: " + pictures[pictureIndex].name + "\tRating: " + pictures[pictureIndex].getRating() + "\nTags: " + pictures[pictureIndex].getAllTags();
 
