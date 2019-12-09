@@ -52,20 +52,26 @@ namespace PictureThis.View
 
             //reload the editor(;
             reloadEditorTags();
-
-            //throw new NotImplementedException();
         }
 
         //function for adding a new tag to the JSON Tags file
         private async void BtnNewTag_Clicked(object sender, EventArgs e)
         {
-            String prompt = await DisplayPromptAsync("Add New Tag", "Please Enter the new tag you would like to add", "Cancel");
+            String prompt = await DisplayPromptAsync("Add New Tag", "Please Enter the new tag you would like to add", "OK");
 
             if (prompt != null)
             {
+                //add the tag to the image
                 jsonTB.AddTag(prompt);
 
+                //reset the spinner
+                spinner.SelectedIndex = -1;
+
+                //Add the tag to the json file that has tags
                 spinner.ItemsSource = jsonTB.GetTags();
+
+                //reload the editor
+                reloadEditorTags();
             }
         }
 
@@ -74,6 +80,9 @@ namespace PictureThis.View
         {
             //set the variable to capture the json
             string path = jsonTB.GetImagesPath();
+
+            //convert it to a readable path
+            string extendedPath = System.IO.File.ReadAllText(path);
 
             //set the name
             pictureData.name = entName.Text;
@@ -91,9 +100,9 @@ namespace PictureThis.View
             try
             {
                 //get the file that has the list of objects
-                Images = JsonConvert.DeserializeObject<List<Picture>>(path);
+                Images = JsonConvert.DeserializeObject<List<Picture>>(extendedPath);
 
-                await DisplayAlert("Try Succeeded", "Deserialized", "OK");
+                await DisplayAlert("Try Succeeded", "Deserialized JSON File", "OK");
             }
             catch (Exception ex)
             {
@@ -103,7 +112,11 @@ namespace PictureThis.View
                 await DisplayAlert("Catch Succeeded", "New List Created", "OK");
             }
 
+            //add the images to the list
             Images.Add(pictureData);
+
+            //sort the list of images
+            Images.OrderBy(item => item.name);
 
             //serialize the object back to json
             string newJSON = JsonConvert.SerializeObject(Images, Formatting.Indented);
@@ -111,8 +124,8 @@ namespace PictureThis.View
             //save it to the file
             jsonTB.WriteToImages(newJSON);
 
-            await DisplayAlert("Attention", "First Image Saved", "OK");
-
+            //pop the page and go back to the home screen
+            Navigation.PopAsync();
         }
 
         //
