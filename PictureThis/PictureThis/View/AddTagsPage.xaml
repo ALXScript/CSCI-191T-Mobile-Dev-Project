@@ -8,15 +8,18 @@
     <ContentPage.Content>
         <StackLayout Margin="20">
             <Label Text="Select a tag. Swipe inside the box with a single finger. Swiping Right will add the selected tag to the picture. Swiping Left will remove the tag. Swiping Up/Down will skip the picture." />
-            <Image x:Name ="Box" BackgroundColor="Teal" WidthRequest="300" HeightRequest="300" HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
-                <Image.GestureRecognizers>
-                    <!-- Can also set a swipe threshold on each gesture recognizer -->
-                    <SwipeGestureRecognizer Direction="Left" Swiped="OnSwiped"/>
-                    <SwipeGestureRecognizer Direction="Right" Swiped="OnSwiped"/>
-                    <SwipeGestureRecognizer Direction="Up" Swiped="OnSwiped"/>
-                    <SwipeGestureRecognizer Direction="Down" Swiped="OnSwiped"/>
-                </Image.GestureRecognizers>
-            </Image>
+            <Frame Margin="5,5,5,5">
+                
+                <Image x:Name ="Box" BackgroundColor="Black" WidthRequest="300" HeightRequest="300" HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
+                    <Image.GestureRecognizers>
+                        <!-- Can also set a swipe threshold on each gesture recognizer -->
+                        <SwipeGestureRecognizer Direction="Left" Swiped="OnSwiped"/>
+                        <SwipeGestureRecognizer Direction="Right" Swiped="OnSwiped"/>
+                        <SwipeGestureRecognizer Direction="Up" Swiped="OnSwiped"/>
+                        <SwipeGestureRecognizer Direction="Down" Swiped="OnSwiped"/>
+                    </Image.GestureRecognizers>
+                </Image>
+            </Frame>
             <Label x:Name="swipedLabel" Text="You swiped: "/>
             <Picker x:Name="labelPicker" Title="Tags" />
         </StackLayout>

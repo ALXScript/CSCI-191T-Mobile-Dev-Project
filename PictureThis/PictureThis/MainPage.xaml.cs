@@ -20,6 +20,7 @@ namespace PictureThis
         {
             InitializeComponent();
 
+
             NavigationPage.SetHasNavigationBar(this, true);
         }
 
@@ -35,8 +36,11 @@ namespace PictureThis
         }
 
 
-    
 
-        
+
+
+
+
+
     }
 }

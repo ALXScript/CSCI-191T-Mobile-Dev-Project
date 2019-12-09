@@ -58,7 +58,7 @@ namespace PictureThis.Model
             //serialize it into a string
             string json = JsonConvert.SerializeObject(myJSON2, Formatting.Indented);
 
-            //write the file 
+            //write the file
             File.WriteAllText(tagsPath, json);
 
             //DisplayAlert("Doesn't Exist", "Json File Written", "OK");
@@ -84,7 +84,7 @@ namespace PictureThis.Model
                           'Fresno',
                           'Dog'
                         ]
-                    } ,      
+                    } ,
                     {
                         'name': 'Test',
                         'rating': 7,
@@ -110,7 +110,7 @@ namespace PictureThis.Model
         {
             //Get the tags.json as a string
             string jsonString = File.ReadAllText(tagsPath);
-            
+
             //init empty list of tags
             List<string> tagsList;
 
@@ -184,7 +184,7 @@ namespace PictureThis.Model
         void initFiles()
         {
             //check if the file exists and write it if it doesn't
-            if (!File.Exists(tagsPath))
+            if (File.Exists(tagsPath))
             {
                 resetTags();
             }
@@ -201,7 +201,7 @@ namespace PictureThis.Model
                 pictures[2].location = new Xamarin.Essentials.Location(30, 30);
                 json = JsonConvert.SerializeObject(pictures, Formatting.Indented);
                 System.IO.File.WriteAllText(imagesPath, json);
-*/           
+*/
             }
 
         }
