@@ -18,7 +18,7 @@
                 </Image.GestureRecognizers>
             </Image>
             <Label x:Name="swipedLabel" Text="You swiped: "/>
-            <Picker x:Name="labelPicker"/>
+            <Picker x:Name="labelPicker" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

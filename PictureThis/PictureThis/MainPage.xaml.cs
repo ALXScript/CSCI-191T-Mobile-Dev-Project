@@ -21,7 +21,7 @@ namespace PictureThis
             InitializeComponent();
             //pclTest();
             //pclResultText();
-            //startFiles();
+            startFiles();
             //initFiles();
 
             NavigationPage.SetHasNavigationBar(this, true);
@@ -110,7 +110,7 @@ namespace PictureThis
 
 
             //get the path for storing the file
-            string fileName = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Writtentags.json");
+            string fileName = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "tags.json");
 
             //convert the object into a json object
             string json = JsonConvert.SerializeObject(myJSON2, Formatting.Indented);
@@ -123,11 +123,11 @@ namespace PictureThis
             else
             {
                 //delete the original file
-                System.IO.File.Delete(fileName);
+                //System.IO.File.Delete(fileName);
 
                 //write the new file
-                System.IO.File.WriteAllText(fileName, json);
-                DisplayAlert("Attention", "JSON File already exists or has not been written. New File written", "OK");
+                //System.IO.File.WriteAllText(fileName, json);
+                DisplayAlert("Attention", "JSON File already exists.", "OK");
             }
         }
 

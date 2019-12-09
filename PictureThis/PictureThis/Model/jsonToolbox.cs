@@ -23,6 +23,21 @@ namespace PictureThis.Model
             initFiles();
         }
 
+        public void resetFile()
+        {
+            System.IO.File.Delete(imagesPath);
+        }
+
+        public string GetImagesPath()
+        {
+            return imagesPath;
+        }
+
+        public string GetTagsPath()
+        {
+            return tagsPath;
+        }
+
         public void AddTag(string newTag)
         {
             //Get the tags.json as a string
@@ -34,18 +49,21 @@ namespace PictureThis.Model
             //deserialize json into list of tags
             tagsList = JsonConvert.DeserializeObject<List<string>>(jsonString);
 
-            //add a new tag
-            tagsList.Add(newTag);
+            //check if it already exists
+            if (!tagsList.Contains(newTag))
+            {
+                //add a new tag
+                tagsList.Add(newTag);
 
-            //sort the list
-            tagsList.Sort();
+                //sort the list
+                tagsList.Sort();
 
-            //serialize list back into json
-            jsonString = JsonConvert.SerializeObject(tagsList);
+                //serialize list back into json
+                jsonString = JsonConvert.SerializeObject(tagsList);
 
-            //write back to the new json file with the new list
-            File.WriteAllText(tagsPath, jsonString);
-
+                //write back to the new json file with the new list
+                File.WriteAllText(tagsPath, jsonString);
+            }
         }
 
         public void RemoveTag(string currentTag)
@@ -90,10 +108,13 @@ namespace PictureThis.Model
             return tags;
         }
 
+        public void WriteToImages(string passJSON)
+        {
+            File.WriteAllText(imagesPath, passJSON);
+        }
+
         void initFiles()
         {
-
-
             //check if the file exists and write it if it doesn't
             if (File.Exists(tagsPath))
             {
@@ -126,7 +147,8 @@ namespace PictureThis.Model
 
                 //DisplayAlert("Doesn't Exist", "Json File Written", "OK");
             }
-            if (File.Exists(imagesPath))
+
+            if (!File.Exists(imagesPath))
             {
             String json = @"[
                       {
@@ -164,12 +186,17 @@ namespace PictureThis.Model
                     }
                     ]";
                 File.WriteAllText(imagesPath, json);
+/*
+                List<Picture> pictures = new List<Picture>();
 
-
-
-
+                pictures = JsonConvert.DeserializeObject<List<Picture>>(imagesPath);
+                pictures[0].location = new Xamarin.Essentials.Location(10, 10);
+                pictures[1].location = new Xamarin.Essentials.Location(20, 20);
+                pictures[2].location = new Xamarin.Essentials.Location(30, 30);
+                json = JsonConvert.SerializeObject(pictures, Formatting.Indented);
+                System.IO.File.WriteAllText(imagesPath, json);
+*/           
             }
-
 
         }
     }

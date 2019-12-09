@@ -1,49 +1,55 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using PictureThis.Model;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.IO;
+
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using PictureThis.Model;
-using Newtonsoft.Json;
-using Xamarin.Essentials;
 
 namespace PictureThis.View
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class Rate : ContentPage
+    public partial class LabelPage : ContentPage
     {
-        int pictureIndex = 0;
-        List<Picture> pictures;
-        string json,imagesPath;
         Boolean fileFound = false;
-        public Rate()
+        int pictureIndex = 0;
+        String selectedTag, imagesPath, json;
+        jsonToolbox jsonToolbox = new jsonToolbox();
+        List<Picture> pictures = new List<Picture>();
+
+        public LabelPage()
         {
             InitializeComponent();
             imagesPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "images.json"); //Get this later: Path that holds all of the embedded images
-
             //save the file to the device if it doesn't already exist
             if (!System.IO.File.Exists(imagesPath))
-            { 
+            {
                 DisplayAlert("ALERT", "No Pictures were found. Please add pictures.", "OK");
             }
             else
             {
                 fileFound = true;
-                //Get the images.json
+                //Get the tags.json as a string
                 string jsonString = System.IO.File.ReadAllText(imagesPath);
-
                 //deserialize json into list of tags
                 pictures = JsonConvert.DeserializeObject<List<Picture>>(jsonString);
-                swipedLabel.Text = "Name: " + pictures[pictureIndex].name + "\tRating: " + pictures[pictureIndex].getRating() + "\nTags: "+pictures[pictureIndex].getAllTags();
+                swipedLabel.Text = "Name:" + pictures[pictureIndex].getName() + "\nTags: " +  pictures[pictureIndex].getAllTags();
             }
+            labelPicker.ItemsSource = jsonToolbox.GetTags();
         }
+               
         void OnSwiped(object sender, SwipedEventArgs e)
         {
-            if (fileFound)
+            
+            if (fileFound && labelPicker.SelectedIndex>=0)
             {
+                //get selected tag
+                selectedTag = labelPicker.Items[labelPicker.SelectedIndex];
+
                 //logic to update rating based on which direction the user swiped 
                 //then get next picture.
                 switch (e.Direction.ToString())
@@ -59,30 +65,28 @@ namespace PictureThis.View
                                             }
 
                         */
-
+                        Box.Source = ImageSource.FromFile(pictures[pictureIndex].getName());
                         //skip rating for this picture and get next picture 
                         break;
-                    //increase rating
+                    //Add the selected tag from the current picture
                     case "Right":
-                        pictures[pictureIndex].increaseRating();
+                        pictures[pictureIndex].addTag(selectedTag);
                         break;
-                    //decrease rating
+                    
+                    //Remove the selected tag from the selected picture
                     case "Left":
-                        pictures[pictureIndex].decreaseRating();
+                        pictures[pictureIndex].removeTag(selectedTag);
                         break;
                 }
+
                 //get next picture looping back to front if we reach the end of the list
                 pictureIndex = (pictureIndex + 1) % pictures.Count();
-                Box.Source = pictures.ElementAt(pictureIndex).path;
-                swipedLabel.Text = "Name: " + pictures[pictureIndex].name + "\tRating: " + pictures[pictureIndex].getRating() + "\nTags: "+pictures[pictureIndex].getAllTags();
-
+                //Update display info
+                swipedLabel.Text = "Name:" + pictures[pictureIndex].name + "\nTags: "+ string.Join(",",pictures[pictureIndex].tags);
                 //rewrite the json file with updated rating
                 json = JsonConvert.SerializeObject(pictures, Formatting.Indented);
                 System.IO.File.WriteAllText(imagesPath, json);
-                
             }
-        }//end OnSwiped
-
-
+        }
     }
 }
