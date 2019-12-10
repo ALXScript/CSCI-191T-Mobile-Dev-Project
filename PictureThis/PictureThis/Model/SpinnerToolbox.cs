@@ -4,7 +4,7 @@ using System.Text;
 using Xamarin.Forms;
 using Xamarin.Essentials;
 using PictureThis.Model;
-using PCLStorage;
+
 
 namespace PictureThis
 {

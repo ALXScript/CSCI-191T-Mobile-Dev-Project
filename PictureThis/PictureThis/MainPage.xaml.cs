@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using PictureThis.View;
 using Newtonsoft.Json;
-using PCLStorage;
+
 
 namespace PictureThis
 {

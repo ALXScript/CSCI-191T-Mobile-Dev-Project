@@ -7,8 +7,8 @@
              x:Class="PictureThis.Themes.DarkTheme">
     
     <Color x:Key="PageBackgroundColor">Black</Color>
-    <Color x:Key="NavigationBarColor">Teal</Color>
-    <Color x:Key="PrimaryColor">Teal</Color>
+    <Color x:Key="NavigationBarColor">WhiteSmoke</Color>
+    <Color x:Key="PrimaryColor">WhiteSmoke</Color>
     <Color x:Key="SecondaryColor">White</Color>
     <Color x:Key="TertiaryColor">Black</Color>
     <Color x:Key="PrimaryTextColor">White</Color>
