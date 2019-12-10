@@ -8,7 +8,7 @@
              x:Class="PictureThis.View.LocationPage">
     <ContentPage.Content>
         <StackLayout Margin="20">
-            <Label Text="Swipe right to increase the picture's rating, left to decrease it."
+            <Label Text="Swipe right and left to go through distances."
                    Style="{StaticResource lblStyle}"/>
 
             <Frame Margin="5,5,5,5"

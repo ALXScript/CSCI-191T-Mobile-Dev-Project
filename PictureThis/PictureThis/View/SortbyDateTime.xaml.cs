@@ -80,7 +80,11 @@ namespace PictureThis.View
                         break;
                     //decrease rating
                     case "Left":
-                        pictureIndex = (pictureIndex + 1) % pictures.Count();
+                        if (pictureIndex == 0)
+                        {
+                            pictureIndex = pictures.Count() - 1;
+                        }
+                        else { pictureIndex = (pictureIndex - 1) % pictures.Count(); }
                         break;
                 }
                 //get next picture looping back to front if we reach the end of the list

@@ -47,18 +47,30 @@ namespace PictureThis.View
         private void labelPicker_SelectedIndexChanged(object sender, EventArgs e)
         {
             {
-                if (labelPicker.SelectedIndex != -1)
-                {   selectedTag = labelPicker.Items[labelPicker.SelectedIndex];
-                    pictures = (from pic in pictures
-                                where pic.hasTag(selectedTag)
-                                select pic).ToList();
-                    pictureIndex = 0;
-                    Box.Source = pictures.ElementAt(Math.Abs(pictureIndex)).path;
-                }
-                else
-                {
-                    DisplayAlert("Choose a tag", "Pick from below", "OK");
+                bool x = true;
+                
+                
+                    if (labelPicker.SelectedIndex != -1)
+                    {
+                        selectedTag = labelPicker.Items[labelPicker.SelectedIndex];
+                        pictures = (from pic in pictures
+                                    where pic.hasTag(selectedTag)
+                                    select pic).ToList();
+                        //pictureIndex = 0;
+                        if (pictures.Count == 0)
+                        {
+                            DisplayAlert("Pictures no tag", "Pictures do not exist with that tag pick new tag", "OK");
+                        }
+                        else if (pictures.Count != 0)
+                        {
+                            pictureIndex = 0;
+                            Box.Source = pictures.ElementAt(Math.Abs(pictureIndex)).path;
+                        }
+                        else
+                        {
+                        DisplayAlert("Choose a tag", "Pick from below", "OK");
 
+                        }
                 }
             };
 

@@ -7,7 +7,7 @@
              x:Class="PictureThis.View.SortbyDateTime">
     <ContentPage.Content>
         <StackLayout Margin="20">
-            <Label Text="Swipe Right to go through pictures" />
+            <Label Text="Swipe right and left to go through pictures" />
             <Frame Margin="5,5,5,5">
                 <Image x:Name ="Box" BackgroundColor="Black" WidthRequest="300" HeightRequest="300" HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
 
