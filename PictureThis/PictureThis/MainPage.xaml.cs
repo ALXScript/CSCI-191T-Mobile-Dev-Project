@@ -20,9 +20,17 @@ namespace PictureThis
         {
             InitializeComponent();
 
-
+            //set the navigation
             NavigationPage.SetHasNavigationBar(this, true);
+
+            //add the settings event handler
+            tbrItem.Clicked += OnSettingsClicked;
+
+            PictureThis.Model.jsonToolbox jsonTB = new Model.jsonToolbox();
+            jsonTB.initFiles();
         }
+
+        protected async void OnSettingsClicked(object sender, EventArgs e) => await Navigation.PushAsync(new SettingsTheme());
 
         protected async void OnBrowseClicked(object sender, EventArgs e) => await Navigation.PushAsync(new GalleryPage());
 

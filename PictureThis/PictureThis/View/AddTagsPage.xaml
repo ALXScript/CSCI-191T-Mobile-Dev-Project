@@ -4,13 +4,21 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
+             BackgroundColor="{DynamicResource PageBackgroundColor}"
              x:Class="PictureThis.View.LabelPage">
     <ContentPage.Content>
         <StackLayout Margin="20">
-            <Label Text="Select a tag. Swipe inside the box with a single finger. Swiping Right will add the selected tag to the picture. Swiping Left will remove the tag. Swiping Up/Down will skip the picture." />
-            <Frame Margin="5,5,5,5">
+            <Label Text="Select a tag. Swipe inside the box with a single finger. Swiping Right will add the selected tag to the picture. Swiping Left will remove the tag. Swiping Up/Down will skip the picture." 
+                   Style="{StaticResource lblStyle}"/>
+            
+            <Frame Margin="5,5,5,5"
+                   Style="{StaticResource frmStyle}">
                 
-                <Image x:Name ="Box" BackgroundColor="Black" WidthRequest="300" HeightRequest="300" HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
+                <Image x:Name ="Box"
+                       WidthRequest="300"
+                       HeightRequest="300"
+                       HorizontalOptions="Center"
+                       VerticalOptions="CenterAndExpand">
                     <Image.GestureRecognizers>
                         <!-- Can also set a swipe threshold on each gesture recognizer -->
                         <SwipeGestureRecognizer Direction="Left" Swiped="OnSwiped"/>
@@ -19,9 +27,16 @@
                         <SwipeGestureRecognizer Direction="Down" Swiped="OnSwiped"/>
                     </Image.GestureRecognizers>
                 </Image>
+                
             </Frame>
-            <Label x:Name="swipedLabel" Text="You swiped: "/>
-            <Picker x:Name="labelPicker" Title="Tags" />
+            
+            <Label x:Name="swipedLabel" 
+                   Text="You swiped: "
+                   Style="{StaticResource lblStyle}"/>
+            
+            <Picker x:Name="labelPicker"
+                    Title="Tags"
+                    Style="{StaticResource pckStyle}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

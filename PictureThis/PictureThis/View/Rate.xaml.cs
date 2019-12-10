@@ -21,25 +21,34 @@ namespace PictureThis.View
         Boolean fileFound = false;
         public Rate()
         {
+            Console.WriteLine("before Init Component");
             InitializeComponent();
+            Console.WriteLine("before imagespath");
             imagesPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "images.json"); //Get this later: Path that holds all of the embedded images
-
+            Console.WriteLine("before file.exists");
             //save the file to the device if it doesn't already exist
             if (!System.IO.File.Exists(imagesPath))
-            { 
+            {
+                Console.Write("File Does not Exist");
                 DisplayAlert("ALERT", "No Pictures were found. Please add pictures.", "OK");
             }
             else
             {
+                Console.WriteLine("before setting bool to true");
                 fileFound = true;
                 //Get the images.json
+                Console.WriteLine("before reading the file");
                 string jsonString = System.IO.File.ReadAllText(imagesPath);
 
                 //deserialize json into list of tags
+                Console.WriteLine("Before deserializing json file");
                 pictures = JsonConvert.DeserializeObject<List<Picture>>(jsonString);
+                Console.WriteLine("Before setting to box");
                 Box.Source = pictures.ElementAt(pictureIndex).path;
+                Console.WriteLine("Before setting label text");
                 swipedLabel.Text = "Name: " + pictures[pictureIndex].name + "\tRating: " + pictures[pictureIndex].getRating() + "\nTags: "+pictures[pictureIndex].getAllTags();
             }
+            Console.WriteLine("After file.exists");
         }
         void OnSwiped(object sender, SwipedEventArgs e)
         {

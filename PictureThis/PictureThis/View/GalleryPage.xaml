@@ -2,60 +2,56 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PictureThis.GalleryPage"
-             Title="Gallery Page">
+             Title="Gallery Page"
+             BackgroundColor="{DynamicResource PageBackgroundColor}">
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout Margin="5,5,5,5">
             <Button
-                    BackgroundColor="DarkSeaGreen"
+                    Grid.Row="0"
                     HorizontalOptions="Fill"
                     VerticalOptions="Center"
                     CornerRadius="5"
                     Padding="5,0,5,0"
                     Clicked="OnBrowseClickedTop5Rated"
                     Text="Top 5 rated Pictures"
-                    TextColor="Black"
-                    /> 
+                    Style="{StaticResource btnStyle}"/>
             <Button
-                    BackgroundColor="DarkSeaGreen"
+                    Grid.Row="1"
                     HorizontalOptions="Fill"
                     VerticalOptions="Center"
                     CornerRadius="5"
                     Padding="5,0,5,0"
                     Clicked="OnBrowseClickedAllPictures"
                     Text="Go through all Pictures"
-                    TextColor="Black"
-                    />
+                    Style="{StaticResource btnStyle}"/>
             <Button
-                    BackgroundColor="DarkSeaGreen"
+                    Grid.Row="2"
                     HorizontalOptions="Fill"
                     VerticalOptions="Center"
                     CornerRadius="5"
                     Padding="5,0,5,0"
                     Clicked="OnBrowseSortRating"
                     Text="Sort by Rating higest to lowest"
-                    TextColor="Black"
-                    />
+                    Style="{StaticResource btnStyle}"/>
             <Button
-                    BackgroundColor="DarkSeaGreen"
+                    Grid.Row="3"
                     HorizontalOptions="Fill"
                     VerticalOptions="Center"
                     CornerRadius="5"
                     Padding="5,0,5,0"
                     Clicked="OnBrowseClickedLocation"
                     Text="Display pictures closest to your Location"
-                    TextColor="Black"
-                    />
-            
+                    Style="{StaticResource btnStyle}"/>
+
             <Button
-                    BackgroundColor="DarkSeaGreen"
+                    Grid.Row="4"
                     HorizontalOptions="Fill"
                     VerticalOptions="Center"
                     CornerRadius="5"
                     Padding="5,0,5,0"
                     Clicked="OnBrowseSortByTags"
                     Text="Choose a Tag"
-                    TextColor="Black"
-                    />
+                    Style="{StaticResource btnStyle}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

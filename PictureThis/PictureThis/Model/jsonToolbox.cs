@@ -156,7 +156,7 @@ namespace PictureThis.Model
             File.WriteAllText(imagesPath, passJSON);
         }
 
-        void initFiles()
+        public void initFiles()
         {
             //check if the file exists and write it if it doesn't
             if (File.Exists(tagsPath))

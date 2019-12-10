@@ -9,20 +9,50 @@
     <Application.Resources>
         <ResourceDictionary Source="Themes/LightTheme.xaml"/>
 
+        <Style TargetType="Page">
+            <Setter Property="BackgroundColor"
+                    Value="{DynamicResource PageBackgroundColor}"/>
+        </Style>
+
+        <Style TargetType="NavigationPage">
+            <Setter Property="BarBackgroundColor"
+                    Value="{DynamicResource NavigationBarColor}"/>
+            <Setter Property="BarTextColor"
+                    Value="{DynamicResource SecondaryColor}"/>
+        </Style>
+
         <Style x:Key="btnStyle"
                TargetType="Button">
             <Setter Property="BorderColor"
                     Value="{DynamicResource PrimaryColor}"/>
-
+            <Setter Property="BorderWidth"
+                    Value="1"/>
             <Setter Property="TextColor"
                     Value="{DynamicResource PrimaryTextColor}"/>
-
             <Setter Property="BackgroundColor"
-                    Value="{DynamicResource TransparentColor}"/>
+                    Value="{DynamicResource TertiaryColor}"/>
         </Style>
 
         <Style x:Key="lblStyle"
                TargetType="Label">
+            <Setter Property="TextColor"
+                    Value="{DynamicResource PrimaryTextColor}"/>
+            <Setter Property="BackgroundColor"
+                    Value="{DynamicResource TertiaryColor}"/>
+        </Style>
+
+        <Style x:Key="edtStyle"
+               TargetType="Editor">
+            <Setter Property="TextColor"
+                    Value="{DynamicResource PrimaryTextColor}"/>
+            <Setter Property="BackgroundColor"
+                    Value="{DynamicResource TertiaryColor}"/>
+        </Style>
+
+        <Style x:Key="entStyle"
+               TargetType="Entry">
+            <Setter Property="BackgroundColor"
+                    Value="{DynamicResource TertiaryColor}"/>
             <Setter Property="TextColor"
                     Value="{DynamicResource PrimaryTextColor}"/>
         </Style>
@@ -33,6 +63,42 @@
                     Value="{DynamicResource PrimaryColor}"/>
             <Setter Property="OnColor"
                     Value="{DynamicResource SecondaryColor}"/>
+        </Style>
+
+        <Style x:Key="pckStyle"
+               TargetType="Picker">
+            <Setter Property="BackgroundColor"
+                    Value="{DynamicResource TertiaryColor}"/>
+            <Setter Property="TextColor"
+                    Value="{DynamicResource PrimaryTextColor}"/>
+            <Setter Property="TitleColor"
+                    Value="{DynamicResource TertiaryTextColor}"/>
+        </Style>
+
+        <Style x:Key="frmStyle"
+               TargetType="Frame">
+            <Setter Property="BackgroundColor"
+                    Value="{DynamicResource TertiaryColor}"/>
+            <Setter Property="BorderColor"
+                    Value="{DynamicResource PrimaryColor}"/>
+            <Setter Property="HasShadow"
+                    Value="True"/>
+        </Style>
+
+        <Style x:Key="dpkStyle"
+               TargetType="DatePicker">
+            <Setter Property="BackgroundColor"
+                    Value="{DynamicResource TertiaryColor}"/>
+            <Setter Property="TextColor"
+                    Value="{DynamicResource PrimaryTextColor}"/>
+        </Style>
+
+        <Style x:Key="tpkStyle"
+               TargetType="TimePicker">
+            <Setter Property="BackgroundColor"
+                    Value="{DynamicResource TertiaryColor}"/>
+            <Setter Property="TextColor"
+                    Value="{DynamicResource PrimaryTextColor}"/>
         </Style>
     </Application.Resources>
 </Application>

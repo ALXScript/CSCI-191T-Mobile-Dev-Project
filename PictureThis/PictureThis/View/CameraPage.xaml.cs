@@ -26,7 +26,7 @@ namespace PictureThis.View
             if (photo != null)
             {
                 //PhotoImage.Source = ImageSource.FromStream(() => { return photo.GetStream(); });
-               await DisplayAlert("File Name / Location",photo.Path,"ok"); // check current path of photo
+               //await DisplayAlert("File Name / Location",photo.Path,"ok"); // check current path of photo
                 await Navigation.PushAsync(new CameraSavePage(photo));
             }
             else

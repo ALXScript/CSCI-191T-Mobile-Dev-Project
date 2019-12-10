@@ -7,9 +7,18 @@
     xmlns:local="clr-namespace:PictureThis;assembly=PictureThis"
     mc:Ignorable="d"
     x:Class="PictureThis.MainPage"
-    Title="Picture This!">
+    Title="Picture This!"
+    BackgroundColor="{DynamicResource PageBackgroundColor}">
 
-    <StackLayout>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Settings"
+                     Order="Primary"
+                     Priority="0"
+                     x:Name="tbrItem"
+                     Clicked="OnSettingsClicked"/>
+    </ContentPage.ToolbarItems>
+
+        <StackLayout>
         <ContentView>
             <Grid ColumnSpacing="0" RowSpacing="0">
                 <Grid.RowDefinitions>
