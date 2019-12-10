@@ -8,16 +8,18 @@
     <ContentPage.Content>
         <StackLayout Margin="20">
             <Label Text="Swipe Right to go through pictures" />
-            <Image x:Name ="Box" BackgroundColor="Teal" WidthRequest="300" HeightRequest="300" HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
+            <Frame Margin="5,5,5,5">
+                <Image x:Name ="Box" BackgroundColor="Black" WidthRequest="300" HeightRequest="300" HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
 
-                <Image.GestureRecognizers>
-                    <!-- Can also set a swipe threshold on each gesture recognizer -->
-                    <SwipeGestureRecognizer Direction="Left" Swiped="OnSwiped"/>
-                    <SwipeGestureRecognizer Direction="Right" Swiped="OnSwiped"/>
-                    <SwipeGestureRecognizer Direction="Up" Swiped="OnSwiped"/>
-                    <SwipeGestureRecognizer Direction="Down" Swiped="OnSwiped"/>
-                </Image.GestureRecognizers>
-            </Image>
+                    <Image.GestureRecognizers>
+                        <!-- Can also set a swipe threshold on each gesture recognizer -->
+                        <SwipeGestureRecognizer Direction="Left" Swiped="OnSwiped"/>
+                        <SwipeGestureRecognizer Direction="Right" Swiped="OnSwiped"/>
+                        <SwipeGestureRecognizer Direction="Up" Swiped="OnSwiped"/>
+                        <SwipeGestureRecognizer Direction="Down" Swiped="OnSwiped"/>
+                    </Image.GestureRecognizers>
+                </Image>
+            </Frame>
             <Label x:Name="swipedLabel" Text="You swiped: "/>
         </StackLayout>
     </ContentPage.Content>
