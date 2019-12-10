@@ -16,11 +16,12 @@ namespace PictureThis.View
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class top5Ratedpage : ContentPage
     {
+        private int negval;
         int pictureIndex = 0;
         List<Picture> pictures;
         string json, imagesPath;
         Boolean fileFound = false;
-
+        
 
         public top5Ratedpage()
         {
@@ -51,7 +52,6 @@ namespace PictureThis.View
         {
             pictures = (from pic in pictures
                         orderby (pic.getRating()) descending
-                        // sorts pictures by location 
                         select pic).ToList();
         }
              
@@ -71,18 +71,24 @@ namespace PictureThis.View
                     case "Right":
                         pictureIndex = (pictureIndex + 1) % pictures.Count;
                         pictureIndex = (pictureIndex ) % 5;
+
+
+
                         break;
 
                     //Remove the selected tag from the selected picture
                     case "Left":
+                        negval = -pictureIndex;
                         pictureIndex = (pictureIndex - 1) % pictures.Count;
                         pictureIndex = (pictureIndex) % 5;
+
+
                         break;
                 }
 
 
-                Box.Source = pictures.ElementAt(pictureIndex).path;
-                swipedLabel.Text = "Name: " + pictures[pictureIndex].name + "\tRating: " + pictures[pictureIndex].getRating() + "\nTags: " + pictures[pictureIndex].getAllTags();
+                Box.Source = pictures.ElementAt(Math.Abs(pictureIndex)).path;
+                swipedLabel.Text = "Name: " + pictures[Math.Abs(pictureIndex)].name + "\tRating: " + pictures[Math.Abs(pictureIndex)].getRating() + "\nTags: " + pictures[Math.Abs(pictureIndex)].getAllTags();
 
                 //rewrite the json file with updated rating
                 json = JsonConvert.SerializeObject(pictures, Formatting.Indented);

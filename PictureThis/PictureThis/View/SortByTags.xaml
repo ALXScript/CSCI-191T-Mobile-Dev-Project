@@ -7,7 +7,7 @@
              x:Class="PictureThis.View.SortByTags">
     <ContentPage.Content>
         <StackLayout Margin="20">
-            <Label Text="Select a tag. Swipe inside the box with a single finger. Swiping Right will add the selected tag to the picture. Swiping Left will remove the tag. Swiping Up/Down will skip the picture." />
+            <Label Text="Select a tag. Swipe right and left to go through pictures" />
             <Image x:Name ="Box" BackgroundColor="Teal" WidthRequest="300" HeightRequest="300" HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
                 <Image.GestureRecognizers>
                     <!-- Can also set a swipe threshold on each gesture recognizer -->
