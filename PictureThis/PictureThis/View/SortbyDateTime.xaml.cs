@@ -47,9 +47,10 @@ namespace PictureThis.View
 
         private void SortDateTime()
         {
-            pictures = (from pic in pictures
-                        orderby (pic.dateTime) ascending // sorts by rating decending order 
+            pictures = (from pic in pictures // query for pictures
+                        orderby (pic.dateTime) ascending // sorts by datetime by decending order 
                         select pic).ToList();
+            Box.Source = pictures.ElementAt(Math.Abs(pictureIndex)).path;
         }
         void OnSwiped(object sender, SwipedEventArgs e)
         {

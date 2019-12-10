@@ -142,7 +142,8 @@ namespace PictureThis.View
             try
             {
                 //get the file that has the list of objects
-                Images = JsonConvert.DeserializeObject<List<Picture>>(extendedPath);
+                 Images = JsonConvert.DeserializeObject<List<Picture>>(extendedPath);
+               
 
                 await DisplayAlert("Try Succeeded", "Deserialized JSON File", "OK");
             }

@@ -67,7 +67,12 @@ namespace PictureThis.Model
         //function for resetting the images
         public void resetImages()
         {
-            String json = "";
+            List<Picture> Images = new List<Picture>();
+            //serialize the object back to json
+            string json = JsonConvert.SerializeObject(Images, Formatting.Indented);
+
+            //save it to the file
+
             File.WriteAllText(imagesPath, json);
         }
 

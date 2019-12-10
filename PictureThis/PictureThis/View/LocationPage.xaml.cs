@@ -67,10 +67,11 @@ namespace PictureThis.View
                         }
                     }
 
-                    pictures = (from pic in pictures
+                    pictures = (from pic in pictures // query for pictures
                                 where pic.location != null
                                 orderby pic.distance ascending  // sorts pictures by location
                                 select pic).ToList();
+                    Box.Source = pictures.ElementAt(Math.Abs(pictureIndex)).path;
                 }
 
             }

@@ -49,9 +49,10 @@ namespace PictureThis.View
 
         private void SetTopRated()
         {
-            pictures = (from pic in pictures
+            pictures = (from pic in pictures // query for pictures
                         orderby (pic.getRating()) descending // sorts by rating decending order 
                         select pic).ToList();
+            Box.Source = pictures.ElementAt(Math.Abs(pictureIndex)).path;
         }
 
 

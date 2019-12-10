@@ -16,7 +16,7 @@ namespace PictureThis.View
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class top5Ratedpage : ContentPage
     {
-        private int negval;
+
         int pictureIndex = 0;
         List<Picture> pictures;
         string json, imagesPath;
@@ -78,7 +78,6 @@ namespace PictureThis.View
 
                     //Remove the selected tag from the selected picture
                     case "Left":
-                        negval = -pictureIndex;
                         pictureIndex = (pictureIndex - 1) % pictures.Count;
                         pictureIndex = (pictureIndex) % 5;
 

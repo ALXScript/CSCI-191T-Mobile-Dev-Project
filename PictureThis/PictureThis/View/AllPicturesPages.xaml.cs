@@ -73,7 +73,12 @@ namespace PictureThis.View
                         break;
                         //decrease rating
                         case "Left":
-                        pictureIndex = (pictureIndex - 1) % pictures.Count();
+                        if (pictureIndex == 0)
+                        {
+                            pictureIndex = pictures.Count() - 1;
+                        }
+                        else { pictureIndex = (pictureIndex - 1) % pictures.Count(); }
+
 
                         break;
                     }
