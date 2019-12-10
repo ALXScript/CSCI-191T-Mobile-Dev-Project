@@ -4,21 +4,12 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             BackgroundColor="{DynamicResource PageBackgroundColor}"
-             x:Class="PictureThis.View.top5Ratedpage">
+             x:Class="PictureThis.View.SortbyDateTime">
     <ContentPage.Content>
         <StackLayout Margin="20">
-            <Label Text="Swipe right to increase the picture's rating, left to decrease it."
-                   Style="{StaticResource lblStyle}"/>
-
-            <Frame Margin="5,5,5,5"
-                   Style="{StaticResource frmStyle}">
-
-                <Image x:Name ="Box"
-                   WidthRequest="300"
-                   HeightRequest="300"
-                   HorizontalOptions="Center"
-                   VerticalOptions="CenterAndExpand">
+            <Label Text="Swipe Right to go through pictures" />
+            <Frame Margin="5,5,5,5">
+                <Image x:Name ="Box" BackgroundColor="Black" WidthRequest="300" HeightRequest="300" HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
 
                     <Image.GestureRecognizers>
                         <!-- Can also set a swipe threshold on each gesture recognizer -->
@@ -28,12 +19,8 @@
                         <SwipeGestureRecognizer Direction="Down" Swiped="OnSwiped"/>
                     </Image.GestureRecognizers>
                 </Image>
-
             </Frame>
-
-            <Label x:Name="swipedLabel"
-                   Text="You swiped: "
-                   Style="{StaticResource lblStyle}"/>
+            <Label x:Name="swipedLabel" Text="You swiped: "/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

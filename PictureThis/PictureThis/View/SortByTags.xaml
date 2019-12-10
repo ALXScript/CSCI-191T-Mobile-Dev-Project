@@ -29,11 +29,11 @@
                 </Image>
 
             </Frame>
-            
+
             <Label x:Name="swipedLabel"
                    Text="You swiped: "
                    Style="{StaticResource lblStyle}"/>
-            
+
             <Picker x:Name="labelPicker"
                     Title="Tags"
                     SelectedIndexChanged="labelPicker_SelectedIndexChanged"

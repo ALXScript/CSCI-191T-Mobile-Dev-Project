@@ -14,7 +14,7 @@
             <Frame Margin="5,5,5,5"
                    Style="{StaticResource frmStyle}">
 
-                <Image x:Name ="Box" 
+                <Image x:Name ="Box"
                    WidthRequest="300"
                    HeightRequest="300"
                    HorizontalOptions="Center"
@@ -29,9 +29,9 @@
                     </Image.GestureRecognizers>
 
                 </Image>
-                
+
             </Frame>
-            
+
             <Label x:Name="swipedLabel"
                    Text="You swiped: "
                    Style="{StaticResource lblStyle}"/>

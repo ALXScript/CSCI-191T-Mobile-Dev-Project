@@ -6,25 +6,23 @@ using System.Threading.Tasks;
 using System.IO;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using Xamarin.Essentials;
 using PictureThis.Model;
 using Newtonsoft.Json;
-
+using Xamarin.Essentials;
 
 namespace PictureThis.View
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class top5Ratedpage : ContentPage
+    public partial class SortbyDateTime : ContentPage
     {
-        private int negval;
         int pictureIndex = 0;
         List<Picture> pictures;
         string json, imagesPath;
         Boolean fileFound = false;
-        
-
-        public top5Ratedpage()
+        public SortbyDateTime()
         {
+            InitializeComponent();
+
             InitializeComponent();
             imagesPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "images.json"); //Get this later: Path that holds all of the embedded images
 
@@ -41,21 +39,18 @@ namespace PictureThis.View
 
                 //deserialize json into list of tags
                 pictures = JsonConvert.DeserializeObject<List<Picture>>(jsonString);
-                // swipedLabel.Text = "Name: " + pictures[pictureIndex].name + "\tRating: " + pictures[pictureIndex].getRating() + "\nTags: " + pictures[pictureIndex].getAllTags();
+                Box.Source = pictures.ElementAt(pictureIndex).path;
+                //swipedLabel.Text = "Name: " + pictures[pictureIndex].name + "\tRating: " + pictures[pictureIndex].getRating() + "\nTags: " + pictures[pictureIndex].getAllTags();
+                SortDateTime();
             }
-            SetTopRated5();
-
-
         }
 
-        private void SetTopRated5()
+        private void SortDateTime()
         {
             pictures = (from pic in pictures
-                        orderby (pic.getRating()) descending
+                        orderby (pic.dateTime) ascending // sorts by rating decending order 
                         select pic).ToList();
         }
-             
-
         void OnSwiped(object sender, SwipedEventArgs e)
         {
             if (fileFound)
@@ -65,30 +60,32 @@ namespace PictureThis.View
                 switch (e.Direction.ToString())
                 {
                     case "Up":
+                        /*
+                                            //This is the logic to add a single photo. It is not part of the end functionality of this page
+                                            var photo = await Plugin.Media.CrossMedia.Current.PickPhotoAsync();
+                                            if (photo != null)
+                                            {
+                                                Box.Source = ImageSource.FromStream(() => { return photo.GetStream(); });
+                                                dir = photo.AlbumPath;
+                                            }
 
+                        */
+
+                        //skip rating for this picture and get next picture 
                         break;
-                    //Add the selected tag from the current picture
+                    //increase rating
                     case "Right":
-                        pictureIndex = (pictureIndex + 1) % pictures.Count;
-                        pictureIndex = (pictureIndex ) % 5;
-
-
-
+                        pictureIndex = (pictureIndex + 1) % pictures.Count();
                         break;
-
-                    //Remove the selected tag from the selected picture
+                    //decrease rating
                     case "Left":
-                        negval = -pictureIndex;
-                        pictureIndex = (pictureIndex - 1) % pictures.Count;
-                        pictureIndex = (pictureIndex) % 5;
-
-
+                        pictureIndex = (pictureIndex + 1) % pictures.Count();
                         break;
                 }
-
-
+                //get next picture looping back to front if we reach the end of the list
+                pictureIndex = (pictureIndex + 1) % pictures.Count();
                 Box.Source = pictures.ElementAt(Math.Abs(pictureIndex)).path;
-                swipedLabel.Text = "Name: " + pictures[Math.Abs(pictureIndex)].name + "\tRating: " + pictures[Math.Abs(pictureIndex)].getRating() + "\nTags: " + pictures[Math.Abs(pictureIndex)].getAllTags();
+                swipedLabel.Text = "Name: " + pictures[Math.Abs(pictureIndex)].name + "\tRating: " + pictures[Math.Abs(pictureIndex)].getRating() + "\nTags: " + pictures[Math.Abs(pictureIndex)].getAllTags() + "\nDistance: " + pictures[Math.Abs(pictureIndex)].dateTime;
 
                 //rewrite the json file with updated rating
                 json = JsonConvert.SerializeObject(pictures, Formatting.Indented);
@@ -96,6 +93,7 @@ namespace PictureThis.View
 
             }
         }//end OnSwiped
+
 
     }
 }

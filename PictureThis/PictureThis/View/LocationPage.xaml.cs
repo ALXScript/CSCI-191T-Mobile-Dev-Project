@@ -111,12 +111,13 @@ namespace PictureThis.View
                     //Remove the selected tag from the selected picture
                     case "Left":
                         pictureIndex = (pictureIndex - 1) % pictures.Count();
+
                         break;
                 }
 
 
-                Box.Source = pictures.ElementAt(pictureIndex).path;
-                swipedLabel.Text = "Name: " + pictures[pictureIndex].name + "\tRating: " + pictures[pictureIndex].getRating() + "\nTags: " + pictures[pictureIndex].getAllTags() + "\nDistance: " + pictures[pictureIndex].distance;
+                Box.Source = pictures.ElementAt(Math.Abs(pictureIndex)).path;
+                swipedLabel.Text = "Name: " + pictures[Math.Abs(pictureIndex)].name + "\tRating: " + pictures[Math.Abs(pictureIndex)].getRating() + "\nTags: " + pictures[Math.Abs(pictureIndex)].getAllTags() + "\nDistance: " + pictures[Math.Abs(pictureIndex)].distance;
 
                 //rewrite the json file with updated rating
                 json = JsonConvert.SerializeObject(pictures, Formatting.Indented);

@@ -20,6 +20,8 @@ namespace PictureThis
 
         protected async void OnBrowseSortRating(object sender, EventArgs e) => await Navigation.PushAsync(new SortByRating());
 
+        protected async void OnBrowseClickedSortbyDateTime(object sender, EventArgs e) => await Navigation.PushAsync(new SortbyDateTime());
+
 
     }
 }
