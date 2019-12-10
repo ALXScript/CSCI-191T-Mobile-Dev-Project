@@ -6,7 +6,7 @@
     <ContentPage.Content>
         <StackLayout>
             <Button
-                    BackgroundColor="DarkSeaGreen"
+                    BackgroundColor="White"
                     HorizontalOptions="Fill"
                     VerticalOptions="Center"
                     CornerRadius="5"
@@ -16,7 +16,7 @@
                     TextColor="Black"
                     /> 
             <Button
-                    BackgroundColor="DarkSeaGreen"
+                    BackgroundColor="White"
                     HorizontalOptions="Fill"
                     VerticalOptions="Center"
                     CornerRadius="5"
@@ -26,7 +26,7 @@
                     TextColor="Black"
                     />
             <Button
-                    BackgroundColor="DarkSeaGreen"
+                    BackgroundColor="White"
                     HorizontalOptions="Fill"
                     VerticalOptions="Center"
                     CornerRadius="5"
@@ -36,7 +36,7 @@
                     TextColor="Black"
                     />
             <Button
-                    BackgroundColor="DarkSeaGreen"
+                    BackgroundColor="White"
                     HorizontalOptions="Fill"
                     VerticalOptions="Center"
                     CornerRadius="5"
@@ -46,7 +46,7 @@
                     TextColor="Black"
                     />            
             <Button
-                    BackgroundColor="DarkSeaGreen"
+                    BackgroundColor="White"
                     HorizontalOptions="Fill"
                     VerticalOptions="Center"
                     CornerRadius="5"
@@ -57,7 +57,7 @@
                     />
             
             <Button
-                    BackgroundColor="DarkSeaGreen"
+                    BackgroundColor="White"
                     HorizontalOptions="Fill"
                     VerticalOptions="Center"
                     CornerRadius="5"
