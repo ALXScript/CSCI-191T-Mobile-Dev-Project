@@ -26,6 +26,10 @@ namespace PictureThis
             //add the settings event handler
             tbrItem.Clicked += OnSettingsClicked;
 
+            string fullpath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "tags.json");
+
+            DisplayAlert("Path", fullpath, "OK");
+
             PictureThis.Model.jsonToolbox jsonTB = new Model.jsonToolbox();
             jsonTB.initFiles();
         }
