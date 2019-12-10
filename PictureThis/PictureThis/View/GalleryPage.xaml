@@ -7,7 +7,6 @@
     <ContentPage.Content>
         <StackLayout Margin="5,5,5,5">
             <Button
-                    Grid.Row="0"
                     HorizontalOptions="Fill"
                     VerticalOptions="Center"
                     CornerRadius="5"
@@ -16,7 +15,6 @@
                     Text="Top 5 rated Pictures"
                     Style="{StaticResource btnStyle}"/>
             <Button
-                    Grid.Row="1"
                     HorizontalOptions="Fill"
                     VerticalOptions="Center"
                     CornerRadius="5"
@@ -25,16 +23,22 @@
                     Text="Go through all Pictures"
                     Style="{StaticResource btnStyle}"/>
             <Button
-                    Grid.Row="2"
                     HorizontalOptions="Fill"
                     VerticalOptions="Center"
                     CornerRadius="5"
                     Padding="5,0,5,0"
                     Clicked="OnBrowseSortRating"
                     Text="Sort by Rating higest to lowest"
+                    Style="{StaticResource btnStyle}"/>            
+            <Button
+                    HorizontalOptions="Fill"
+                    VerticalOptions="Center"
+                    CornerRadius="5"
+                    Padding="5,0,5,0"
+                    Clicked="OnBrowseClickedSortbyDateTime"
+                    Text="Sort by Date and Time"
                     Style="{StaticResource btnStyle}"/>
             <Button
-                    Grid.Row="3"
                     HorizontalOptions="Fill"
                     VerticalOptions="Center"
                     CornerRadius="5"
@@ -44,7 +48,6 @@
                     Style="{StaticResource btnStyle}"/>
 
             <Button
-                    Grid.Row="4"
                     HorizontalOptions="Fill"
                     VerticalOptions="Center"
                     CornerRadius="5"
@@ -52,6 +55,7 @@
                     Clicked="OnBrowseSortByTags"
                     Text="Choose a Tag"
                     Style="{StaticResource btnStyle}"/>
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

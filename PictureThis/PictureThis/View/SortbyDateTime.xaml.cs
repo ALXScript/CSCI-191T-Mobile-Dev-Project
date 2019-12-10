@@ -20,8 +20,7 @@ namespace PictureThis.View
         string json, imagesPath;
         Boolean fileFound = false;
         public SortbyDateTime()
-        {
-            InitializeComponent();
+        { 
 
             InitializeComponent();
             imagesPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "images.json"); //Get this later: Path that holds all of the embedded images
@@ -61,17 +60,7 @@ namespace PictureThis.View
                 switch (e.Direction.ToString())
                 {
                     case "Up":
-                        /*
-                                            //This is the logic to add a single photo. It is not part of the end functionality of this page
-                                            var photo = await Plugin.Media.CrossMedia.Current.PickPhotoAsync();
-                                            if (photo != null)
-                                            {
-                                                Box.Source = ImageSource.FromStream(() => { return photo.GetStream(); });
-                                                dir = photo.AlbumPath;
-                                            }
-
-                        */
-
+                       
                         //skip rating for this picture and get next picture 
                         break;
                     //increase rating
@@ -88,13 +77,11 @@ namespace PictureThis.View
                         break;
                 }
                 //get next picture looping back to front if we reach the end of the list
-                pictureIndex = (pictureIndex + 1) % pictures.Count();
-                Box.Source = pictures.ElementAt(Math.Abs(pictureIndex)).path;
-                swipedLabel.Text = "Name: " + pictures[Math.Abs(pictureIndex)].name + "\tRating: " + pictures[Math.Abs(pictureIndex)].getRating() + "\nTags: " + pictures[Math.Abs(pictureIndex)].getAllTags() + "\nDistance: " + pictures[Math.Abs(pictureIndex)].dateTime;
 
-                //rewrite the json file with updated rating
-                json = JsonConvert.SerializeObject(pictures, Formatting.Indented);
-                System.IO.File.WriteAllText(imagesPath, json);
+                Box.Source = pictures.ElementAt(pictureIndex).path;
+                swipedLabel.Text = "Name: " + pictures[pictureIndex].name + "\tRating: " + pictures[pictureIndex].getRating() + "\nTags: " + pictures[pictureIndex].getAllTags() + "\nDate and Time: " + pictures[pictureIndex].dateTime;
+
+
 
             }
         }//end OnSwiped

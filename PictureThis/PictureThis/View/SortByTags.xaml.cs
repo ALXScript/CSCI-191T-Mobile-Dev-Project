@@ -78,51 +78,54 @@ namespace PictureThis.View
         void OnSwiped(object sender, SwipedEventArgs e)
         {
 
-            if (fileFound && labelPicker.SelectedIndex >= 0)
+            if (pictures.Count > 0)
             {
-                //get selected tag
-                selectedTag = labelPicker.Items[labelPicker.SelectedIndex];
 
-                //logic to update rating based on which direction the user swiped 
-                //then get next picture.
-                switch (e.Direction.ToString())
+                if (fileFound && labelPicker.SelectedIndex >= 0)
                 {
-                    case "Up":
-                     
-                        break;
-                    //Add the selected tag from the current picture
-                    case "Right":
-                       pictureIndex = (pictureIndex + 1) % pictures.Count();
-                        break;
+                    //get selected tag
+                    selectedTag = labelPicker.Items[labelPicker.SelectedIndex];
 
-                    //Remove the selected tag from the selected picture
-                    case "Left":
-                        if (pictureIndex ==0)
-                        {
-                            pictureIndex =pictures.Count()-1;
-                        }
-                        else { pictureIndex = (pictureIndex - 1) % pictures.Count(); }
+                    //logic to update rating based on which direction the user swiped 
+                    //then get next picture.
+                    switch (e.Direction.ToString())
+                    {
+                        case "Up":
 
-                        break;
+                            break;
+                        //Add the selected tag from the current picture
+                        case "Right":
+                            pictureIndex = (pictureIndex + 1) % pictures.Count();
+                            break;
+
+                        //Remove the selected tag from the selected picture
+                        case "Left":
+                            if (pictureIndex == 0)
+                            {
+                                pictureIndex = pictures.Count() - 1;
+                            }
+                            else { pictureIndex = (pictureIndex - 1) % pictures.Count(); }
+
+                            break;
+                    }
+
+                    //get next picture looping back to front if we reach the end of the list
+
+                    //Update display info
+
+                    Box.Source = pictures.ElementAt(pictureIndex).path;
+                    swipedLabel.Text = "Name:" + pictures[pictureIndex].name + "\nTags: " + string.Join(",", pictures[pictureIndex].tags);
+
+
                 }
-
-                //get next picture looping back to front if we reach the end of the list
-
-                //Update display info
-
-                Box.Source = pictures.ElementAt(Math.Abs(pictureIndex)).path;
-                swipedLabel.Text = "Name:" + pictures[Math.Abs(pictureIndex)].name + "\nTags: " + string.Join(",", pictures[Math.Abs(pictureIndex)].tags);
-                //rewrite the json file with updated rating
-                json = JsonConvert.SerializeObject(pictures, Formatting.Indented);
-                System.IO.File.WriteAllText(imagesPath, json);
-            }
-            else if (!fileFound)
-            {
-                DisplayAlert("Error", "No file has been found containing picture data. Please add pictures.", "OK");
-            }
-            else
-            {
-                DisplayAlert("Error", "Please select a tag", "OK");
+                else if (!fileFound)
+                {
+                    DisplayAlert("Error", "No file has been found containing picture data. Please add pictures.", "OK");
+                }
+                else
+                {
+                    DisplayAlert("Error", "Please select a tag", "OK");
+                }
             }
         }
     }

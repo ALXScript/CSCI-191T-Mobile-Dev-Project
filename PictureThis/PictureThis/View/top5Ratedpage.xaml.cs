@@ -78,6 +78,12 @@ namespace PictureThis.View
 
                     //Remove the selected tag from the selected picture
                     case "Left":
+
+                        if (pictureIndex == 0)
+                        {
+                            pictureIndex = pictures.Count() - 1;
+                        }
+
                         pictureIndex = (pictureIndex - 1) % pictures.Count;
                         pictureIndex = (pictureIndex) % 5;
 
@@ -86,12 +92,11 @@ namespace PictureThis.View
                 }
 
 
-                Box.Source = pictures.ElementAt(Math.Abs(pictureIndex)).path;
-                swipedLabel.Text = "Name: " + pictures[Math.Abs(pictureIndex)].name + "\tRating: " + pictures[Math.Abs(pictureIndex)].getRating() + "\nTags: " + pictures[Math.Abs(pictureIndex)].getAllTags();
+                Box.Source = pictures.ElementAt(pictureIndex).path;
+                swipedLabel.Text = "Name: " + pictures[pictureIndex].name + "\tRating: " + pictures[pictureIndex].getRating() + "\nTags: " + pictures[pictureIndex].getAllTags();
 
                 //rewrite the json file with updated rating
-                json = JsonConvert.SerializeObject(pictures, Formatting.Indented);
-                System.IO.File.WriteAllText(imagesPath, json);
+
 
             }
         }//end OnSwiped

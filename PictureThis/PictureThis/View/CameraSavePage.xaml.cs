@@ -145,14 +145,14 @@ namespace PictureThis.View
                  Images = JsonConvert.DeserializeObject<List<Picture>>(extendedPath);
                
 
-                await DisplayAlert("Try Succeeded", "Deserialized JSON File", "OK");
+               
             }
             catch (Exception ex)
             {
                 //If this is the first image, just serialize the object and write it
                 Images = new List<Picture>();
 
-                await DisplayAlert("Catch Succeeded", "New List Created", "OK");
+              
             }
 
             //add the images to the list
@@ -192,7 +192,7 @@ namespace PictureThis.View
                 {
 
                     pictureData.location = geoLocation;
-                    await DisplayAlert("Location achieved", "Your Location is: " + pictureData.location.ToString(), "OK");
+                   // await DisplayAlert("Location achieved", "Your Location is: " + pictureData.location.ToString(), "OK");
 
                 }
 
@@ -224,13 +224,13 @@ namespace PictureThis.View
             }
 
             //Set Date and Time
-//            pictureData.dateTime = DateTime.Today;
+            pictureData.dateTime = DateTime.Now;
 
             //get date data (read only)
-//            datePickDate.Date = pictureData.dateTime.Date;
+            datePickDate.Date = pictureData.dateTime.Date;
 
             //get time data (read only)
-//            timePickTime.Time = pictureData.dateTime.TimeOfDay;
+            timePickTime.Time = pictureData.dateTime.TimeOfDay;
 
             //display location time
 
