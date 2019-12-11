@@ -6,7 +6,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PictureThis.Android", "Pict
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PictureThis.iOS", "PictureThis.iOS\PictureThis.iOS.csproj", "{89AD80B2-A233-47DA-8558-3D822C583C85}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PictureThis", "PictureThis\PictureThis.csproj", "{3158F295-0929-456D-833B-D66EB28CDC5A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PictureThis", "PictureThis\PictureThis.csproj", "{3158F295-0929-456D-833B-D66EB28CDC5A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

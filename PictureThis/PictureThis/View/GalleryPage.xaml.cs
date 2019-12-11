@@ -22,6 +22,8 @@ namespace PictureThis
 
         protected async void OnBrowseClickedSortbyDateTime(object sender, EventArgs e) => await Navigation.PushAsync(new SortbyDateTime());
 
+        protected async void OnBrowseClickedMapPage(object sender, EventArgs e) => await Navigation.PushAsync(new MapPage());
+
 
     }
 }
