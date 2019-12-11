@@ -72,6 +72,8 @@ namespace PictureThis.View
                                 orderby pic.distance ascending  // sorts pictures by location
                                 select pic).ToList();
                     Box.Source = pictures.ElementAt(Math.Abs(pictureIndex)).path;
+                    swipedLabel.Text = "Name: " + pictures[pictureIndex].name + "\tRating: " + pictures[pictureIndex].getRating() + "\nTags: " + pictures[pictureIndex].getAllTags() + "\nDistance: " + pictures[pictureIndex].distance;
+
                 }
 
             }

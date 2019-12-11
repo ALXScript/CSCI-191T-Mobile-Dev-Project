@@ -63,14 +63,12 @@ namespace PictureThis.View
                 switch (e.Direction.ToString())
                 {
                     case "Up":
-                       
-                        //skip rating for this picture and get next picture 
                         break;
-                    //increase rating
+                    
                     case "Right":
                         pictureIndex = (pictureIndex + 1) % pictures.Count();
                         break;
-                    //decrease rating
+                   
                     case "Left":
                         if (pictureIndex == 0)
                         {

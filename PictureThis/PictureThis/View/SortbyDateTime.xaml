@@ -7,9 +7,17 @@
              x:Class="PictureThis.View.SortbyDateTime">
     <ContentPage.Content>
         <StackLayout Margin="20">
-            <Label Text="Swipe right and left to go through pictures" />
-            <Frame Margin="5,5,5,5">
-                <Image x:Name ="Box" BackgroundColor="Black" WidthRequest="300" HeightRequest="300" HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
+            <Label Text="Swipe right and left to go through pictures."
+                   Style="{StaticResource lblStyle}"/>
+
+            <Frame Margin="5,5,5,5"
+                   Style="{StaticResource frmStyle}">
+
+                <Image x:Name ="Box"
+                   WidthRequest="300"
+                   HeightRequest="300"
+                   HorizontalOptions="Center"
+                   VerticalOptions="CenterAndExpand">
 
                     <Image.GestureRecognizers>
                         <!-- Can also set a swipe threshold on each gesture recognizer -->
@@ -19,8 +27,12 @@
                         <SwipeGestureRecognizer Direction="Down" Swiped="OnSwiped"/>
                     </Image.GestureRecognizers>
                 </Image>
+
             </Frame>
-            <Label x:Name="swipedLabel" Text="You swiped: "/>
+
+            <Label x:Name="swipedLabel"
+                   Text="You swiped: "
+                   Style="{StaticResource lblStyle}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

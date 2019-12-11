@@ -70,7 +70,6 @@ namespace PictureThis.View
                     case "Up":
 
                         break;
-                    //Add the selected tag from the current picture
                     case "Right":
                         pictureIndex = (pictureIndex + 1) % pictures.Count;
                         pictureIndex = (pictureIndex ) % 5;
