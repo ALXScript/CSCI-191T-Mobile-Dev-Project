@@ -52,7 +52,10 @@ namespace PictureThis.View
             pictures = (from pic in pictures // query for pictures
                         orderby (pic.getRating()) descending // sorts by rating decending order 
                         select pic).ToList();
+            
             Box.Source = pictures.ElementAt(Math.Abs(pictureIndex)).path;
+            swipedLabel.Text = "Name: " + pictures[pictureIndex].name + "\tRating: " + pictures[pictureIndex].getRating() + "\nTags: " + pictures[pictureIndex].getAllTags();
+
         }
 
 

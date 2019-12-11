@@ -53,6 +53,9 @@ namespace PictureThis.View
             pictures = (from pic in pictures
                         orderby (pic.getRating()) descending
                         select pic).ToList();
+            //display picture after query
+            Box.Source = pictures.ElementAt(pictureIndex).path;
+            swipedLabel.Text = "Name: " + pictures[pictureIndex].name + "\tRating: " + pictures[pictureIndex].getRating() + "\nTags: " + pictures[pictureIndex].getAllTags() + "\nThis picture is rated: " + pictureIndex;
         }
              
 

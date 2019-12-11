@@ -50,6 +50,9 @@ namespace PictureThis.View
                         orderby (pic.dateTime) ascending // sorts by datetime by decending order 
                         select pic).ToList();
             Box.Source = pictures.ElementAt(Math.Abs(pictureIndex)).path;
+            swipedLabel.Text = "Name: " + pictures[pictureIndex].name + "\tRating: " + pictures[pictureIndex].getRating() + "\nTags: " + pictures[pictureIndex].getAllTags() + "\nDate and Time: " + pictures[pictureIndex].dateTime;
+
+
         }
         void OnSwiped(object sender, SwipedEventArgs e)
         {
