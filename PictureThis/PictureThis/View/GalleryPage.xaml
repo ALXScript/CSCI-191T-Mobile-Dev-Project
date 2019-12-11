@@ -60,7 +60,6 @@
                     VerticalOptions="Center"
                     CornerRadius="5"
                     Padding="5,0,5,0"
-                    Clicked="OnBrowseClickedMapPage"
                     Text="Map View"
                     Style="{StaticResource btnStyle}"/>
 
